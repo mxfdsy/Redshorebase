@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cww.world.mapper.user.UserPOMapper" >
+  <resultMap id="BaseResultMap" type="cww.world.pojo.po.user.UserPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_uid" property="userUid" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="wechat_no" property="wechatNo" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="archive" property="archive" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_uid, user_name, login_name, password, phone, status, gender, email, wechat_no,
+    identity, memo, created_at, updated_at, created_by, updated_by,archive
+  </sql>
+
+  <insert id="insertUserInfo" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="cww.world.pojo.po.user.UserPO" >
+    insert into tnt_biz_hello_user_account
+    (user_uid,user_name,login_name,password,phone,status,gender,email,created_at,created_by)
+    values
+    (tnt_uuid_short(), #{userName}, #{loginName}, #{password}, #{phone}, #{status}, #{gender}, #{email}, now(), #{createdBy})
+  </insert>
+  <update id="updateUserinfo" parameterType="cww.world.pojo.po.user.UserPO" >
+    UPDATE
+    tnt_biz_hello_user_account
+    SET
+    user_name = #{userName}, gender = #{gender}, phone = #{phone}, email = #{email}, updated_at = now()
+    <if test="updatedBy != null" >
+      ,updated_by = #{updatedBy}
+    </if>
+    <if test="status != null">
+      ,status = #{status}
+    </if>
+    WHERE
+    user_uid = #{userUid}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cww.world.pojo.po.user.UserPO" >
+    update tnt_biz_hello_user_account
+    set user_uid = #{userUid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      wechat_no = #{wechatNo,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      updated_by = #{updatedBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <sql id="listUserWhere">
+    <where>
+      <trim prefixOverrides="and|or">
+        archive = 1
+        <if test="loginName != null and loginName != ''  ">      AND  login_name like CONCAT('%', #{loginName}, '%')</if>
+        <if test="userName != null and userName != ''  ">      AND  user_name like CONCAT('%', #{userName}, '%')</if>
+        <if test="phone != null and phone != ''  ">      AND  phone like CONCAT('%', #{phone}, '%')</if>
+        <if test="status != null and status != ''  ">      AND  status like CONCAT('%', #{status}, '%')</if>
+        <!--<if test="catalogUids != null and !catalogUids.isEmpty()  ">-->
+          <!--AND catalog.catalog_uid in-->
+          <!--<foreach collection="catalogUids" item="item" open="(" close=")" separator=",">-->
+            <!--#{item}-->
+          <!--</foreach>-->
+        <!--</if>-->
+      </trim>
+    </where>
+  </sql>
+
+  <select id="listUserInfo" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    tnt_biz_hello_user_account
+    <include refid="listUserWhere"/>
+    <if test="sortKey != null and sortOrder != null">
+      ORDER BY ${sortKey} ${sortOrder}
+    </if>
+    <if test="pageNo != null and pageSize != null">
+      limit #{pageOffset},#{pageSize}
+    </if>
+  </select>
+
+  <select id="getUserInfoByLoginName"  resultMap="BaseResultMap">
+  select
+    <include refid="Base_Column_List"/>
+  from
+    tnt_biz_hello_user_account
+  where
+    login_name = #{loginName}
+  and
+    archive = 1
+  </select>
+
+  <select id="countUserPhone"  resultType="integer">
+    select
+      COUNT(id)
+    from
+    tnt_biz_hello_user_account
+    where
+    phone = #{phone}
+    and
+    archive = 1
+  </select>
+
+
+  <select id="getUserInfoByUid"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    tnt_biz_hello_user_account
+    where
+    user_uid = #{userUid}
+    and
+    archive = 1
+  </select>
+
+  <update id="updateUserStatus" parameterType="cww.world.pojo.dto.user.UpdateUserStatusRequestDTO">
+    update
+      tnt_biz_hello_user_account
+    set
+    <if test="status != null and status != ''" >
+      status = #{status}
+    </if>
+    WHERE
+      user_uid in
+      <foreach collection="userUids" open="(" close=")" separator="," item="item">
+        #{item}
+      </foreach>
+  </update>
+
+  <select id="getAllUserInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+      tnt_biz_hello_user_account
+    where
+      archive = 1
+  </select>
+
+  <insert id="batchInsertUserInfo">
+    insert into
+      tnt_biz_hello_user_account
+    (user_uid,user_name)
+    values
+      <foreach collection="userPOS" separator="," item="userPO">
+        (tnt_uuid_short(),#{userName})
+      </foreach>
+  </insert>
+
+</mapper>
