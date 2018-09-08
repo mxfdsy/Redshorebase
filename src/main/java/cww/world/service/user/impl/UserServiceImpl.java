@@ -71,7 +71,6 @@ public class UserServiceImpl implements UserService {
 //            userMallList.sort(Comparator.comparing(SimpleMallDTO::getMallUid));
 //        }
         HttpSession session = request.getSession();
-
         session.setAttribute(Constants.MENU, menu);
         session.setAttribute(Constants.CHILDREN_MENU_MAP, childrenMenuMap);
         session.setAttribute(Constants.PARENT_MENU_MAP, parentMenuMap);
