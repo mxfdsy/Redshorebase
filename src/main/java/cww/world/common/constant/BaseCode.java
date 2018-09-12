@@ -27,8 +27,25 @@ public enum BaseCode {
 
     MENU_DO_NOT_EXIST(12002, "菜单不存在"),
 
+    WORKFLOW_PROGRESS_NOT_EXISTS(23004, "审核流程不存在"),
+
+    OPERATION_NOT_SUPPORT(1100, "Operation does not support"),
+
+    WORKFLOW_AUDITOR_LIST_IS_EMPTY(23003, "审核人候选列表为空"),
+
+    WORKFLOW_AUDIT_STRATEGY_NOT_SUPPORT(23006, "审核处理策略不支持使用"),
+
+    WORKFLOW_AUDIT_STATUS_ERROR(23002, "审核状态错误"),
+
+    DB_UPDATE_ERROR(19998, "数据库更新错误"),
+    WORKFLOW_AUDITOR_ERROR(23001, "用户不在审核人候选列表"),
 
     INVALID_ARGUMENT(11001, "请求参数错误");
+
+
+
+
+    public static final String DEFAULT_MALL_UID = "11111111111111111";
 
     private int code;
     private String message;

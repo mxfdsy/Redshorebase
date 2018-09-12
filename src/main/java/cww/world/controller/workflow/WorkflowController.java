@@ -76,7 +76,7 @@ public class WorkflowController extends BaseController {
             throw new BaseException(BaseCode.INVALID_ARGUMENT, checkResult.getErrorMessages());
         }
         addWorkflow.setCreatedBy(SessionGetter.getLoginUserUid());
-        workflowService.addWorkflow(addWorkflow);
+//        workflowService.addWorkflow(addWorkflow);
         return ResultBuilderUtils.buildSuccess(Constants.SUCCESS);
     }
 
@@ -85,8 +85,9 @@ public class WorkflowController extends BaseController {
     public String listWorkflow(@RequestBody String payload) {
         logger.warn("listWorkflow  :: {}", payload);
         SearchWorkflowDTO searchWorkflowDTO = FastJsonUtils.toBean(payload, SearchWorkflowDTO.class);
-        GridPage<WorkflowPO> result = workflowService.listWorkflowPageable(searchWorkflowDTO);
-        return ResultBuilderUtils.buildSuccess(result);
+//        GridPage<WorkflowPO> result = workflowService.listWorkflowPageable(searchWorkflowDTO);
+//        return ResultBuilderUtils.buildSuccess(result);
+        return "";
     }
 
 

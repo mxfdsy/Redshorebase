@@ -20,4 +20,10 @@ public class Constants {
     public static final String MENU = "login_user_menu";
     public static final String USER_UID = "login_user_uid";
     public static final String SYSTEM_UID = "10000000000000001";
+
+    public static final String DEFAULT_MALL_UID = "11111111111111111";
+
+    public static final String AUDUTOR_LIST_SOUCE_MANUAL = "MANUAL_SELECTION";
+    public static final String AUDUTOR_LIST_SOUCE_SYNC = "WORKFLOW_SYNC";
+    public static final String AUDUTOR_LIST_SOUCE_WORKFLOWSTEP = "WORKFLOWSTEP_CONFIG";
 }
