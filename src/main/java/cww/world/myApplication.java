@@ -1,8 +1,10 @@
 package cww.world;
 
+import cww.world.common.mytag.CmsDialect;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -17,5 +19,10 @@ import org.springframework.context.annotation.ImportResource;
 public class myApplication {
     public static void main(String[] args) {
             SpringApplication.run(myApplication.class, args);
+    }
+
+    @Bean
+    public CmsDialect CmsDialect(){
+        return new CmsDialect();
     }
 }

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cww.world.mapper.config.ComboxItemMapper">
+
+    <resultMap id="comboxItemMap" type="cww.world.pojo.po.config.ComboxItemPO">
+        <result column="combox_item_uid"  property="comboxItemUid" jdbcType="VARCHAR" />
+        <result column="text"  property="text" jdbcType="VARCHAR" />
+        <result column="type"  property="type" jdbcType="VARCHAR" />
+        <result column="flag"  property="flag" jdbcType="VARCHAR" />
+        <result column="memo"  property="memo" jdbcType="VARCHAR" />
+        <result column="created_at"  property="createdAt" jdbcType="TIMESTAMP" />
+        <result column="updated_at"  property="updatedAt" jdbcType="TIMESTAMP" />
+        <result column="created_by"  property="createdBy" jdbcType="VARCHAR" />
+        <result column="updated_by"  property="updatedBy" jdbcType="VARCHAR" />
+        <result column="sort_order"  property="sortOrder" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="batchCreateComboxItem">
+        INSERT INTO tnt_biz_erp_combox_item
+        (combox_item_uid, `text`, memo, type, created_by, created_at, sort_order)
+        VALUES
+        <foreach collection="comboxItemPOList" item="item" separator=",">
+            (tnt_uuid_short(), #{text}, #{memo}, #{type}, #{createdBy}, now(), #{sortOrder})
+        </foreach>
+    </insert>
+
+    <insert id="createComboxItem" parameterType="cww.world.pojo.po.config.ComboxItemPO">
+        INSERT INTO tnt_biz_erp_combox_item
+            (combox_item_uid, `text`, memo, type, created_by, created_at, sort_order)
+        VALUES
+            (tnt_uuid_short(), #{text}, #{memo}, #{type}, #{createdBy}, now(), #{sortOrder})
+    </insert>
+
+    <delete id="deleteComboxItem">
+        DELETE FROM tnt_biz_erp_combox_item
+        WHERE
+            combox_item_uid = #{comboxItemUid}
+    </delete>
+
+    <update id="updateComboxItem" parameterType="cww.world.pojo.po.config.ComboxItemPO">
+        UPDATE tnt_biz_erp_combox_item
+        SET
+            `text` = #{text},
+            memo = #{memo},
+            type = #{type},
+            flag = #{flag},
+            sort_order = #{sortOrder},
+            updated_by = #{updatedBy},
+            updated_at = now()
+        WHERE
+            combox_item_uid = #{comboxItemUid}
+    </update>
+
+    <update id="updateComboxItemFlag">
+        UPDATE tnt_biz_erp_combox_item
+        SET
+        flag = #{flag},
+        updated_by = #{updatedBy},
+        updated_at = now()
+        WHERE
+        combox_item_uid = #{comboxItemUid}
+    </update>
+
+    <select id="getComboxItemByUid" resultMap="comboxItemMap">
+        SELECT
+            *
+        FROM
+            tnt_biz_erp_combox_item
+        WHERE
+            combox_item_uid = #{comboxItemUid}
+    </select>
+
+    <select id="getComboxItemByTypeText" resultMap="comboxItemMap">
+        SELECT
+        *
+        FROM
+        tnt_biz_erp_combox_item
+        WHERE
+        1=1
+        <if test=" type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test=" text != null and text != ''">
+            AND text = #{text}
+        </if>
+    </select>
+
+    <select id="listActiveComboxItemByType" resultMap="comboxItemMap">
+        SELECT
+        *
+        FROM
+        tnt_biz_erp_combox_item
+        WHERE
+        flag = 'FLAG_ACTIVE'
+        <if test=" type != null and type != ''">
+            AND type = #{type}
+        </if>
+        ORDER BY
+        sort_order asc, id asc
+    </select>
+
+    <select id="listComboxItem" parameterType="cww.world.pojo.dto.config.ListComboxItemDTO" resultMap="comboxItemMap">
+        SELECT
+        *
+        FROM
+        tnt_biz_erp_combox_item
+        WHERE
+        1=1
+        <if test=" type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test=" text != null and text != ''">
+            AND `text` like concat('%', #{text}, '%')
+        </if>
+        ORDER BY created_at desc
+        <if test="pageNo != null and pageSize != null">
+            limit #{pageOffset},#{pageSize}
+        </if>
+    </select>
+
+
+    <select id="countComboxItem" parameterType="cww.world.pojo.dto.config.ListComboxItemDTO" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM
+            tnt_biz_erp_combox_item
+        WHERE
+        1=1
+        <if test=" type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test=" text != null and text != ''">
+            AND `text` like concat('%', #{text}, '%')
+        </if>
+    </select>
+
+    <select id="getComboxItemValueByTypeAndUid" resultType= "java.lang.String">
+        SELECT
+            `text`
+        FROM
+        tnt_biz_erp_combox_item
+        WHERE
+        flag = 'FLAG_ACTIVE'
+        <if test=" type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test=" uid != null and uid != ''">
+            AND combox_item_uid = #{uid}
+        </if>
+    </select>
+</mapper>
