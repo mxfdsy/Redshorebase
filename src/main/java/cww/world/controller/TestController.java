@@ -1,15 +1,16 @@
 package cww.world.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 小武 on 2018/9/27.
  */
-@RestController
+@Controller("/test")
 public class TestController {
-    @PostMapping("/test")
+
+    @PostMapping("/diy")
     public String test() {
-        return "/demo/test";
+        return "demo/diy";
     }
 }

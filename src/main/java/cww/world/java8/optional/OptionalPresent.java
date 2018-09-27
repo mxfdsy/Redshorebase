@@ -20,8 +20,6 @@ public class OptionalPresent {
         //condition failed, no output print
         emptyGender.ifPresent(g -> System.out.println("In emptyGender Option, value available."));
 
-
-
     }
 
 }
