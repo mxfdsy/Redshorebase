@@ -1,6 +1,6 @@
-package cww.world.common.mytag;
+package cww.world.common.tag.mytag;
 
-import cww.world.common.mytag.Processor.MatterTagProcessor;
+import cww.world.common.tag.mytag.Processor.MatterTagProcessor;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.StandardDialect;
@@ -21,7 +21,7 @@ public class CmsDialect extends AbstractProcessorDialect {
     private static final String PREFIX = "cww";
 
 
-    public CmsDialect() {
+    public  CmsDialect() {
         super(DIALECT_NAME, PREFIX, StandardDialect.PROCESSOR_PRECEDENCE);
     }
 

@@ -1,26 +1,62 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-       <!--xmlns:int="http://www.springframework.org/schema/integration"-->
-       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-       <!--xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"-->
-       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
-        <!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
-        <!--http://www.springframework.org/schema/integration-->
-        <!--http://www.springframework.org/schema/integration/spring-integration.xsd-->
-        <!--http://www.springframework.org/schema/integration/amqp-->
-        <!--http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd">-->
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+       xmlns:file="http://www.springframework.org/schema/integration/file"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/integration
+        http://www.springframework.org/schema/integration/spring-integration.xsd
+        http://www.springframework.org/schema/integration/stream
+        http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+        http://www.springframework.org/schema/integration/file
+        http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+        http://www.springframework.org/schema/integration/http
+        http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+        http://www.springframework.org/schema/integration/amqp
+        http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 
-    <!--<int:channel id="test_send_channel"/>-->
-    <!--<int-amqp:outbound-channel-adapter channel="test_send_channel"-->
-                                       <!--routing-key="cww.test.queue"-->
-                                       <!--exchange-name="test.exchange"/>-->
+    <int:channel id="async_message_channel"/>
+    <int-amqp:outbound-channel-adapter channel="async_message_channel"
+                                       routing-key="cww.test.queue"
+                                       exchange-name="test.exchange"/>
 
-    <!--<int:channel id="test_receiver_channel"/>-->
-    <!--<int-amqp:inbound-channel-adapter channel="test_receiver_channel"-->
+    <int:channel id="async_receiver_channel"/>
+    <int-amqp:inbound-channel-adapter channel="async_receiver_channel"
 
-                                      <!--connection-factory="rabbitConnectionFactory"-->
-                                      <!--queue-names="cww.test.queue"/>-->
-    <!--<int:service-activator ref="testHandler" method="test"-->
-                           <!--input-channel="test_receiver_channel"/>-->
-<!--</beans>-->
+                                      connection-factory="rabbitConnectionFactory"
+                                      queue-names="cww.async.queue"/>
+    <int:service-activator ref="testHandler" method="testDirect"
+                           input-channel="async_receiver_channel"/>
+
+
+    <int:channel id="async_message_fanout_channel"/>
+    <int-amqp:outbound-channel-adapter channel="async_message_fanout_channel"
+                                       amqp-template="amqpTemplate"
+                                       exchange-name="test.fanout.exchange_cww"/>
+
+    <int:channel id="async_fanout_receiver_channel1"/>
+    <int-amqp:inbound-channel-adapter channel="async_fanout_receiver_channel1"
+                                      connection-factory="rabbitConnectionFactory"
+                                      queue-names="cww.test.fanout.queue5"/>
+    <int:service-activator ref="testHandler" method="testFanout1"
+                           input-channel="async_fanout_receiver_channel1"/>
+
+
+    <int:channel id="async_fanout_receiver_channel"/>
+    <int-amqp:inbound-channel-adapter channel="async_fanout_receiver_channel"
+                                      connection-factory="rabbitConnectionFactory"
+                                      queue-names="cww.test.fanout.queue4"/>
+    <int:service-activator ref="testHandler" method="testFanout2"
+                           input-channel="async_fanout_receiver_channel"/>
+</beans>

@@ -51,9 +51,6 @@ public class RoleController  extends BaseController {
     @Autowired
     private UserRoleService userRoleService;
 
-//    @Autowired
-//    @Qualifier("test_send_channel")
-//    private MessageChannel testMessageChannel;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String createMenu(HttpServletRequest request, Model model) {
@@ -122,7 +119,7 @@ public class RoleController  extends BaseController {
         // 解析参数
         ListGroupRoleRequestDTO request = JSON.parseObject(payload, ListGroupRoleRequestDTO.class);
 
-//        testMessageChannel.send(MessageBuilder.withPayload("发送发送").build());
+
         String result = ResultBuilderUtils.buildSuccess(roleService.listRole(request));
 //        asyncInsertUserOperationTrace("", "TYP_ROLE", "查询角色列表", "ListGroupRoleRequestDTO", result, payload);
         return result;
