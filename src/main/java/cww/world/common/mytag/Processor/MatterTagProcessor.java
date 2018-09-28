@@ -20,8 +20,10 @@ import java.util.List;
  */
 public class MatterTagProcessor extends AbstractElementTagProcessor{
 
-    private static final String TAG_NAME  = "matter";//标签名
-    private static final int PRECEDENCE = 10000;//优先级
+    //标签名
+    private static final String TAG_NAME  = "mxfdsy";
+    //优先级
+    private static final int PRECEDENCE = 10000;
 
     public MatterTagProcessor( String dialectPrefix) {
         super(
@@ -53,7 +55,7 @@ public class MatterTagProcessor extends AbstractElementTagProcessor{
         /**
          * 从标签中读取matterid属性，标签中的这个可选属性将告诉我们需要什么样的数据
          */
-        final String  matterid= tag.getAttributeValue("matterid");
+        final String  matterid= tag.getAttributeValue("redshorebase");
 
 
         List<ComboxItemPO> comboxItemPOS = mapper.listActiveComboxItemByType(matterid);
