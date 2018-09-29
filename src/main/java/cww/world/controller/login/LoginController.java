@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/login")
 @Log4j
 public class LoginController {
-    protected static final String JSON_UTF8 = "application/json;charset=UTF-8";
 
     @Autowired
     UserService userService;
@@ -48,7 +47,6 @@ public class LoginController {
         if (validateResult.hasError()) {
             throw new BaseException(BaseCode.INVALID_ARGUMENT,validateResult.getErrorMessages());
         }
-
         return  userService.login(loginUser, request);
     }
 
