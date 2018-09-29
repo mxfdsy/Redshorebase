@@ -7,9 +7,15 @@ import cww.world.common.exception.BaseException;
 import cww.world.common.validate.EntityValidator;
 import cww.world.common.validate.ValidateResult;
 import cww.world.common.validate.group.Insert;
+import cww.world.pojo.po.account.UserAccountPO;
 import cww.world.pojo.po.user.UserPO;
 import cww.world.service.user.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/login")
+@Log4j
 public class LoginController {
     protected static final String JSON_UTF8 = "application/json;charset=UTF-8";
 
@@ -30,7 +37,9 @@ public class LoginController {
     UserService userService;
 
 
-    @RequestMapping(value = "/check" , method = RequestMethod.POST, produces = JSON_UTF8)
+    @ApiOperation(value="用戶登陆校验",notes = "用戶登陆校验",httpMethod = "POST")
+    @ApiImplicitParam(name = "payload",value = "用户登陆信息",required = true,dataType = "String")
+    @RequestMapping(value = "/check" , method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String check(@RequestBody String payload, HttpServletRequest request) {
         String field = JSONObject.parseObject(payload).getString("field");
@@ -39,6 +48,7 @@ public class LoginController {
         if (validateResult.hasError()) {
             throw new BaseException(BaseCode.INVALID_ARGUMENT,validateResult.getErrorMessages());
         }
+
         return  userService.login(loginUser, request);
     }
 
