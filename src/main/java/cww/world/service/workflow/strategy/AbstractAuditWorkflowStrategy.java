@@ -49,7 +49,7 @@ public abstract class AbstractAuditWorkflowStrategy implements BusinessAuditWork
                 .filter(Objects::nonNull)
                 .flatMap(List::stream)
                 .collect(Collectors.collectingAndThen(
-                        Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(UserAccountPO::getUserUid))), ArrayList::new));
+                        Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(UserAccountPO::getUseruid))), ArrayList::new));
 
         if (CollectionUtils.isEmpty(auditorList)) {
             throw new BaseException(BaseCode.WORKFLOW_AUDITOR_LIST_IS_EMPTY, "审核候选人为空");
@@ -62,10 +62,10 @@ public abstract class AbstractAuditWorkflowStrategy implements BusinessAuditWork
             BusinessAuditTodoListPO businessAuditTodoListPO = new BusinessAuditTodoListPO();
             businessAuditTodoListPO.setAuditProgressUid(businessAuditProgressPO.getProgressUid());
             businessAuditTodoListPO.setStatus(UserAuditStatusEnum.TODO);
-            businessAuditTodoListPO.setAuditorUserUid(user.getUserUid());
+            businessAuditTodoListPO.setAuditorUserUid(user.getUseruid());
             businessAuditTodoListPO.setAuditorUserName(user.getName());
             businessAuditTodoListPO.setCreatedBy(nextStep.getStepUid());
-            businessAuditTodoListPO.setSource(getSource(user.getUserUid(), nextAuditorList));
+            businessAuditTodoListPO.setSource(getSource(user.getUseruid(), nextAuditorList));
             todoList.add(businessAuditTodoListPO);
         }
         businessAuditTodoListMapper.batchInsert(todoList);

@@ -7,12 +7,10 @@ import cww.world.common.exception.BaseException;
 import cww.world.common.validate.EntityValidator;
 import cww.world.common.validate.ValidateResult;
 import cww.world.common.validate.group.Insert;
-import cww.world.pojo.po.account.UserAccountPO;
 import cww.world.pojo.po.user.UserPO;
 import cww.world.service.user.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -60,9 +59,6 @@ public class LoginController {
     public String userIndex(Model model) throws Exception {
         return "/user/list2";
     }
-
-
-
 
     @RequestMapping("/login")
     public String login(Model model) throws Exception {

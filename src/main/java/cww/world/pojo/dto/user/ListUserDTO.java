@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import cww.world.pojo.dto.PageableRequestDTO;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author 小武 on 2018/8/24.
  */
@@ -26,6 +28,7 @@ public class ListUserDTO extends PageableRequestDTO {
 
     @JSONField(name = "email")
     private String email;
+
 
     public String getLoginName() {
         return loginName;

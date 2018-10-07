@@ -1,14 +1,14 @@
 package cww.world.service.user.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import cww.world.cache.RedisUtils;
 import cww.world.common.constant.BaseCode;
 import cww.world.common.constant.Constants;
 import cww.world.common.exception.BaseException;
 import cww.world.common.util.ResultBuilderUtils;
 import cww.world.mapper.user.UserPOMapper;
-import cww.world.pojo.dto.PageableRequestDTO;
 import cww.world.pojo.dto.user.*;
-import cww.world.pojo.po.account.UserAccountPO;
 import cww.world.pojo.po.user.UserPO;
 import cww.world.pojo.vo.MenuVO;
 import cww.world.service.account.UserRoleService;
@@ -16,6 +16,8 @@ import cww.world.service.menu.MenuService;
 import cww.world.service.menu.RolePermissionService;
 import cww.world.service.user.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,9 @@ import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -44,6 +48,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    RedisUtils redisUtils;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 
     @Override
@@ -66,10 +75,6 @@ public class UserServiceImpl implements UserService {
 
         Map<Integer, MenuVO> parentMenuMap = menu.stream().filter(ele -> ele.getLayer() == 1).collect(Collectors.toMap(MenuVO::getId, Function.identity()));
 
-//        List<SimpleMallDTO> userMallList = businessProgramService.listSimpleMallByUserUid(loginUser.getUserUid());
-//        if (!CollectionUtils.isEmpty(userMallList)) {
-//            userMallList.sort(Comparator.comparing(SimpleMallDTO::getMallUid));
-//        }
         HttpSession session = request.getSession();
         session.setAttribute(Constants.MENU, menu);
         session.setAttribute(Constants.CHILDREN_MENU_MAP, childrenMenuMap);
@@ -77,7 +82,7 @@ public class UserServiceImpl implements UserService {
         session.setAttribute(Constants.USER_INFO, loginUser);
         session.setAttribute(Constants.USER_UID, loginUser.getUserUid());
 
-
+        putSessionToRedis(session, loginUser);
 
         JSONObject res = new JSONObject();
         String lastRedirectUrl = (String) session.getAttribute(Constants.REDIRECT_URL);
@@ -86,7 +91,15 @@ public class UserServiceImpl implements UserService {
             session.setAttribute(Constants.REDIRECT_URL, null);
         }
 
+
         return ResultBuilderUtils.buildSuccess(loginUser);
+    }
+
+    private void putSessionToRedis(HttpSession session, LoginUserDTO loginUser) {
+        UserInfoResponseDTO userInfoResponseDTO = new UserInfoResponseDTO();
+        userInfoResponseDTO.setSession(session);
+        redisUtils.delKey(loginUser.getLoginName());
+        redisUtils.cacheNxExpire(loginUser.getLoginName(), JSON.toJSONString(userInfoResponseDTO), 2592000);
     }
 
     @Override
@@ -135,7 +148,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public void updateUserinfo(UserPO userPO) {
         userPOMapper.updateUserinfo(userPO);
@@ -164,7 +176,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private LoginUserDTO getLoginUserInfo(String loginNam,UserPO loginUser) {
+    private LoginUserDTO getLoginUserInfo(String loginNam, UserPO loginUser) {
         UserPO userAccountInfo = userPOMapper.getUserInfoByLoginName(loginNam);
 
         if (userAccountInfo == null) {

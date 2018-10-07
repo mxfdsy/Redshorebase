@@ -13,6 +13,8 @@ public enum BaseCode {
 
     PERMISSION_IS_NOT_EXIST(13001,"权限信息不存在"),
 
+    SESSION_SETTING_FAIL(13002,"缓存设置失败"),
+
     INTERNAL_ERROR(11002,"请求信息不存在"),
 
     DATE_ERROR(11003, "数据异常"),

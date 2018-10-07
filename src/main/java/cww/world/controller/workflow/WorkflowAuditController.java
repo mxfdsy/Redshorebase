@@ -80,7 +80,7 @@ public class WorkflowAuditController extends BaseController {
     private ProgressAuditDTO getProgressAuditDTO(AuditOperationDTO auditOperationDTO, UserAccountPO auditor, AuditOperationItem progress) {
         ProgressAuditDTO param = new ProgressAuditDTO();
         param.setAuditProgressUid(progress.getProgressUid());
-        param.setAuditUserUid(auditor.getUserUid());
+        param.setAuditUserUid(auditor.getUseruid());
         param.setAuditUserName(auditor.getName());
         param.setAuditUserPhone(auditor.getPhone());
         if (Objects.equals(auditOperationDTO.getOperation(), AuditOperationEnum.APPROVED)) {

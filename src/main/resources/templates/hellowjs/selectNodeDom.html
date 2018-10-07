@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom选择器，节点选择</title>
+</head>
+<body>
+    <div id="only" class="demo"></div>
+
+    <div>
+        <strong>
+
+        </strong>
+    </div>
+
+    <div>
+        <span>
+            <strong>
+
+            </strong>
+        </span>
+    </div>
+
+
+    <div class="demo">
+        <strong></strong>
+        <span></span>
+        <em></em>
+    </div>
+
+    <div class="xw"></div>
+
+    <div class="cww">
+        <div>你好</div>
+        <span>世界</span>
+    </div>
+
+
+<script type="text/javascript">
+
+    //获取和查看节点
+    // var div = document.getElementById('only');
+    var div = document.getElementsByTagName('div')[0];
+    var div1 = document.getElementsByClassName('demo')[0];
+
+    var  eleT= document.getElementsByTagName('strong');
+    var eleS = document.querySelector('div > span strong');
+    var eleA = document.querySelectorAll('div > span strong');
+
+    var parent = document.getElementsByClassName('demo')[0];
+
+    //创建节点
+    var div = document.getElementsByClassName('xw')[0];
+    var text = document.createTextNode("没想法的岁月");
+    var span = document.createElement('span')
+
+    //插入节点
+    div.appendChild(text);
+    div.appendChild(span);
+    var text1 = document.createTextNode('你好世界');
+    span.appendChild(text1);
+    span.appendChild(text);
+
+    // div.insertBefore(A, B);
+
+    //删除
+    div.removeChild(span);
+
+
+    //常用操作
+    var cww = document.getElementsByClassName('cww')[0];
+
+    // cwww.innerHTML = 123;
+
+    //设置属性值
+    cww.setAttribute('class', 'demo');
+    cww.setAttribute('id', 'only');
+
+    cww.getAttribute('id');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

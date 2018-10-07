@@ -4,6 +4,8 @@ import com.alibaba.fastjson.annotation.JSONField;
 import cww.world.pojo.po.BasePO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Teo on 2018/6/19.
  */
@@ -32,6 +34,17 @@ public class UserInfoResponseDTO extends BasePO {
 
     @JSONField(name = "wechatNo")
     private String wechatNo;
+
+    @JSONField(name = "session")
+    private HttpSession session;
+
+    public HttpSession getSession() {
+        return session;
+    }
+
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
 
     public String getUserUid() {
         return userUid;

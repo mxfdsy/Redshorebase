@@ -1,12 +1,10 @@
 package cww.world.pojo.po.account;
 
 import cww.world.pojo.po.BasePO;
-import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-@Data
 public class UserAccountPO extends BasePO {
 
-    private String userUid;
+    private String useruid;
 
     private String name;
 
@@ -27,6 +25,94 @@ public class UserAccountPO extends BasePO {
     private String wechatNo;
 
     private String identity;
+
+    public String getUseruid() {
+        return useruid;
+    }
+
+    public void setUseruid(String useruid) {
+        this.useruid = useruid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWechatNo() {
+        return wechatNo;
+    }
+
+    public void setWechatNo(String wechatNo) {
+        this.wechatNo = wechatNo;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
 
     @Override
     public String toString() {
