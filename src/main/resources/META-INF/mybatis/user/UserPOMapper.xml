@@ -73,7 +73,7 @@
         <if test="userName != null and userName != ''  ">      AND  user_name like CONCAT('%', #{userName}, '%')</if>
         <if test="phone != null and phone != ''  ">      AND  phone like CONCAT('%', #{phone}, '%')</if>
         <if test="status != null and status != ''  ">      AND  status like CONCAT('%', #{status}, '%')</if>
-        <!--<if test="catalogUids != null and !catalogUids.isEmpty()  ">-->
+        <!--<if Test="catalogUids != null and !catalogUids.isEmpty()  ">-->
           <!--AND catalog.catalog_uid in-->
           <!--<foreach collection="catalogUids" item="item" open="(" close=")" separator=",">-->
             <!--#{item}-->

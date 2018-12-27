@@ -1,5 +1,6 @@
 package cww.world.java8.optional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class OrElse {
@@ -16,6 +17,7 @@ public class OrElse {
         System.out.println(gender.orElse("<N/A>")); //MALE
         System.out.println(emptyGender.orElse("<N/A>")); //<N/A>
 
+        System.out.println(Optional.ofNullable(null).orElse(new BigDecimal(0)));
 
     }
 }

@@ -2,13 +2,10 @@ package cww.world.java8.stream;
 
 import com.alibaba.fastjson.JSON;
 import cww.world.java8.po.Father;
-import cww.world.java8.po.son;
-import org.thymeleaf.expression.Lists;
+import cww.world.java8.po.Son;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,10 +29,10 @@ class StreamDemo {
         Father father = new Father();
         father.setAge(1111);
 
-        son son1 = new son();
+        Son son1 = new Son();
         son1.setAge(19);
 
-        son son2 = new son();
+        Son son2 = new Son();
         son2.setAge(20);
 
         father.setSonList(Arrays.asList(son1, son2));
@@ -59,7 +56,7 @@ class StreamDemo {
 //                .mapToInt(Father::getAge).collect(Collectors.toList());
 
 
-        System.out.println("flatMap -----和map类似，它主要拿过来做转化如下 List<List<son>> 转化为 List<son>  转化后我们的.xx方法才可以使用");
+        System.out.println("flatMap -----和map类似，它主要拿过来做转化如下 List<List<Son>> 转化为 List<Son>  转化后我们的.xx方法才可以使用");
 
         flatMapDemo(father);
 
@@ -100,12 +97,12 @@ class StreamDemo {
     }
 
     private static void flatMapDemo(Father father) {
-        System.out.println(" List<List<son>> ");
-        List<List<son>> collect1 = Stream.of(father)
+        System.out.println(" List<List<Son>> ");
+        List<List<Son>> collect1 = Stream.of(father)
                 .map(Father -> Father.getSonList()).collect(Collectors.toList());
 
-        System.out.println(" List<son>");
-        List<son> collect = Stream.of(father)
+        System.out.println(" List<Son>");
+        List<Son> collect = Stream.of(father)
                 .map(Father::getSonList)
                 .flatMap(x -> x.stream()).collect(Collectors.toList());
 

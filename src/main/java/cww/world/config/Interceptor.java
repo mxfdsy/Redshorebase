@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Component
 public class Interceptor implements HandlerInterceptor {
-    private static final List DEFAULT_URL = Arrays.asList("/login/login","/caches/test");
+    private static final List DEFAULT_URL = Arrays.asList("/login/login","/caches/Test");
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        if (isAjaxReq(request)) {

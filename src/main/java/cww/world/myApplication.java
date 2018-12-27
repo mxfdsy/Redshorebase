@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author 小武 on 2018/8/13.
@@ -13,9 +14,10 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication
 @MapperScan(basePackages = "cww.world.mapper")
 @ImportResource(value = {
-        "classpath:META-INF/mybatis/*.xml"
-//        "classpath:META-INF/rabbitmq/*.xml"
+        "classpath:META-INF/mybatis/*.xml",
+        "classpath:META-INF/rabbitmq/*.xml"
 })
+@PropertySource(value="classpath:parameter.properties")
 public class myApplication {
     public static void main(String[] args) {
             SpringApplication.run(myApplication.class, args);

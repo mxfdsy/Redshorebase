@@ -2,7 +2,7 @@ package cww.world.service.user.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import cww.world.cache.RedisUtils;
+import cww.world.common.cache.CommonCacheUtil;
 import cww.world.common.constant.BaseCode;
 import cww.world.common.constant.Constants;
 import cww.world.common.exception.BaseException;
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     private MenuService menuService;
 
     @Autowired
-    RedisUtils redisUtils;
+    CommonCacheUtil commonCacheUtil;
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -98,8 +98,9 @@ public class UserServiceImpl implements UserService {
     private void putSessionToRedis(HttpSession session, LoginUserDTO loginUser) {
         UserInfoResponseDTO userInfoResponseDTO = new UserInfoResponseDTO();
         userInfoResponseDTO.setSession(session);
-        redisUtils.delKey(loginUser.getLoginName());
-        redisUtils.cacheNxExpire(loginUser.getLoginName(), JSON.toJSONString(userInfoResponseDTO), 2592000);
+        commonCacheUtil.delKey(loginUser.getLoginName());
+        commonCacheUtil.cacheNxExpire(loginUser.getLoginName(), JSON.toJSONString(userInfoResponseDTO), 2592000);
+        System.out.println(commonCacheUtil.getCacheValue(loginUser.getLoginName()));
     }
 
     @Override

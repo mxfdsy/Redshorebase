@@ -1,43 +1,43 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-       <!--xmlns:int="http://www.springframework.org/schema/integration"-->
-       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"-->
-       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
-		<!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
-		<!--http://www.springframework.org/schema/integration-->
-		<!--http://www.springframework.org/schema/integration/spring-integration.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">-->
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration
+		http://www.springframework.org/schema/integration/spring-integration.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
 
-    <!--<rabbit:connection-factory id="rabbitConnectionFactory" host="${spring.rabbitmq.host}"-->
-                               <!--username="${spring.rabbitmq.username}" password="${spring.rabbitmq.password}"/>-->
-    <!--<rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"/>-->
-    <!--<rabbit:admin connection-factory="rabbitConnectionFactory" />-->
+    <rabbit:connection-factory id="rabbitConnectionFactory" host="${spring.rabbitmq.host}"
+                               username="${spring.rabbitmq.username}" password="${spring.rabbitmq.password}"/>
+    <rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"/>
+    <rabbit:admin connection-factory="rabbitConnectionFactory" />
 
-    <!--&lt;!&ndash; rabbitmq 异步消息特殊的Exception处理 &ndash;&gt;-->
-    <!--&lt;!&ndash;<int:channel id="amqpAsynFailedMessageChannel"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;<int:service-activator input-channel="amqpAsynFailedMessageChannel" ref="amqpAsynFailedMessageHandler"/>&ndash;&gt;-->
+    <!-- rabbitmq 异步消息特殊的Exception处理 -->
+    <!--<int:channel id="amqpAsynFailedMessageChannel"/>-->
+    <!--<int:service-activator input-channel="amqpAsynFailedMessageChannel" ref="amqpAsynFailedMessageHandler"/>-->
 
-    <!--&lt;!&ndash;<int:channel id="failedMessageChannel" />&ndash;&gt;-->
-    <!--&lt;!&ndash;<int:service-activator input-channel="failedMessageChannel"	ref="failedMessageHandler" />&ndash;&gt;-->
+    <!--<int:channel id="failedMessageChannel" />-->
+    <!--<int:service-activator input-channel="failedMessageChannel"	ref="failedMessageHandler" />-->
 
 
 
-    <!--&lt;!&ndash;点对点，交换机&ndash;&gt;-->
-    <!--<rabbit:queue name="cww.async.queue"/>-->
-    <!--<rabbit:direct-exchange name="test.exchange">-->
-        <!--<rabbit:bindings>-->
-            <!--<rabbit:binding queue="cww.async.queue" key="cww.test.queue"/>-->
-        <!--</rabbit:bindings>-->
-    <!--</rabbit:direct-exchange>-->
+    <!--点对点，交换机-->
+    <rabbit:queue name="cww.async.queue"/>
+    <rabbit:direct-exchange name="test.exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="cww.async.queue" key="cww.test.queue"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
 
-    <!--&lt;!&ndash;fanout交换机&ndash;&gt;-->
-    <!--<rabbit:queue name="cww.test.fanout.queue5"/>-->
-    <!--<rabbit:queue name="cww.test.fanout.queue4"/>-->
-    <!--<rabbit:fanout-exchange name="test.fanout.exchange_cww">-->
-            <!--<rabbit:bindings>-->
-                <!--<rabbit:binding queue="cww.test.fanout.queue5"/>-->
-                <!--<rabbit:binding queue="cww.test.fanout.queue4"/>-->
-            <!--</rabbit:bindings>-->
-    <!--</rabbit:fanout-exchange>-->
+    <!--fanout交换机-->
+    <rabbit:queue name="cww.test.fanout.queue5"/>
+    <rabbit:queue name="cww.test.fanout.queue4"/>
+    <rabbit:fanout-exchange name="test.fanout.exchange_cww">
+            <rabbit:bindings>
+                <rabbit:binding queue="cww.test.fanout.queue5"/>
+                <rabbit:binding queue="cww.test.fanout.queue4"/>
+            </rabbit:bindings>
+    </rabbit:fanout-exchange>
 
-<!--</beans>-->
+</beans>

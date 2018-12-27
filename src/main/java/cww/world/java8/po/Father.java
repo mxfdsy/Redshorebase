@@ -1,12 +1,33 @@
 package cww.world.java8.po;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Father {
     String name;
     Integer age;
+    BigDecimal bigDecimal;
 
-    List<son> sonList;
+    List<Son> sonList;
+
+    String businessType;
+
+
+    public BigDecimal getBigDecimal() {
+        return bigDecimal;
+    }
+
+    public void setBigDecimal(BigDecimal bigDecimal) {
+        this.bigDecimal = bigDecimal;
+    }
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType;
+    }
 
     public String getName() {
         return name;
@@ -24,11 +45,32 @@ public class Father {
         this.age = age;
     }
 
-    public List<son> getSonList() {
+    public List<Son> getSonList() {
         return sonList;
     }
 
-    public void setSonList(List<son> sonList) {
+    public void setSonList(List<Son> sonList) {
         this.sonList = sonList;
+    }
+
+
+    public Father(String name, Integer age, BigDecimal bigDecimal) {
+        this.name = name;
+        this.age = age;
+        this.bigDecimal = bigDecimal;
+    }
+
+    public Father() {
+    }
+
+    @Override
+    public String toString() {
+        return "Father{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", bigDecimal=" + bigDecimal +
+                ", sonList=" + sonList +
+                ", businessType='" + businessType + '\'' +
+                '}';
     }
 }
