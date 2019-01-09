@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/es")
@@ -61,8 +58,12 @@ public class EsController {
     @RequestMapping(value = "/getGoodsInfo", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getGoodsInfo(@RequestBody String payload) {
-        List<Goods> allGoods = repository.findByGoodUidIn(Arrays.asList("2222222"));
         Iterable<Goods> all = repository.findAll();
+        Iterable<Goods> all1 = repository.findAll(Collections.singleton("2222222"));
+        List<Goods> byGoodUidIn = repository.findByGoodUidIn(Arrays.asList("2222222"));
+        Goods byGoodUid = repository.findByGoodUid("2222222");
+        Goods mac02 = repository.findByNameAndAndGoodPrice("mac02", BigDecimal.ONE);
+        List<Goods> byGoodPriceBetween = repository.findByGoodPriceBetween(BigDecimal.ZERO, BigDecimal.TEN);
         return ResultBuilderUtils.buildSuccess(Constants.SUCCESS);
     }
 }
