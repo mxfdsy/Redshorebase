@@ -1,8 +1,7 @@
 package cww.world.java8.Map;
-
 import java.util.HashMap;
 
-public class Map {
+public class MapTest {
     public static void main(String[] args) {
         HashMap<Integer, String> map = new HashMap<>();
 
@@ -24,5 +23,8 @@ public class Map {
         map.forEach((id,val)-> {
             System.out.println(val);
         });
+
+
+
     }
 }

@@ -101,7 +101,7 @@ public abstract class BaseController {
 //     */
 //    public void getNavigationInfo(String skipUrl, Model model, Integer pageLayer){
 //        MenuNavigationDTO navigationDTO = new MenuNavigationDTO();
-//        Map<String, MenuVO> childrenMenuMap = SessionGetter.getChildrenMenuMap();
+//        MapTest<String, MenuVO> childrenMenuMap = SessionGetter.getChildrenMenuMap();
 //        if (null == childrenMenuMap){
 //            throw new BaseException(BaseCode.MENU_DO_NOT_EXIST, "用户没有菜单");
 //        }
@@ -110,7 +110,7 @@ public abstract class BaseController {
 //        navigationDTO.setChildrenMenuName(childrenMenu.getName());
 //        navigationDTO.setChildrenMenuUrl(childrenMenu.getSkipUrl());
 //
-//        Map<Integer, MenuVO> parentMenuMap = SessionGetter.getParentMenuMap();
+//        MapTest<Integer, MenuVO> parentMenuMap = SessionGetter.getParentMenuMap();
 //        if (null == parentMenuMap){
 //            throw new BaseException(BaseCode.MENU_DO_NOT_EXIST, "用户没有菜单");
 //        }

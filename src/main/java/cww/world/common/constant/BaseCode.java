@@ -88,7 +88,7 @@ public enum BaseCode {
 //    }
 //
 //
-//    private static final Map<Integer, BaseCode> values = new HashMap<Integer, BaseCode>();
+//    private static final MapTest<Integer, BaseCode> values = new HashMap<Integer, BaseCode>();
 //
 //    static {
 //        for (BaseCode ec : BaseCode.values()) {
