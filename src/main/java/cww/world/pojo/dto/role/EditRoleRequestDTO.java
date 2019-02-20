@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 public class EditRoleRequestDTO {
-    
+
     @JSONField(name = "role_id")
     private String roleId;
     @JSONField(name = "role_uid")
@@ -27,10 +27,10 @@ public class EditRoleRequestDTO {
 
     @JSONField(name = "is_changeable")
     private String isChangeable;
-    
+
     @JSONField(name = "permission_uids")
     @NotNull(message = "缺少权限", groups = {Insert.class, Update.class})
-    @Size(min = 1,message = "缺少权限",groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "缺少权限", groups = {Insert.class, Update.class})
     private List<String> permissionUids;
 
     @JSONField(name = "operator_uid")
@@ -71,7 +71,7 @@ public class EditRoleRequestDTO {
     }
 
     public String getRoleName() {
-        if(StringUtils.isBlank(roleName)){
+        if (StringUtils.isBlank(roleName)) {
             return roleName;
         }
         return roleName.trim();

@@ -9,31 +9,31 @@ import javax.validation.constraints.Size;
 
 
 public class InsertChildrenMenuDTO {
-    @NotNull(message="缺少模块id", groups={Insert.class})
-    @Size(min=1, message="缺少模块id", groups={Insert.class})
+    @NotNull(message = "缺少模块id", groups = {Insert.class})
+    @Size(min = 1, message = "缺少模块id", groups = {Insert.class})
     @JSONField(name = "modul_id")
     private String modulId;
-    
+
     @JSONField(name = "modul_name")
     private String modulName;
-    
-    @NotNull(message="缺少页面名称", groups={Insert.class})
-    @Size(min=1, message="缺少页面名称", groups={Insert.class})
+
+    @NotNull(message = "缺少页面名称", groups = {Insert.class})
+    @Size(min = 1, message = "缺少页面名称", groups = {Insert.class})
     @JSONField(name = "menu_name")
     private String menuName;
-    
-    @NotNull(message="缺少页面跳转链接", groups={Insert.class})
-    @Size(min=1, message="缺少页面跳转链接", groups={Insert.class})
+
+    @NotNull(message = "缺少页面跳转链接", groups = {Insert.class})
+    @Size(min = 1, message = "缺少页面跳转链接", groups = {Insert.class})
     @JSONField(name = "skip_url")
     private String skipUrl;
-    
-    @NotNull(message="缺少权限", groups={Insert.class})
-    @Size(min=1, message="缺少权限", groups={Insert.class})
+
+    @NotNull(message = "缺少权限", groups = {Insert.class})
+    @Size(min = 1, message = "缺少权限", groups = {Insert.class})
     @JSONField(name = "permission_key")
     private String permissionKey;
-    
-    @NotNull(message="缺少权限名称", groups={Insert.class})
-    @Size(min=1, message="缺少权限名称", groups={Insert.class})
+
+    @NotNull(message = "缺少权限名称", groups = {Insert.class})
+    @Size(min = 1, message = "缺少权限名称", groups = {Insert.class})
     @JSONField(name = "permission_name")
     private String permissionName;
 

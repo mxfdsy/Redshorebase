@@ -2,11 +2,11 @@ package cww.world.pojo.dto.role;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class RoleUserCountDTO{
-    
+public class RoleUserCountDTO {
+
     @JSONField(name = "role_uid")
     private String roleUid;
-    
+
     @JSONField(name = "user_count")
     private Integer userCount;
 

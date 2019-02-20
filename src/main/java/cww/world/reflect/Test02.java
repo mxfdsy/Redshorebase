@@ -1,6 +1,6 @@
 package cww.world.reflect;
 
-import cww.world.elasticsearch.bean.Person;
+import cww.world.otherInfo.java8.lambda.Person;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;

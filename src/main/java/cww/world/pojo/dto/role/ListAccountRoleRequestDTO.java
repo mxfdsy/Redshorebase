@@ -6,29 +6,30 @@ public class ListAccountRoleRequestDTO {
 
     @JSONField(name = "role_name")
     private String roleName;
-    
+
     @JSONField(name = "system_type")
     private String systemType;
-    
+
     @JSONField(name = "system_type_prefix")
     private String systemTypePrefix;
-    
+
     private ListAccountRoleRequestDTO(String roleName, String systemType,
-            String systemTypePrefix) {
+                                      String systemTypePrefix) {
         super();
         this.roleName = roleName;
         this.systemType = systemType;
         this.systemTypePrefix = systemTypePrefix;
     }
+
     public ListAccountRoleRequestDTO() {
         super();
     }
 
-    public static ListAccountRoleRequestDTO getInstance(String roleName, String systemType){
+    public static ListAccountRoleRequestDTO getInstance(String roleName, String systemType) {
         return new ListAccountRoleRequestDTO(roleName, systemType, null);
     }
-    
-    public static ListAccountRoleRequestDTO getPrefixInstance(String roleName, String systemType){
+
+    public static ListAccountRoleRequestDTO getPrefixInstance(String roleName, String systemType) {
         return new ListAccountRoleRequestDTO(roleName, null, systemType);
     }
 

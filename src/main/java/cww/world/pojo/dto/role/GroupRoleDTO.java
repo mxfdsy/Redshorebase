@@ -3,7 +3,7 @@ package cww.world.pojo.dto.role;
 import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class GroupRoleDTO{
+public class GroupRoleDTO {
 
     @JSONField(name = "role_uid")
     private String roleUid;

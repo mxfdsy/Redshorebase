@@ -12,15 +12,15 @@ import java.util.Date;
  * @author wyz
  */
 public class ModuleOperationTraceMessageDTO {
-    @NotNull(message = "原数据不能为空",  groups = { Insert.class })
+    @NotNull(message = "原数据不能为空", groups = {Insert.class})
     @JSONField(name = "old_data")
     private String oldData;
 
-    @NotNull(message = "关联uid不能为空",  groups = { Insert.class })
+    @NotNull(message = "关联uid不能为空", groups = {Insert.class})
     @JSONField(name = "operation_trace_uid")
     private String operationTraceUid;
 
-    @NotNull(message = "新数据不能为空",  groups = { Insert.class })
+    @NotNull(message = "新数据不能为空", groups = {Insert.class})
     @JSONField(name = "new_data")
     private String newData;
 

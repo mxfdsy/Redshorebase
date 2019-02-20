@@ -10,31 +10,31 @@ public class MenuVO implements Serializable {
 
     @JSONField(name = "parent")
     private Integer parent;
-    
+
     @JSONField(name = "sort")
     private Integer sort;
-    
+
     @JSONField(name = "name")
     private String name;
-    
+
     @JSONField(name = "code")
     private String code;
-    
+
     @JSONField(name = "layer")
     private Integer layer;
-    
+
     @JSONField(name = "id")
     private Integer id;
-    
+
     @JSONField(name = "skip_url")
     private String skipUrl;
-    
+
     @JSONField(name = "menu_icon")
     private String menuIcon;
-    
+
     @JSONField(name = "menu_icon_checked")
     private String menuIconChecked;
-    
+
     @JSONField(name = "code_list")
     private String[] codeList;
 
@@ -109,12 +109,12 @@ public class MenuVO implements Serializable {
     public void setMenuIconChecked(String menuIconChecked) {
         this.menuIconChecked = menuIconChecked;
     }
-    
+
     public String[] getCodeList() {
-        codeList=code.split(",");
+        codeList = code.split(",");
         return codeList;
     }
-    
+
     public void setCodeList(String[] codeList) {
         this.codeList = codeList;
     }

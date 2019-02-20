@@ -6,34 +6,34 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Date;
 
 public class RolePermissionInfoDTO {
-    
+
     @JSONField(name = "permission_uid")
     private String permissionUid;
-    
+
     @JSONField(name = "permission_key")
     private String permissionKey;
 
     @JSONField(name = "permission_name")
     private String permissionName;
-    
+
     @JSONField(name = "permission_desc")
     private String permissionDesc;
-    
+
     @JSONField(name = "permission_module")
     private String permissionModule;
-    
+
     @JSONField(name = "role_uid")
     private String roleUid;
 
     @JSONField(name = "created_at", format = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
-    
+
     @JSONField(name = "created_by")
     private String createdBy;
-    
+
     @JSONField(name = "updated_at", format = "yyyy-MM-dd HH:mm:ss")
     private Date updatedAt;
-    
+
     @JSONField(name = "updated_by")
     private String updatedBy;
 

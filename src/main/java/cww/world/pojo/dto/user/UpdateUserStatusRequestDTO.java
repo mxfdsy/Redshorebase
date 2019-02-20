@@ -14,7 +14,7 @@ import java.util.List;
 public class UpdateUserStatusRequestDTO {
 
 
-   @JSONField(name = "status")
+    @JSONField(name = "status")
     private String status;
 
     @JSONField(name = "user_uids")

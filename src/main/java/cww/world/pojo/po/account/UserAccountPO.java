@@ -2,6 +2,7 @@ package cww.world.pojo.po.account;
 
 import cww.world.pojo.po.BasePO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class UserAccountPO extends BasePO {
 
     private String useruid;

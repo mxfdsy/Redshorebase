@@ -1,6 +1,7 @@
 package cww.world.reflect;
 
-import cww.world.elasticsearch.bean.Person;
+
+import cww.world.otherInfo.java8.lambda.Person;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;

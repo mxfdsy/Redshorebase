@@ -7,16 +7,16 @@ import java.util.List;
 
 
 public class ChildMenuDTO {
-    
+
     @JSONField(name = "menu_id")
     private Integer menuId;
-    
+
     @JSONField(name = "menu_name")
     private String menuName;
 
     @JSONField(name = "skip_url")
     private String skipUrl;
-    
+
     @JSONField(name = "permissions")
     private List<PermissionDTO> permissions;
 

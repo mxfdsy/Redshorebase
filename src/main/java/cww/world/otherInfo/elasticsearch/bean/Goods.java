@@ -1,4 +1,4 @@
-package cww.world.elasticsearch.bean;
+package cww.world.otherInfo.elasticsearch.bean;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;

@@ -4,21 +4,21 @@ import cww.world.pojo.po.BasePO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class PermissionPO extends BasePO {
-    
+
     private Integer id;
 
     private String permissionUid;
-    
+
     private String permissionKey;
-    
+
     private String permissionName;
-    
+
     private String permissionDesc;
-    
+
     private String permissionModule;
-    
+
     private Integer menuId;
-    
+
     private Integer parentMenuId;
 
     public Integer getId() {

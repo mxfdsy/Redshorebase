@@ -8,33 +8,33 @@ import javax.validation.constraints.Size;
 
 
 public class InsertPermissionDTO {
-    @NotNull(message="缺少权限", groups={Insert.class})
-    @Size(min=1, message="缺少权限", groups={Insert.class})
+    @NotNull(message = "缺少权限", groups = {Insert.class})
+    @Size(min = 1, message = "缺少权限", groups = {Insert.class})
     @JSONField(name = "permission_key")
     private String permissionKey;
-    
-    @NotNull(message="缺少权限名称", groups={Insert.class})
-    @Size(min=1, message="缺少权限名称", groups={Insert.class})
+
+    @NotNull(message = "缺少权限名称", groups = {Insert.class})
+    @Size(min = 1, message = "缺少权限名称", groups = {Insert.class})
     @JSONField(name = "permission_name")
     private String permissionName;
-    
-    @NotNull(message="缺少权限描述", groups={Insert.class})
-    @Size(min=1, message="缺少权限描述", groups={Insert.class})
+
+    @NotNull(message = "缺少权限描述", groups = {Insert.class})
+    @Size(min = 1, message = "缺少权限描述", groups = {Insert.class})
     @JSONField(name = "permission_desc")
     private String permissionDesc;
-    
-    @NotNull(message="缺少页面名称", groups={Insert.class})
-    @Size(min=1, message="缺少页面名称", groups={Insert.class})
+
+    @NotNull(message = "缺少页面名称", groups = {Insert.class})
+    @Size(min = 1, message = "缺少页面名称", groups = {Insert.class})
     @JSONField(name = "permission_module")
     private String permissionModule;
-    
-    @NotNull(message="缺少页面id", groups={Insert.class})
-    @Size(min=1, message="缺少页面id", groups={Insert.class})
+
+    @NotNull(message = "缺少页面id", groups = {Insert.class})
+    @Size(min = 1, message = "缺少页面id", groups = {Insert.class})
     @JSONField(name = "menu_id")
     private String menuId;
-    
-    @NotNull(message="缺少模块id", groups={Insert.class})
-    @Size(min=1, message="缺少模块id", groups={Insert.class})
+
+    @NotNull(message = "缺少模块id", groups = {Insert.class})
+    @Size(min = 1, message = "缺少模块id", groups = {Insert.class})
     @JSONField(name = "parent_menu_id")
     private String parentMenuId;
 

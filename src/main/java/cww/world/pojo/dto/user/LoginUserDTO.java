@@ -10,31 +10,31 @@ import java.util.Set;
 
 public class LoginUserDTO implements Serializable {
     private static final long serialVersionUID = -6148782076805864643L;
-    
+
     @JSONField(name = "session_key")
     private String sessionKey;
-    
+
     @JSONField(name = "verified")
     private boolean verified;
-    
+
     @JSONField(name = "user_uid")
     private String userUid;
-    
+
     @JSONField(name = "login_name")
     private String loginName;
-    
+
     @JSONField(name = "phone")
     private String phone;
-    
+
     @JSONField(name = "name")
     private String name;
-    
+
     @JSONField(name = "gender")
     private String gender;
-    
+
     @JSONField(name = "role_info")
     private List<LoginRoleDTO> roleInfo;
-    
+
     @JSONField(name = "permission_info")
     private Set<String> permissionInfo;
 

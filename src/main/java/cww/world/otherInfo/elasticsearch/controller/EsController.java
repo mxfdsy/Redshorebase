@@ -1,10 +1,10 @@
-package cww.world.elasticsearch.controller;
+package cww.world.otherInfo.elasticsearch.controller;
 
 import cww.world.common.constant.Constants;
 import cww.world.common.util.ResultBuilderUtils;
-import cww.world.elasticsearch.bean.Goods;
-import cww.world.elasticsearch.bean.Person;
-import cww.world.elasticsearch.repository.GoodsRepository;
+import cww.world.otherInfo.elasticsearch.bean.Goods;
+import cww.world.otherInfo.elasticsearch.bean.Person;
+import cww.world.otherInfo.elasticsearch.repository.GoodsRepository;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

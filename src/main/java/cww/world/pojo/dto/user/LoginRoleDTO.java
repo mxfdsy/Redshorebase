@@ -11,10 +11,10 @@ public class LoginRoleDTO implements Serializable {
 
     @JSONField(name = "role_uid")
     private String roleUid;
-    
+
     @JSONField(name = "role_key")
     private String roleKey;
-    
+
     @JSONField(name = "mall_uid")
     public List<String> mallUid;
 

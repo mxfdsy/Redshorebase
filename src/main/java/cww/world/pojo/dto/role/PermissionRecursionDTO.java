@@ -5,19 +5,19 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.util.List;
 
 public class PermissionRecursionDTO {
-    
+
     @JSONField(name = "permission_uid")
     private String permissionUid;
-    
+
     @JSONField(name = "permission_key")
     private String permissionKey;
 
     @JSONField(name = "permission_name")
     private String permissionName;
-    
+
     @JSONField(name = "permission_desc")
     private String permissionDesc;
-    
+
     @JSONField(name = "child")
     private List<PermissionRecursionDTO> child;
 

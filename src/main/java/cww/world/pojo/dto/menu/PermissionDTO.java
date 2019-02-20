@@ -4,22 +4,22 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 
 public class PermissionDTO {
-    
+
     @JSONField(name = "id")
     private Integer id;
 
     @JSONField(name = "permission_uid")
     private String permissionUid;
-    
+
     @JSONField(name = "permission_name")
     private String permissionName;
-    
+
     @JSONField(name = "permission_key")
     private String permissionKey;
-    
+
     @JSONField(name = "permission_desc")
     private String permissionDesc;
-    
+
     @JSONField(name = "is_role_selected")
     private boolean isRoleSelected;
 

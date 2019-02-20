@@ -5,25 +5,25 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class MenuPO extends BasePO {
     private Integer id;
-    
+
     private String menuUid;
-    
+
     private String name;
-    
+
     private Integer parent;
-    
+
     private Integer layer;
-    
+
     private Integer sort;
 
     private String menuIcon;
-    
+
     private String menuIconChecked;
-    
+
     private String skipUrl;
-    
+
     private String code;
-    
+
     private String permissionKeys;
 
     private String menuType;

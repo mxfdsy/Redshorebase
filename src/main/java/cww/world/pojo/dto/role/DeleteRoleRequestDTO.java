@@ -2,11 +2,11 @@ package cww.world.pojo.dto.role;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class DeleteRoleRequestDTO{
-    
+public class DeleteRoleRequestDTO {
+
     @JSONField(name = "role_uid")
     private String roleUid;
-    
+
     @JSONField(name = "role_key")
     private String roleKey;
 

@@ -80,6 +80,6 @@ public class ListUserDTO extends PageableRequestDTO {
 
     @Override
     public String toString() {
-        return  JSON.toJSONString(this);
+        return JSON.toJSONString(this);
     }
 }

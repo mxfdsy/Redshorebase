@@ -11,105 +11,105 @@ import javax.validation.constraints.Size;
 
 public class UserEditDTO {
 
-    @NotNull(message = "更新集团uid不能为空", groups = { Update.class })
-    @Size(min = 1, message = "更新集团uid不能为空", groups = { Update.class })
+    @NotNull(message = "更新集团uid不能为空", groups = {Update.class})
+    @Size(min = 1, message = "更新集团uid不能为空", groups = {Update.class})
     @JSONField(name = "company_uid")
-	private String companyUid;
+    private String companyUid;
 
     @JSONField(name = "business_code")
-	private String businessCode;
-	
-    @NotNull(message = "公司名称不能为空", groups = { Insert.class })
-    @Size(min = 1, max = 30, message = "公司名称长度应大于1小于等于30", groups = { Insert.class })
+    private String businessCode;
+
+    @NotNull(message = "公司名称不能为空", groups = {Insert.class})
+    @Size(min = 1, max = 30, message = "公司名称长度应大于1小于等于30", groups = {Insert.class})
     @JSONField(name = "company_name")
-	private String companyName;
-	
-    @NotNull(message = "公司简称不能为空", groups = { Insert.class })
-    @Size(min = 1, max = 30, message = "公司简称长度应大于1小于等于30", groups = { Insert.class })
+    private String companyName;
+
+    @NotNull(message = "公司简称不能为空", groups = {Insert.class})
+    @Size(min = 1, max = 30, message = "公司简称长度应大于1小于等于30", groups = {Insert.class})
     @JSONField(name = "company_short_name")
-	private String companyShortName;
-	
-    @NotNull(message = "公司类型不能为空", groups = { Insert.class })
-    @Size(min = 1, message = "公司类型不能为空", groups = { Insert.class })
+    private String companyShortName;
+
+    @NotNull(message = "公司类型不能为空", groups = {Insert.class})
+    @Size(min = 1, message = "公司类型不能为空", groups = {Insert.class})
     @JSONField(name = "company_type")
-	private String companyType;
-	
-    @NotNull(message = "法人代表不能为空", groups = { Insert.class })
-    @Size(min = 1, max = 5, message = "法人代表长度应大于1小于等于5", groups = { Insert.class })
+    private String companyType;
+
+    @NotNull(message = "法人代表不能为空", groups = {Insert.class})
+    @Size(min = 1, max = 5, message = "法人代表长度应大于1小于等于5", groups = {Insert.class})
     @JSONField(name = "corporate_representative")
-	private String corporateRepresentative;
-	
-    @NotNull(message = "所属行业不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, max = 50, message = "所属行业长度应大于1小于等于20", groups = { Insert.class, Update.class })
+    private String corporateRepresentative;
+
+    @NotNull(message = "所属行业不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, max = 50, message = "所属行业长度应大于1小于等于20", groups = {Insert.class, Update.class})
     @JSONField(name = "industry")
-	private String industry;
-	
-    @NotNull(message = "电话不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1,  max = 20, message = "电话长度应大于1小于20", groups = { Insert.class, Update.class })
+    private String industry;
+
+    @NotNull(message = "电话不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, max = 20, message = "电话长度应大于1小于20", groups = {Insert.class, Update.class})
     @JSONField(name = "phone")
-	private String phone;
+    private String phone;
 
     @JSONField(name = "company_country_id")
     private String companyCountryId;
 
     @JSONField(name = "company_country")
     private String companyCountry;
-	
-    @NotNull(message = "省id不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, message = "省id不能为空", groups = { Insert.class, Update.class })
+
+    @NotNull(message = "省id不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "省id不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "company_province_id")
     private String companyProvinceId;
-    
-    @NotNull(message = "省不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, message = "省不能为空", groups = { Insert.class, Update.class })
+
+    @NotNull(message = "省不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "省不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "company_province")
     private String companyProvince;
 
-    @NotNull(message = "市id不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, message = "市id不能为空", groups = { Insert.class, Update.class })
+    @NotNull(message = "市id不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "市id不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "company_city_id")
     private String companyCityId;
-	
-    @NotNull(message = "市不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, message = "市不能为空", groups = { Insert.class, Update.class })
+
+    @NotNull(message = "市不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "市不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "company_city")
     private String companyCity;
-	
-    @NotNull(message = "区id不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, message = "区id不能为空", groups = { Insert.class, Update.class })
+
+    @NotNull(message = "区id不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "区id不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "company_district_id")
     private String companyDistrictId;
-	
-    @NotNull(message = "区不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, message = "区不能为空", groups = { Insert.class, Update.class })
+
+    @NotNull(message = "区不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, message = "区不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "company_district")
     private String companyDistrict;
-	
-    @NotNull(message = "详细地址不能为空", groups = { Insert.class, Update.class })
-    @Size(min = 1, max = 50, message = "详细地址长度应为1~50", groups = { Insert.class, Update.class })
+
+    @NotNull(message = "详细地址不能为空", groups = {Insert.class, Update.class})
+    @Size(min = 1, max = 50, message = "详细地址长度应为1~50", groups = {Insert.class, Update.class})
     @JSONField(name = "company_address")
     private String companyAddress;
-    
+
     @JSONField(name = "company_detail_address")
     private String companyDetailAddress;
 
     private String fax;
 
     @JSONField(name = "deposit_bank")
-	private String depositBank;
-	
+    private String depositBank;
+
     @JSONField(name = "bank_account")
-	private String bankAccount;
-	
+    private String bankAccount;
+
     @JSONField(name = "bank_account_name")
-	private String bankAccountName;
-	
+    private String bankAccountName;
+
     @JSONField(name = "duty_paragraph")
-	private String dutyParagraph;
-	
+    private String dutyParagraph;
+
     @JSONField(name = "company_email")
-	private String companyEmail;
-    
+    private String companyEmail;
+
     @JSONField(name = "operator_uid")
     private String operatorUid;
 

@@ -112,7 +112,6 @@ public class UserInfoResponsePO extends BasePO {
     }
 
 
-
     public String getResultOrganizationName() {
         return resultOrganizationName;
     }

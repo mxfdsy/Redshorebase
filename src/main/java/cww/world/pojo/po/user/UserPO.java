@@ -18,11 +18,11 @@ public class UserPO implements Serializable {
     @JSONField(name = "userName")
     private String userName;
 
-    @NotNull(message = "登陆名不能为空",groups = Insert.class)
+    @NotNull(message = "登陆名不能为空", groups = Insert.class)
     @JSONField(name = "loginName")
     private String loginName;
 
-    @NotNull(message = "密码不能为空",groups ={Insert.class,Update.class} )
+    @NotNull(message = "密码不能为空", groups = {Insert.class, Update.class})
     @JSONField(name = "password")
     private String password;
 

@@ -6,32 +6,32 @@ import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class PageableRequestDTO {
-    
+
     @JSONField(name = "page_no")
     private Integer pageNo;
-    
+
     @JSONField(name = "page_size")
     private Integer pageSize;
-    
+
     @JSONField(name = "sort_key")
     private String sortKey;
-    
+
     @JSONField(name = "sort_order")
     private String sortOrder;
-    
-    public boolean isPageable(){
+
+    public boolean isPageable() {
         return !(null == pageNo || null == pageSize);
     }
-    
-    public boolean isSortable(){
+
+    public boolean isSortable() {
         return !StringUtils.isBlank(sortKey);
     }
-    
-    public Integer getPageOffset(){
-        if(!isPageable()){
+
+    public Integer getPageOffset() {
+        if (!isPageable()) {
             return 0;
         }
-        return (pageNo -1) * pageSize;
+        return (pageNo - 1) * pageSize;
     }
 
     public Integer getPageNo() {
@@ -59,7 +59,7 @@ public class PageableRequestDTO {
     }
 
     public String getSortOrder() {
-        if(StringUtils.isBlank(sortOrder)){
+        if (StringUtils.isBlank(sortOrder)) {
             return SortOrderEnum.ASC.name();
         }
         SortOrderEnum order = EnumUtils.getEnum(SortOrderEnum.class, sortOrder.toUpperCase());

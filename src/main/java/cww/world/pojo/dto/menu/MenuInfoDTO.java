@@ -4,41 +4,41 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class MenuInfoDTO {
-	
-	@JSONField(name = "bm_uid")
-	private String bmUid;
-	
-	@JSONField(name = "id")
+
+    @JSONField(name = "bm_uid")
+    private String bmUid;
+
+    @JSONField(name = "id")
     private String id;
-	
-	@JSONField(name = "parent")
-	private String parent;
-	
-	@JSONField(name = "sort")
-	private int sort;
 
-	@JSONField(name = "menu_icon")
-	private String menuIcon;
-	@JSONField(name = "menu_icon_checked")
-	private String menuIconChecked;
-	
-	@JSONField(name = "name")
-	private String name;
-	
-	@JSONField(name = "skip_url")
-	private String skipUrl;
-	
-	@JSONField(name = "code")
-	private String code;
-	
-	@JSONField(name = "layer")
-	private int layer;
-	
-	@JSONField(name = "permission_keys")
-	private String permissionKeys;
+    @JSONField(name = "parent")
+    private String parent;
 
-	@JSONField(name = "menu_uid")
-	private String menuUid;
+    @JSONField(name = "sort")
+    private int sort;
+
+    @JSONField(name = "menu_icon")
+    private String menuIcon;
+    @JSONField(name = "menu_icon_checked")
+    private String menuIconChecked;
+
+    @JSONField(name = "name")
+    private String name;
+
+    @JSONField(name = "skip_url")
+    private String skipUrl;
+
+    @JSONField(name = "code")
+    private String code;
+
+    @JSONField(name = "layer")
+    private int layer;
+
+    @JSONField(name = "permission_keys")
+    private String permissionKeys;
+
+    @JSONField(name = "menu_uid")
+    private String menuUid;
 
     public String getId() {
         return id;
@@ -99,7 +99,7 @@ public class MenuInfoDTO {
     public String getSkipUrl() {
         return skipUrl;
     }
-    
+
     public void setSkipUrl(String skipUrl) {
         this.skipUrl = skipUrl;
     }

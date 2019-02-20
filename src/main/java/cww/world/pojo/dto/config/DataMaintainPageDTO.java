@@ -13,7 +13,8 @@ public class DataMaintainPageDTO {
 
     private String pageTitle;
 
-    public DataMaintainPageDTO(){}
+    public DataMaintainPageDTO() {
+    }
 
     public DataMaintainPageDTO(String baseUrl, String pageTitle) {
         this.baseUrl = baseUrl;

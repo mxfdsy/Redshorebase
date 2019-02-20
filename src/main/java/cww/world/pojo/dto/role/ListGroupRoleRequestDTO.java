@@ -14,7 +14,7 @@ public class ListGroupRoleRequestDTO extends PageableRequestDTO {
     private String isChangeable;
 
     public String getRoleName() {
-        if(StringUtils.isBlank(roleName)){
+        if (StringUtils.isBlank(roleName)) {
             return roleName;
         }
         return roleName.trim();

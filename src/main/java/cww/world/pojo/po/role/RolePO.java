@@ -5,18 +5,18 @@ import cww.world.pojo.po.BasePO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class RolePO extends BasePO {
-    
-    private Integer id; 
-    
+
+    private Integer id;
+
     @JSONField(name = "role_uid")
     private String roleUid;
-    
+
     @JSONField(name = "role_key")
     private String roleKey;
-    
+
     @JSONField(name = "role_name")
     private String roleName;
-    
+
     @JSONField(name = "role_desc")
     private String roleDesc;
 

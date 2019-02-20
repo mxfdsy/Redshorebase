@@ -10,7 +10,7 @@ public class ModuleDTO {
 
     @JSONField(name = "menu_name")
     private String menuName;
-    
+
     @JSONField(name = "menu_id")
     private Integer menuId;
 
@@ -19,7 +19,7 @@ public class ModuleDTO {
 
     @JSONField(name = "menu_icon_checked")
     private String menuIconChecked;
-    
+
     @JSONField(name = "children")
     private List<ChildMenuDTO> children;
 

@@ -1,4 +1,4 @@
-package cww.world.elasticsearch.bean;
+package cww.world.otherInfo.elasticsearch.bean;
 
 public class Person {
     String name;

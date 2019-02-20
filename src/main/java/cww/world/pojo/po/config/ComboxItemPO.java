@@ -19,7 +19,7 @@ public class ComboxItemPO extends BasePO {
     @JSONField(name = "memo")
     private String memo;
 
-    @NotBlank(message="缺少下拉type", groups={Insert.class})
+    @NotBlank(message = "缺少下拉type", groups = {Insert.class})
     @JSONField(name = "type")
     private String type;
 
@@ -81,7 +81,7 @@ public class ComboxItemPO extends BasePO {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return JSON.toJSONString(this);
     }
 }
