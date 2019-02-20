@@ -9,7 +9,6 @@ import cww.world.pojo.dto.messsage.user.UserEditDTO;
 import cww.world.pojo.po.trace.Generic;
 import cww.world.pojo.po.trace.ModuleOperationTraceDetailPO;
 import cww.world.pojo.po.trace.ModuleOperationTracePO;
-import cww.world.service.trance.TranceService;
 import cww.world.service.trance.UserOperationTraceService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ import java.util.List;
  * @author 小武 on 2018/9/1.
  */
 @Service("userTranceImpl")
-public class UserTranceServiceImpl implements TranceService {
+public class UserTranceServiceImpl implements UserOperationTraceService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserTranceServiceImpl.class);
 
@@ -37,7 +36,6 @@ public class UserTranceServiceImpl implements TranceService {
     @Autowired
     private ModuleOperationTraceDetailMapper moduleOperationTraceDetailMapper;
 
-    @Override
     public void engerInfoParameter(ModuleOperationTraceMessageDTO moduleOperationTraceMessageDTO) {
         UserEditDTO newDataDTO = JSONObject.parseObject(moduleOperationTraceMessageDTO.getNewData(), UserEditDTO.class);
         UserEditDTO oldDataDTO = JSONObject.parseObject(moduleOperationTraceMessageDTO.getOldData(), UserEditDTO.class);
@@ -121,5 +119,10 @@ public class UserTranceServiceImpl implements TranceService {
         } else {
             message.setItemMemo("由" + message.getOldValue() + "变更为" + message.getNewValue());
         }
+    }
+
+    @Override
+    public List<ModuleOperationTraceDetailPO> generateDetail(Generic newValue, Generic oldValue) {
+        return null;
     }
 }
