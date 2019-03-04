@@ -84,15 +84,15 @@ class StreamDemo {
 
     private static List<Integer> peekDemo() {
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
-        integers.stream().filter(x -> x >3).peek(e -> System.out.println(e)).collect(Collectors.toList());
+        integers.stream().filter(x -> x > 3).peek(e -> System.out.println(e)).collect(Collectors.toList());
 
 
         Stream.of("one", "two", "three", "four")
-                         .filter(e -> e.length() > 3)
-                         .peek(e -> System.out.println("Filtered value: " + e))
-                         .map(String::toUpperCase)
-                         .peek(e -> System.out.println("Mapped value: " + e))
-                         .collect(Collectors.toList());
+                .filter(e -> e.length() > 3)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .collect(Collectors.toList());
         return integers;
     }
 

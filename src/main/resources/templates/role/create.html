@@ -110,13 +110,13 @@
         <h2 class="layui-colla-title layui-colla-title-hasmore layui-this" lmf-event="role-icon-show">
 
             <input
-                   lay-filter="role-first-menu"
-                   type="checkbox"
-                   name=""
-                   first-menu-name="role-first-menu"
-                   lay-skin="primary"
-                   value="{{ d[i].menu_id }}"
-                   title="{{d[i].menu_name }}"
+                    lay-filter="role-first-menu"
+                    type="checkbox"
+                    name=""
+                    first-menu-name="role-first-menu"
+                    lay-skin="primary"
+                    value="{{ d[i].menu_id }}"
+                    title="{{d[i].menu_name }}"
             >
 
             <div class=" layui-input-inline layui-colla-title-more">
@@ -138,7 +138,7 @@
                            lay-skin="primary"
                            value="{{ d[i].children[j].menu_id }}"
                            title="{{ d[i].children[j].menu_name }}"
-                           lay-filter = "role-second-menu"
+                           lay-filter="role-second-menu"
                            first-menu-uid="{{ d[i].menu_id }}"
                     >
                 </div>
@@ -152,7 +152,7 @@
                                lay-skin="primary"
                                value="{{d[i].children[j].permissions[k].permission_uid}}"
                                title="{{d[i].children[j].permissions[k].permission_name}}"
-                               lay-filter = "role-third-menu"
+                               lay-filter="role-third-menu"
                                first-menu-uid="{{ d[i].menu_id }}"
                                second-menu-uid="{{ d[i].children[j].menu_id }}"
                         >

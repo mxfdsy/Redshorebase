@@ -1,7 +1,7 @@
 <div class="layui-side-scroll" th:if="${ session.login_user_menu!=null && #arrays.length(session.login_user_menu)>0}">
     <div class="layui-logo">
         <a th:href="@{/login/login}">
-            <span th:text = "${SYS_NAME}"></span>
+            <span th:text="${SYS_NAME}"></span>
         </a>
     </div>
     <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="system-side-menu" lay-filter="system-side-menu">
@@ -30,9 +30,10 @@
 </div>
 
 
-<div class="layui-side-scroll" th:if="${ session.login_user_menu == null || #arrays.length(session.login_user_menu) == 0}">
+<div class="layui-side-scroll"
+     th:if="${ session.login_user_menu == null || #arrays.length(session.login_user_menu) == 0}">
     <div class="layui-logo">
-        <span th:text = "${SYS_NAME}"></span>
+        <span th:text="${SYS_NAME}"></span>
     </div>
     <ul class="layui-nav layui-nav-tree" lay-shrink="all" lay-filter="system-side-menu">
         <li class="layui-nav-item" th:classappend="${session.menuDTO}?'':'layui-this'">

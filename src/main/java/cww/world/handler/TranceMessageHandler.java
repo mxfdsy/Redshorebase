@@ -29,7 +29,7 @@ public class TranceMessageHandler {
     private DefaultTranceServiceImpl defaultTranceServiceimpl;
 
 
-    private  void  handleMessage(ModuleOperationTraceMessageDTO moduleOperationTraceMessageDTO) {
+    private void handleMessage(ModuleOperationTraceMessageDTO moduleOperationTraceMessageDTO) {
         logger.info("开始校验数据记录的入参信息");
         ValidateResult validate = EntityValidator.validate(moduleOperationTraceMessageDTO, Insert.class);
         if (validate.hasError()) {

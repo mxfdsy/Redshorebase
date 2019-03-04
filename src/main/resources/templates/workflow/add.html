@@ -30,9 +30,9 @@
 
                 <a href="/workflow/layout/index.html">审核流程配置</a>
                 <span lay-separator="">/</span>
-                
+
                 <a>新建审核流程</a>
-                
+
             </div>
         </div>
 
@@ -82,9 +82,9 @@
                                 <div class="layui-inline step-item">
                                     <label class="layui-form-label">步骤:</label>
                                     <div class="layui-input-inline" style="width: 50px">
-                                            <input type="text" name="workflow_step[0][step]" class="layui-input"
-                                                   layui-verify="required|n">
-                                        </div>
+                                        <input type="text" name="workflow_step[0][step]" class="layui-input"
+                                               layui-verify="required|n">
+                                    </div>
                                     <!--<label class="layui-form-label">步骤描述</label>-->
                                     <div class="layui-input-inline">
                                         <input type="text" name="workflow_step[0][step_desc]" class="layui-input"
@@ -97,27 +97,27 @@
                                             <option value="TYP_MALL">商业项目</option>
                                         </select>
                                     </div>
-                                        <!--<label class="layui-form-label">审核组类型</label>-->
-                                        <div class="layui-input-inline">
-                                            <select name="workflow_step[0][approval_group_type]"
-                                                    layui-verify="required" lay-filter="approval_group_type_filter">
-                                                <option value="TYP_INDIVIDUAL">个人</option>
-                                                <option value="TYP_ROLE">角色</option>
-                                                <option value="TYP_DEPARTMENT">部门</option>
-                                                <option value="TYP_COMBINATION">组合</option>
-                                                <!--<option value="TYP_SUBMITTER_LINE_MANAGER ">提交人直属领导</option>-->
-                                            </select>
-                                        </div>
-                                        <!--<label class="layui-form-label">审核组</label>-->
-                                        <div class="layui-input-inline">
-                                            <input type="hidden" name="workflow_step[0][approval_group]"
-                                                   class="approval_group_value" layui-verify="required">
-                                            <input type="text" name="workflow_step[0][approval_group_name]"
-                                                   placeholder="请选择审核人组别"
-                                                   class="layui-input approval_group_name"
-                                                   lmf-event="change-approval-group"
-                                                   layui-verify="required" readonly>
-                                        </div>
+                                    <!--<label class="layui-form-label">审核组类型</label>-->
+                                    <div class="layui-input-inline">
+                                        <select name="workflow_step[0][approval_group_type]"
+                                                layui-verify="required" lay-filter="approval_group_type_filter">
+                                            <option value="TYP_INDIVIDUAL">个人</option>
+                                            <option value="TYP_ROLE">角色</option>
+                                            <option value="TYP_DEPARTMENT">部门</option>
+                                            <option value="TYP_COMBINATION">组合</option>
+                                            <!--<option value="TYP_SUBMITTER_LINE_MANAGER ">提交人直属领导</option>-->
+                                        </select>
+                                    </div>
+                                    <!--<label class="layui-form-label">审核组</label>-->
+                                    <div class="layui-input-inline">
+                                        <input type="hidden" name="workflow_step[0][approval_group]"
+                                               class="approval_group_value" layui-verify="required">
+                                        <input type="text" name="workflow_step[0][approval_group_name]"
+                                               placeholder="请选择审核人组别"
+                                               class="layui-input approval_group_name"
+                                               lmf-event="change-approval-group"
+                                               layui-verify="required" readonly>
+                                    </div>
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -149,9 +149,9 @@
     <div class="layui-inline step-item">
         <label class="layui-form-label">步骤:</label>
         <div class="layui-input-inline" style="width: 50px;">
-                <input type="text" name="workflow_step[{{d.index}}][step]" class="layui-input"
-                       layui-verify="required|n" lay-errorText="请输入数字">
-            </div>
+            <input type="text" name="workflow_step[{{d.index}}][step]" class="layui-input"
+                   layui-verify="required|n" lay-errorText="请输入数字">
+        </div>
         <!--<label class="layui-form-label">步骤描述</label>-->
         <div class="layui-input-inline">
             <input type="text" name="workflow_step[{{d.index}}][step_desc]" class="layui-input"
@@ -164,24 +164,24 @@
                 <option value="TYP_MALL">商业项目</option>
             </select>
         </div>
-            <div class="layui-input-inline">
-                <select name="workflow_step[{{d.index}}][approval_group_type]" layui-verify="required"
-                        lay-filter="approval_group_type_filter">
-                    <option value="TYP_INDIVIDUAL">个人</option>
-                    <option value="TYP_ROLE">角色</option>
-                    <option value="TYP_DEPARTMENT">部门</option>
-                    <option value="TYP_COMBINATION">组合</option>
-                    <!--<option value="TYP_SUBMITTER_LINE_MANAGER ">提交人直属领导</option>-->
-                </select>
-            </div>
-            <!--<label class="layui-form-label">审核组</label>-->
-            <div class="layui-input-inline">
-                <input type="hidden" name="workflow_step[{{d.index}}][approval_group]" class="approval_group_value"
-                       layui-verify="required">
-                <input type="text" name=workflow_step[{{d.index}}][approval_group_name] placeholder="请选择审核人组别"
-                       class="layui-input approval_group_name" lmf-event="change-approval-group"
-                       layui-verify="required" readonly>
-            </div>
+        <div class="layui-input-inline">
+            <select name="workflow_step[{{d.index}}][approval_group_type]" layui-verify="required"
+                    lay-filter="approval_group_type_filter">
+                <option value="TYP_INDIVIDUAL">个人</option>
+                <option value="TYP_ROLE">角色</option>
+                <option value="TYP_DEPARTMENT">部门</option>
+                <option value="TYP_COMBINATION">组合</option>
+                <!--<option value="TYP_SUBMITTER_LINE_MANAGER ">提交人直属领导</option>-->
+            </select>
+        </div>
+        <!--<label class="layui-form-label">审核组</label>-->
+        <div class="layui-input-inline">
+            <input type="hidden" name="workflow_step[{{d.index}}][approval_group]" class="approval_group_value"
+                   layui-verify="required">
+            <input type="text" name=workflow_step[{{d.index}}][approval_group_name] placeholder="请选择审核人组别"
+                   class="layui-input approval_group_name" lmf-event="change-approval-group"
+                   layui-verify="required" readonly>
+        </div>
         <i class="layui-icon layui-icon-close-fill delete-icon" lmf-event="del-workflow-step"></i>
     </div>
 </script>

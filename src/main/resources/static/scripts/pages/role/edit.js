@@ -155,17 +155,17 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent', 'element'
                     layer.closeAll('loading');
                     layer.Notify.error('该角色名称已被使用，请重新输入!');
                     return false;
-                }else if(res.code == 11001){
+                } else if (res.code == 11001) {
                     layer.closeAll('loading');
                     layer.Notify.error('请选择权限！');
                     return false;
-                }else if (res.code != 200) {
+                } else if (res.code != 200) {
                     layer.closeAll('loading');
                     layer.Notify.error('编辑角色失败!');
                     return false;
                 }
                 layer.closeAll();
-                layer.Notify.success('编辑角色成功!',function () {
+                layer.Notify.success('编辑角色成功!', function () {
                     window.location.href = "/role/layout/management";
                 });
                 return false;

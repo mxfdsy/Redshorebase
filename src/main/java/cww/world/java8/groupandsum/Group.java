@@ -42,7 +42,7 @@ public class Group {
 
     }
 
-    public List<Integer> conditionFilter(List<Integer> list, Predicate<Integer> predicate){
+    public List<Integer> conditionFilter(List<Integer> list, Predicate<Integer> predicate) {
         return list.stream().filter(predicate).collect(Collectors.toList());
     }
 }

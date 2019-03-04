@@ -16,12 +16,14 @@ public interface BusinessAuditResultHandle {
 
     /**
      * 审批最后状态的回调
+     *
      * @param businessAuditPO
      */
     void handle(BusinessAuditPO businessAuditPO);
 
     /**
      * 审批中每步的审核结果回调
+     *
      * @param businessAuditProgressNotifyMessageDTO
      */
     void auditProgressResultHandle(BusinessAuditProgressNotifyMessageDTO businessAuditProgressNotifyMessageDTO);

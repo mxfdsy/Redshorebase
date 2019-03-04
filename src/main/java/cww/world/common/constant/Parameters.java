@@ -15,13 +15,14 @@ import java.util.List;
 public class Parameters {
 
     @Value("#{'${security.noneSecurityPath}'.split(',')}")
-    private  List<String> noneSecurityPath;
+    private List<String> noneSecurityPath;
 
     /*****redis config start*******/
     @Value("${spring.redis.host}")
     private String redisHost;
     @Value("${spring.redis.port}")
     private int redisPort;
+
     /*****redis config end*******/
 
 

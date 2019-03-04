@@ -21,7 +21,8 @@
     </resultMap>
 
     <sql id="moduleOperationTraceColumns">
-        trace_uid, operation_type, major_uid, operator_name, operator_organization, operator_phone, operator_user_uid,column1,column2,column3,operate_at,
+        trace_uid, operation_type, major_uid, operator_name, operator_organization, operator_phone,
+        operator_user_uid,column1,column2,column3,operate_at,
         created_by, created_at, updated_by, updated_at
     </sql>
 

@@ -9,7 +9,7 @@
 
     <!-- 指定数据库连接驱动jara地址 -->
     <classPathEntry
-            location="/Users/chengwuwu/develoTools/jar/mysql/mysql-connector-java/5.1.43/mysql-connector-java-5.1.43.jar" />
+            location="/Users/chengwuwu/develoTools/jar/mysql/mysql-connector-java/5.1.43/mysql-connector-java-5.1.43.jar"/>
 
     <!-- 一个数据库一个context -->
     <context id="sqlserverTables">
@@ -18,7 +18,7 @@
 
         <!-- 注释 -->
         <commentGenerator>
-            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
             <!-- <property name="suppressDate" value="true" />  是否生成注释代时间戳 -->
         </commentGenerator>
 
@@ -32,7 +32,7 @@
         <javaTypeResolver>
             <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL
                 和 NUMERIC 类型解析为java.math.BigDecimal -->
-            <property name="forceBigDecimals" value="false" />
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <!-- 生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径,如./src/main/java，
@@ -40,22 +40,22 @@
         <javaModelGenerator targetPackage="cww.world.xml"
                             targetProject="src/main/java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eUseruser.model， true:com.oop.eUseruser.model.[schemaName] -->
-            <property name="enableSubPackages" value="false" />
+            <property name="enableSubPackages" value="false"/>
             <!-- 从数据库返回的值被清理前后的空格 -->
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!--对应的mapper.xml文件 -->
         <sqlMapGenerator targetPackage="cww.world.xml"
                          targetProject="src/main/java">
-            <property name="enableSubPackages" value="false" />
+            <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- 对应的Mapper接口类文件 -->
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="cww.world.xml"
                              targetProject="src/main/java">
-            <property name="enableSubPackages" value="false" />
+            <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
 
@@ -72,7 +72,7 @@
             <!-- 指定列的java数据类型
             <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />  -->
             <!-- 用于指定生成实体类时是否使用实际的列名作为实体类的属性名。false是 Camel Case风格-->
-            <property name="useActualColumnNames" value="false" />
+            <property name="useActualColumnNames" value="false"/>
         </table>
     </context>
 </generatorConfiguration>

@@ -17,14 +17,14 @@ import org.springframework.context.annotation.PropertySource;
         "classpath:META-INF/mybatis/*.xml",
         "classpath:META-INF/rabbitmq/*.xml"
 })
-@PropertySource(value="classpath:parameter.properties")
+@PropertySource(value = "classpath:parameter.properties")
 public class myApplication {
     public static void main(String[] args) {
-            SpringApplication.run(myApplication.class, args);
+        SpringApplication.run(myApplication.class, args);
     }
 
     @Bean
-    public CmsDialect CmsDialect(){
+    public CmsDialect CmsDialect() {
         return new CmsDialect();
     }
 }

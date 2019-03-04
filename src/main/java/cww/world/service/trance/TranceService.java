@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
  */
 
 public interface TranceService {
-        default void  defaultTranceImpl(ModuleOperationTraceMessageDTO moduleOperationTraceMessageDTO){
-            return;
-        }
+    default void defaultTranceImpl(ModuleOperationTraceMessageDTO moduleOperationTraceMessageDTO) {
+        return;
+    }
 
     void engerInfoParameter(ModuleOperationTraceMessageDTO moduleOperationTraceMessageDTO);
 }

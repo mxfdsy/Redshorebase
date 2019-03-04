@@ -29,7 +29,7 @@ public class ReflectTest {
             Method readMethod = pd.getReadMethod();
             declaredField.setAccessible(true);
             declaredField.set(person2, "3");
-            Object invoke =  readMethod.invoke(person2);
+            Object invoke = readMethod.invoke(person2);
             System.out.println(person2);
             String s1 = invoke.toString();
             System.out.println(s1);

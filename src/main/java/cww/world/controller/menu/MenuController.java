@@ -53,7 +53,7 @@ public class MenuController extends BaseController {
 
     @RequestMapping(value = "/menu/insertModule", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String insertModule(@RequestBody String payload){
+    public String insertModule(@RequestBody String payload) {
         logger.info("创建模块，入参：{}", payload);
         MenuDTO menuDTO = JSONObject.parseObject(payload, MenuDTO.class);
         if (StringUtils.isBlank(menuDTO.getName())) {
@@ -65,7 +65,7 @@ public class MenuController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/menu/insertChildrenMenu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String insertChildrenMenu(@RequestBody String payload){
+    public String insertChildrenMenu(@RequestBody String payload) {
         logger.info("创建子级菜单，入参：{}", payload);
         InsertChildrenMenuDTO request = JSONObject.parseObject(payload, InsertChildrenMenuDTO.class);
         ValidateResult validateResult = EntityValidator.validate(request, Insert.class);
@@ -81,7 +81,7 @@ public class MenuController extends BaseController {
 
     @RequestMapping(value = "/menu/listMenu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String listMenu(@RequestBody  String payload){
+    public String listMenu(@RequestBody String payload) {
         logger.info("获取菜单配置页菜单列表，入参:{}", payload);
         ListMenuRequestDTO requestDTO = JSONObject.parseObject(payload, ListMenuRequestDTO.class);
         return ResultBuilderUtils.buildSuccess(menuService.listModuleMenu(requestDTO));
@@ -95,5 +95,5 @@ public class MenuController extends BaseController {
             return ResultBuilderUtils.buildError(baseCode);
         }
     }
-    
+
 }

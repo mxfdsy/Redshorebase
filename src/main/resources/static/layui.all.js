@@ -51,7 +51,7 @@
         function s(e, t) {
             var o = "PLaySTATION 3" === navigator.platform ? /^complete$/ : /^(complete|loaded)$/;
             ("load" === e.type || o.test((e.currentTarget || e.srcElement).readyState)) && (n.modules[d] = t, f.removeChild(v), function r() {
-                return ++m > 1e3 * n.timeout / 4 ? a(d + " is not a valid module") : void(n.status[d] ? c() : setTimeout(r, 4))
+                return ++m > 1e3 * n.timeout / 4 ? a(d + " is not a valid module") : void (n.status[d] ? c() : setTimeout(r, 4))
             }())
         }
 
@@ -66,7 +66,7 @@
         var d = e[0], m = 0;
         if (l = l || [], n.host = n.host || (p.match(/\/\/([\s\S]+?)\//) || ["//" + location.host + "/"])[0], 0 === e.length || layui["layui.all"] && u[d] || !layui["layui.all"] && layui["layui.mobile"] && u[d]) return c(), y;
         if (n.modules[d]) !function g() {
-            return ++m > 1e3 * n.timeout / 4 ? a(d + " is not a valid module") : void("string" == typeof n.modules[d] && n.status[d] ? c() : setTimeout(g, 4))
+            return ++m > 1e3 * n.timeout / 4 ? a(d + " is not a valid module") : void ("string" == typeof n.modules[d] && n.status[d] ? c() : setTimeout(g, 4))
         }(); else {
             var v = t.createElement("script"),
                 h = (u[d] ? p + "lay/" : /^\{\/\}/.test(y.modules[d]) ? "" : n.base || "") + (y.modules[d] || d) + ".js";
@@ -88,7 +88,7 @@
         "string" == typeof o && (r = o);
         var s = (r || e).replace(/\.|\//g, ""), c = u.id = "layuicss-" + s, y = 0;
         return u.rel = "stylesheet", u.href = e + (n.debug ? "?v=" + (new Date).getTime() : ""), u.media = "all", t.getElementById(c) || l.appendChild(u), "function" != typeof o ? i : (function p() {
-            return ++y > 1e3 * n.timeout / 100 ? a(e + " timeout") : void(1989 === parseInt(i.getStyle(t.getElementById(c), "width")) ? function () {
+            return ++y > 1e3 * n.timeout / 100 ? a(e + " timeout") : void (1989 === parseInt(i.getStyle(t.getElementById(c), "width")) ? function () {
                 o()
             }() : setTimeout(p, 100))
         }(), i)
@@ -100,7 +100,7 @@
         var o = new Image;
         return o.src = e, o.complete ? t(o) : (o.onload = function () {
             o.onload = null, "function" == typeof t && t(o)
-        }, void(o.onerror = function (e) {
+        }, void (o.onerror = function (e) {
             o.onerror = null, "function" == typeof n && n(e)
         }))
     }, o.prototype.config = function (e) {
@@ -149,7 +149,7 @@
         };
         return t && !r[t] && (r[t] = o(t)), r.android = /android/.test(n), r.ios = "ios" === r.os, r
     }, o.prototype.hint = function () {
-        return {    error: a}
+        return {error: a}
     }, o.prototype.each = function (e, t) {
         var n, o = this;
         if ("function" != typeof t) return o;
@@ -179,7 +179,7 @@
                 n === !1 && null === i && (i = !1)
             };
         return r ? (n.event[l] = n.event[l] || {}, n.event[l][s] = [r], this) : (layui.each(n.event[l], function (e, t) {
-            return "{*}" === s ? void layui.each(t, c) : ("" === e && layui.each(t, c), void(e === s && layui.each(t, c)))
+            return "{*}" === s ? void layui.each(t, c) : ("" === e && layui.each(t, c), void (e === s && layui.each(t, c)))
         }), i)
     }, e.layui = new o
 }(window);
@@ -348,7 +348,7 @@ layui.define(function (e) {
                     "string" == typeof a && (i = a);
                     var s = (i || e).replace(/\.|\//g, ""), l = "layuicss-" + s, d = 0;
                     o.rel = "stylesheet", o.href = n.path + e, o.id = l, document.getElementById(l) || r.appendChild(o), "function" == typeof a && !function c() {
-                        return ++d > 80 ? window.console && console.error("laydate.css: Invalid") : void(1989 === parseInt(t.getStyle(document.getElementById(l), "width")) ? a() : setTimeout(c, 100))
+                        return ++d > 80 ? window.console && console.error("laydate.css: Invalid") : void (1989 === parseInt(t.getStyle(document.getElementById(l), "width")) ? a() : setTimeout(c, 100))
                     }()
                 }
             }
@@ -2541,7 +2541,7 @@ layui.define(function (e) {
         var r = "on" + t;
         e.detachEvent && ("undefined" == typeof e[r] && (e[r] = null), e.detachEvent(r, n))
     }, pe.Event = function (e, t) {
-        return this instanceof pe.Event ? (e && e.type ? (this.originalEvent = e, this.type = e.type, this.isDefaultPrevented = e.defaultPrevented || void 0 === e.defaultPrevented && e.returnValue === !1 ? v : x) : this.type = e, t && pe.extend(this, t), this.timeStamp = e && e.timeStamp || pe.now(), void(this[pe.expando] = !0)) : new pe.Event(e, t)
+        return this instanceof pe.Event ? (e && e.type ? (this.originalEvent = e, this.type = e.type, this.isDefaultPrevented = e.defaultPrevented || void 0 === e.defaultPrevented && e.returnValue === !1 ? v : x) : this.type = e, t && pe.extend(this, t), this.timeStamp = e && e.timeStamp || pe.now(), void (this[pe.expando] = !0)) : new pe.Event(e, t)
     }, pe.Event.prototype = {
         constructor: pe.Event,
         isDefaultPrevented: x,
@@ -3078,7 +3078,7 @@ layui.define(function (e) {
         }
     }), Mt && Ft || (pe.attrHooks.value = {
         set: function (e, t, n) {
-            return pe.nodeName(e, "input") ? void(e.defaultValue = t) : Lt && Lt.set(e, t, n)
+            return pe.nodeName(e, "input") ? void (e.defaultValue = t) : Lt && Lt.set(e, t, n)
         }
     }), Ft || (Lt = {
         set: function (e, t, n) {
@@ -3517,7 +3517,7 @@ layui.define(function (e) {
         pe.fn[e] = function (r) {
             return Pe(this, function (e, r, i) {
                 var o = te(e);
-                return void 0 === i ? o ? t in o ? o[t] : o.document.documentElement[r] : e[r] : void(o ? o.scrollTo(n ? pe(o).scrollLeft() : i, n ? i : pe(o).scrollTop()) : e[r] = i)
+                return void 0 === i ? o ? t in o ? o[t] : o.document.documentElement[r] : e[r] : void (o ? o.scrollTo(n ? pe(o).scrollLeft() : i, n ? i : pe(o).scrollTop()) : e[r] = i)
             }, e, r, arguments.length, null)
         }
     }), pe.each(["top", "left"], function (e, t) {
@@ -3580,7 +3580,7 @@ layui.define(function (e) {
                 "string" == typeof i && (n = i);
                 var l = (n || t).replace(/\.|\//g, ""), f = "layuicss-" + l, c = 0;
                 s.rel = "stylesheet", s.href = r.path + t, s.id = f, document.getElementById(f) || a.appendChild(s), "function" == typeof i && !function u() {
-                    return ++c > 80 ? e.console && console.error("layer.css: Invalid") : void(1989 === parseInt(o.getStyle(document.getElementById(f), "width")) ? i() : setTimeout(u, 100))
+                    return ++c > 80 ? e.console && console.error("layer.css: Invalid") : void (1989 === parseInt(o.getStyle(document.getElementById(f), "width")) ? i() : setTimeout(u, 100))
                 }()
             }
         }
@@ -3966,7 +3966,7 @@ layui.define(function (e) {
             var n = new Image;
             return n.src = e, n.complete ? t(n) : (n.onload = function () {
                 n.onload = null, t(n)
-            }, void(n.onerror = function (e) {
+            }, void (n.onerror = function (e) {
                 n.onerror = null, i(e)
             }))
         }
@@ -4561,7 +4561,7 @@ layui.define("layer", function (e) {
                                 var i = this.value, t = e.keyCode;
                                 return 9 !== t && 13 !== t && 37 !== t && 38 !== t && 39 !== t && 40 !== t && ($(i, function (e) {
                                     e ? g.find("." + r)[0] || g.append('<p class="' + r + '">无匹配项</p>') : g.find("." + r).remove()
-                                }, "keyup"), void("" === i && g.find("." + r).remove()))
+                                }, "keyup"), void ("" === i && g.find("." + r).remove()))
                             };
                             f && k.on("keyup", T).on("blur", function (t) {
                                 var a = p[0].selectedIndex;
@@ -4854,7 +4854,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
         }(), layui.each(t.cols, function (t, i) {
             layui.each(i, function (t, l) {
                 var r;
-                return l ? (e.initOpts(l), r = l.width || 0, void(l.colspan > 1 || (/\d+%$/.test(r) ? l.width = r = Math.floor(parseFloat(r) / 100 * o) : r || (l.width = r = 0, a++), n += r))) : void i.splice(t, 1)
+                return l ? (e.initOpts(l), r = l.width || 0, void (l.colspan > 1 || (/\d+%$/.test(r) ? l.width = r = Math.floor(parseFloat(r) / 100 * o) : r || (l.width = r = 0, a++), n += r))) : void i.splice(t, 1)
             })
         }), e.autoColNums = a, o > n && a && (l = (o - n) / a), layui.each(t.cols, function (e, i) {
             layui.each(i, function (e, i) {
@@ -4940,7 +4940,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
                 c.scrollPatch()
             }, 50), c.haveInit = !0, void l.close(c.tipsIndex))
         };
-        return c.key = s.id || s.index, d.cache[c.key] = u, c.layPage[0 === u.length && 1 == n ? "addClass" : "removeClass"](h), r ? v() : 0 === u.length ? (c.renderForm(), c.layFixed.remove(), c.layMain.find("tbody").html(""), c.layMain.find("." + f).remove(), c.layMain.append('<div class="' + f + '">' + s.text.none + "</div>")) : (v(), void(s.page && (s.page = t.extend({
+        return c.key = s.id || s.index, d.cache[c.key] = u, c.layPage[0 === u.length && 1 == n ? "addClass" : "removeClass"](h), r ? v() : 0 === u.length ? (c.renderForm(), c.layFixed.remove(), c.layMain.find("tbody").html(""), c.layMain.find("." + f).remove(), c.layMain.append('<div class="' + f + '">' + s.text.none + "</div>")) : (v(), void (s.page && (s.page = t.extend({
             elem: "layui-table-page" + s.index,
             count: o,
             limit: s.limit,
@@ -5184,7 +5184,7 @@ layui.define(["laytpl", "laypage", "layer", "form"], function (e) {
     }, d.checkStatus = function (e) {
         var t = 0, i = 0, a = [], l = d.cache[e] || [];
         return layui.each(l, function (e, l) {
-            return l.constructor === Array ? void i++ : void(l[d.config.checkName] && (t++, a.push(d.clearCacheKey(l))))
+            return l.constructor === Array ? void i++ : void (l[d.config.checkName] && (t++, a.push(d.clearCacheKey(l))))
         }), {data: a, isAll: !!l.length && t === l.length - i}
     }, c.config = {}, d.reload = function (e, i) {
         var a = c.config[e];

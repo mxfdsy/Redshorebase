@@ -15,7 +15,8 @@ public interface PermissionService {
     List<PermissionPO> listPermissionByParentMenuIds(List<Integer> moduleids);
 
     int insertPermission(PermissionPO permission);
-//
+
+    //
 //    boolean isPermissionExist(String permissionKey);
 //
 //    List<String> listPermissionKeysByMenuId(String menuId);

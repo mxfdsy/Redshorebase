@@ -32,8 +32,8 @@ layui.define(['table', 'form', 'layer', 'laytpl'], function (exports) {
         init: function (tableKey, cols) {
             var that = this;
             var _settingCheckIndex = layui.data('tableColSetting', {
-                    key: tableKey
-                }) || '';
+                key: tableKey
+            }) || '';
             that._settingCheckIndex[tableKey] = _settingCheckIndex;
 
             return that.setVisible(tableKey, cols);
@@ -130,7 +130,7 @@ layui.define(['table', 'form', 'layer', 'laytpl'], function (exports) {
         _OPT_EVENTS: {},
         init: function (tableConfig, operateEvents) {
             // 当点击返回按钮时,保存表格状态
-            var _serialize = $('[lay-filter="'+ tableConfig.searchFilter +'"]').serializeObject();
+            var _serialize = $('[lay-filter="' + tableConfig.searchFilter + '"]').serializeObject();
             tableConfig.where = $.extend({}, _serialize, tableConfig.where);
 
             this._CONFIG = this.config = $.extend({}, _config, tableConfig);

@@ -38,33 +38,33 @@ public class UserController {
     UserService userService;
 
 
-    @RequestMapping(value = "/layout/index.html",method = RequestMethod.GET)
+    @RequestMapping(value = "/layout/index.html", method = RequestMethod.GET)
     public String userList() {
         return "user/list2";
     }
 
     @RequestMapping(value = "/createUser.html")
-    public String createUser(Model model){
+    public String createUser(Model model) {
         return "user/create";
     }
 
 
     @RequestMapping("/list2")
     public String userList2(Model model) throws Exception {
-        model.addAttribute("hello","Hello, Spring Boot!");
+        model.addAttribute("hello", "Hello, Spring Boot!");
         return "/login/list2";
     }
 
     @ResponseBody
     @RequestMapping("/getUserList")
-    public String getUserList(@RequestBody String payload){
+    public String getUserList(@RequestBody String payload) {
         ListUserDTO listUserDTO = JSON.parseObject(payload, ListUserDTO.class);
         List<UserPO> userPOS = userService.userList(listUserDTO);
-        return ResultBuilderUtils.buildSuccess(new GridPage<>(userPOS.size(),userPOS));
+        return ResultBuilderUtils.buildSuccess(new GridPage<>(userPOS.size(), userPOS));
     }
 
     @RequestMapping(value = "/viewUser/{userUid:[\\d]+}.html")
-    public String goToViewUserPage(@PathVariable String userUid, Model model){
+    public String goToViewUserPage(@PathVariable String userUid, Model model) {
         //TODO 检验用户是否存在
         model.addAttribute("userInfo", userService.getUserInfoByUserUid(userUid));
         return "user/view";
@@ -78,7 +78,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/updateUser/{userUid:[\\d]+}.html")
-    public String goToUpdateUserPage(@PathVariable String userUid, Model model){
+    public String goToUpdateUserPage(@PathVariable String userUid, Model model) {
         model.addAttribute("userInfo", userService.getUserInfoByUserUid(userUid));
         return "user/edit";
     }
@@ -97,7 +97,7 @@ public class UserController {
         UpdateUserStatusRequestDTO updateUserStatusRequestDTO = JSON.parseObject(payload, UpdateUserStatusRequestDTO.class);
         ValidateResult validate = EntityValidator.validate(updateUserStatusRequestDTO, Update.class);
         if (validate.hasError()) {
-            throw new BaseException(BaseCode.INVALID_ARGUMENT,validate.getErrorMessages());
+            throw new BaseException(BaseCode.INVALID_ARGUMENT, validate.getErrorMessages());
         }
         int successCount = userService.updateUserStatus(updateUserStatusRequestDTO);
         return ResultBuilderUtils.buildSuccess(successCount);
@@ -105,7 +105,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/batchInserUserInfo")
-    public  String batchInserUserInfo(@RequestBody String payload){
+    public String batchInserUserInfo(@RequestBody String payload) {
         List<UserPO> userPOS = JSONObject.parseArray(payload, UserPO.class);
         userService.batchInsertUserInfo(userPOS);
         return "";

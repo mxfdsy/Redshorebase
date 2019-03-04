@@ -1,7 +1,7 @@
 /**
  * Created by SK on 2018/6/6.
  */
-layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable', 'table','lmfConfig'], function () {
+layui.use(['element', 'form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable', 'table', 'lmfConfig'], function () {
     var $ = layui.$;
     var form = layui.form;
     var layer = layui.layer;
@@ -9,13 +9,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
     var clickEvent = layui.lmfEvent;
     var lmfTable = layui.lmfTable;
     var CONFIG = layui.lmfConfig;
-    
+
     var MAX_ROLE_NUM = 20;
     var roleCount = 0;
     var select_roles = {};
-    layui.element.on('tab(choosed-permission-tab)', function(){
+    layui.element.on('tab(choosed-permission-tab)', function () {
         $(window).trigger('resize');
     });
+
     function initEditView() {
         if (userInfo.roles && userInfo.roles.length > 0) {
             userInfo.roles.forEach(function (role, i) {
@@ -30,13 +31,13 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     })
                 };
             })
-            
+
         } else {
             addRole('');
             initSelectData("1");
         }
     }
-    
+
     function initSelectData(index) {
         if (!select_roles[index]) {
             select_roles[index] = {
@@ -45,12 +46,12 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             }
         }
     }
-    
+
     initEditView();
-    
+
     function addRole(role_name) {
         var roleTpl = $('#tplRoles').html();
-        
+
         laytpl(roleTpl).render({index: ++roleCount, role_name: role_name}, function (contactHtml) {
             $('.user-roles:last').after(contactHtml);
         });
@@ -64,19 +65,19 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 $deleteIcon.first().removeClass('layui-hide')
             }
         }
-        
+
     }
-    
+
     clickEvent('add-role', function () {
         addRole('');
-        
+
         initSelectData(roleCount.toString());
     });
-    
+
     clickEvent('del-role', function (e) {
         var index = $(this).parents('.user-roles').attr('data-index');
         delete select_roles[index];
-        
+
         $(this).parents('.user-roles').remove();
         var $deleteIcon = $('.delete-icon');
         if ($deleteIcon.length < MAX_ROLE_NUM) {
@@ -88,7 +89,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             $deleteIcon.first().removeClass('layui-hide')
         }
     });
-    
+
     // 设置角色
     clickEvent('choose-role', function (res) {
         var _this = this;
@@ -128,7 +129,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 }
             ]]
         };
-        
+
         var optionEvents = {
             select: function (selected) {
                 layer.closeAll();
@@ -138,7 +139,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 $(_this).siblings('.choose-permission').removeClass('layui-hide');
             }
         };
-        
+
         layer.open({
             type: 1,
             area: ['800px', '525px'],
@@ -154,12 +155,12 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             }
         });
     });
-    
-    
+
+
     (function choosePermission() {
         var choosedMalls = []; //弹窗中 选中的数据
         var allMalls; //所有数据
-        
+
         var getAllMalls = function () {
             if (allMalls) {
                 return $.when(allMalls.map(function (mall) {
@@ -169,17 +170,17 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 }));
             }
             return $.ajax({
-                    type: "post",
-                    url: '/businessProgram/getList',
-                    dataType: "json",
-                    data: JSON.stringify({
-                        "page_no": 1,
-                        "page_size": 1000,
-                        "sort_order": "desc",
-                        "sort_key": "created_at"
-                    }),
-                    contentType: "application/json"
-                })
+                type: "post",
+                url: '/businessProgram/getList',
+                dataType: "json",
+                data: JSON.stringify({
+                    "page_no": 1,
+                    "page_size": 1000,
+                    "sort_order": "desc",
+                    "sort_key": "created_at"
+                }),
+                contentType: "application/json"
+            })
                 .then(function (res) {
                     if (res.code != 200) {
                         return []
@@ -190,7 +191,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     return allMalls = _allMalls.slice(0);
                 })
         };
-        
+
         var getWaitingMalls = function () {
             var choosedMallUids = choosedMalls.map(function (mall) {
                 return mall.mall_uid
@@ -199,7 +200,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 return choosedMallUids.indexOf(mall.mall_uid) == -1;
             })
         };
-        
+
         var setChoosedMalls = function (malls) {
             var malluids = malls.map(function (mall) {
                 return mall.mall_uid;
@@ -209,7 +210,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             });
         };
         var choosedTable, listTable;
-        
+
         var renderPermissionTable = function () {
             var tableCols = [
                 {
@@ -263,7 +264,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     width: 130
                 }
             ];
-            
+
             var choosedTableConfig = {
                 data: choosedMalls.slice(0),
                 elem: '#choosed-table',
@@ -278,7 +279,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 page: true,
                 cols: [tableCols.slice(0)]
             };
-            
+
             var listTableConfig = {
                 data: getWaitingMalls(),
                 elem: '#permission-table',
@@ -297,15 +298,15 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             choosedTable = lmfTable(choosedTableConfig, {});
             listTable = lmfTable(listTableConfig, {});
         };
-        
-        
+
+
         //删除项目
         clickEvent('delete-choose', function () {
             var deleteMallsData = choosedTable.checkStatus().data.slice(0);
             var deleteMallUids = deleteMallsData.map(function (mall) {
                 return mall.mall_uid;
             });
-            
+
             choosedMalls = choosedMalls
                 .filter(function (mall) {
                     return deleteMallUids.indexOf(mall.mall_uid) == -1;
@@ -315,14 +316,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     delete mall['LAY_TABLE_INDEX'];
                     return mall;
                 });
-            
+
             choosedTable.reload({
                 data: choosedMalls.slice(0)
             });
             listTable.reload({
                 data: getWaitingMalls()
             });
-            
+
             return false;
         });
         //选择项目
@@ -334,7 +335,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 delete mall['LAY_TABLE_INDEX'];
                 return mall;
             });
-            
+
             choosedTable.reload({
                 data: choosedMalls.slice(0)
             });
@@ -344,12 +345,12 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             return false;
         });
         // 设置数据权限
-        
-        
+
+
         clickEvent('choose-permission', function () {
             var index = $(this).parents('.user-roles').attr('data-index');
-            
-            
+
+
             getAllMalls()
                 .then(function () {
                     layer.open({
@@ -366,7 +367,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                         success: function () {
                             setChoosedMalls(select_roles[index].malls);
                             renderPermissionTable();
-                            
+
                         },
                         yes: function (layerIndex) {
                             select_roles[index].malls = choosedMalls;
@@ -383,10 +384,10 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 });
             return false;
         });
-        
+
     })();
-    
-    
+
+
     var selected_organization = [userInfo.organization ? userInfo.organization.organization_uid : 'root'];
     clickEvent('choose-organization', function () {
         layer.load(2);
@@ -395,14 +396,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             selected_organization_code: selected_organization,
             is_all: "false"
         };
-        
+
         $.ajax({
-                type: "post",
-                url: '/organizationManage/getOrganizationNodeByCode',
-                dataType: "json",
-                data: JSON.stringify(parameter),
-                contentType: "application/json"
-            })
+            type: "post",
+            url: '/organizationManage/getOrganizationNodeByCode',
+            dataType: "json",
+            data: JSON.stringify(parameter),
+            contentType: "application/json"
+        })
             .then(function (res) {
                 layer.closeAll();
                 if (res.code != 200) {
@@ -419,7 +420,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                                 "selected": false,
                                 "disabled": true
                             },
-                            
+
                             children: res.data.children || []
                         }],
                         multiple: false
@@ -435,7 +436,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                         }
                     },
                 };
-                
+
                 var chooseNode;
                 layer.open({
                     type: 1,
@@ -456,10 +457,10 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                                 var _node = data.instance.get_json(nodeUid += node);
                                 nodeText.push(_node.text)
                             });
-                            
+
                             chooseNode = data.instance.get_node(data.selected[0]);
                             chooseNode.previwe_text = nodeText.join('/');
-                            
+
                         }).jstree(treeConfig)
                     },
                     yes: function (index) {
@@ -480,7 +481,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 layer.Notify.error('请求归属组织列表出错');
             });
     });
-    
+
     form.verify({
         input_email: function (value, item) {
             if (value && !/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value)) {
@@ -488,11 +489,11 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             }
         }
     });
-    
+
     // 编辑用户
     form.on('submit(form-save)', function (data) {
         var field = data.field;
-        
+
         var choose_roles = [];
         for (index in select_roles) {
             var role = {
@@ -503,17 +504,17 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             };
             choose_roles.push(role);
         }
-        
+
         field.roles = choose_roles;
-        
+
         $.ajax({
-                type: "post",
-                url: "/user/updateUserInfo",
-                dataType: "json",
-                contentType: "application/json",
-                async: false,
-                data: JSON.stringify(field)
-            })
+            type: "post",
+            url: "/user/updateUserInfo",
+            dataType: "json",
+            contentType: "application/json",
+            async: false,
+            data: JSON.stringify(field)
+        })
             .then(function (res) {
                 if (res.code != 200) {
                     layer.Notify.error(res.error_msg || '编辑用户出错!');
@@ -529,5 +530,5 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             });
         return false;
     });
-    
+
 });

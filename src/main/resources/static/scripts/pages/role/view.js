@@ -60,6 +60,7 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent', 'element'
      */
     var operateEvents = {};
     var roleUid = roleInfo.roleUid;
+
     function renderTable() {
         var table_cols = [
             {
@@ -89,9 +90,9 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent', 'element'
                 align: 'center',
                 title: '状态',
                 templet: function (d) {
-                    if (d.status == 'TYP_ON'){
+                    if (d.status == 'TYP_ON') {
                         return '启用'
-                    }else {
+                    } else {
                         return '停用'
                     }
                 }
@@ -101,9 +102,9 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent', 'element'
                 align: 'center',
                 title: '性别',
                 templet: function (d) {
-                    if (d.gender == 'F'){
+                    if (d.gender == 'F') {
                         return '女'
-                    }else {
+                    } else {
                         return '男'
                     }
                 }

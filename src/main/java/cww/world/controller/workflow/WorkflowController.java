@@ -50,6 +50,7 @@ public class WorkflowController extends BaseController {
         model.addAttribute("workflow_List", workflowList);
         return "workflow/add";
     }
+
     @GetMapping("/{workflowUid:[\\d]+}/view.html")
     public String viewPage(Model model, @PathVariable String workflowUid) {
 //        WorkflowPO workflow = workflowService.getWorkflowByWorkflowUid(workflowUid);
@@ -70,7 +71,7 @@ public class WorkflowController extends BaseController {
     @ResponseBody
     public String addWorkflow(@RequestBody String payload) {
         logger.warn("addWorkflow  :: {}", payload);
-        UpdateWorkflowDTO addWorkflow = JSONObject.parseObject(payload,UpdateWorkflowDTO.class);
+        UpdateWorkflowDTO addWorkflow = JSONObject.parseObject(payload, UpdateWorkflowDTO.class);
         ValidateResult checkResult = EntityValidator.validate(addWorkflow, Insert.class);
         if (checkResult.hasError()) {
             throw new BaseException(BaseCode.INVALID_ARGUMENT, checkResult.getErrorMessages());
@@ -89,7 +90,6 @@ public class WorkflowController extends BaseController {
 //        return ResultBuilderUtils.buildSuccess(result);
         return "";
     }
-
 
 
     private List<NameValuePair> getWorkflowList() {

@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class SessionGetter {
 
-   
+
     /**
      * 登录用户的
      *
@@ -27,6 +27,7 @@ public class SessionGetter {
 
     /**
      * 登录用户的mallUserUid
+     *
      * @return
      */
 
@@ -38,7 +39,6 @@ public class SessionGetter {
         HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
         return request.getSession().getAttribute(key);
     }
-
 
 
 }

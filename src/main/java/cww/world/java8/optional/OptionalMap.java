@@ -20,7 +20,5 @@ public class OptionalMap {
         System.out.println("Optional.flatMap :: " + nonEmptyOtionalGender.flatMap(gender -> gender.map(String::toUpperCase)));
 
 
-
-
     }
 }

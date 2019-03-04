@@ -1,7 +1,6 @@
 package cww.world.service.role;
 
 
-
 import cww.world.pojo.dto.GridPage;
 import cww.world.pojo.dto.role.DeleteRoleRequestDTO;
 import cww.world.pojo.dto.role.EditRoleRequestDTO;
@@ -18,9 +17,11 @@ public interface RoleService {
     String createRole(EditRoleRequestDTO request);
 
     void deleteRole(DeleteRoleRequestDTO request);
-//
+
+    //
     RolePO searchRoleByUidOrKey(String roleUid, String roleKey);
-//
+
+    //
 //    void updateRole(EditRoleRequestDTO request);
 //
     RolePO getRoleInfoByRoleUid(String roleUid);

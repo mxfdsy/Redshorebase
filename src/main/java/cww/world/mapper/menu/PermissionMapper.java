@@ -14,7 +14,7 @@ public interface PermissionMapper {
 
     List<PermissionPO> listPermissionByPermissionKeys(@Param("permissionKeys") Set<String> permissionKeys);
 
-    List<PermissionPO> listPermissionByParentMenuIds(@Param("moduleids")List<Integer> moduleids);
+    List<PermissionPO> listPermissionByParentMenuIds(@Param("moduleids") List<Integer> moduleids);
 
     int insertPermission(PermissionPO permission);
 

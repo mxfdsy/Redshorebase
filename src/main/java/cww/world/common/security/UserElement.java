@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Created by JackWangon[www.coder520.com] 2017/8/1.
- *
+ * <p>
  * 用于缓存的user信息体
  */
 @Data
@@ -28,6 +28,7 @@ public class UserElement {
 
     /**
      * 转 map
+     *
      * @return
      */
     public Map<String, String> toMap() {
@@ -47,6 +48,7 @@ public class UserElement {
 
     /**
      * map转对象
+     *
      * @param map
      * @return
      */

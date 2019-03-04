@@ -113,7 +113,6 @@ public class CommonCacheUtil {
     }
 
 
-
     /**
      * 根据token取缓存的用户信息
      *
@@ -121,7 +120,7 @@ public class CommonCacheUtil {
      * @return
      * @throws
      */
-    public UserElement getUserByToken(String token)  {
+    public UserElement getUserByToken(String token) {
         UserElement ue = null;
 
         JedisPool pool = jedisPoolWrapper.getJedisPool();

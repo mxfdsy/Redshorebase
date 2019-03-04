@@ -22,7 +22,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
         delMenu: '/menu/deleteChildrenMenu',
         changeParent: '/menu/changeParentMenu'
     };
-    
+
     /**
      * 展示所有菜单权限
      */
@@ -40,19 +40,19 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                     return;
                 }
                 var _permissionContainerHtml = laytpl(permissionsListTpl).render(res.data);
-                
+
                 $("#permissionContainer").html(_permissionContainerHtml);
-            
-                
+
+
             },
             error: function () {
                 layer.Notify.error("服务器繁忙");
-                
+
             }
         });
     }
-    
-    
+
+
     var events = {
         /**
          * 添加模块
@@ -88,7 +88,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                                 error: function (error) {
                                     console.error(error);
                                     layer.Notify.error("服务器繁忙");
-                                    
+
                                 }
                             });
                             return false;
@@ -135,7 +135,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                                 },
                                 error: function () {
                                     layer.Notify.error("服务器繁忙");
-                                    
+
                                 }
                             });
                             return false;
@@ -146,7 +146,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                     $("form[role='editModuleForm'] [lay-submit]").trigger('click');
                 }
             });
-            
+
         },
         delLayer2ToDB: function (event, data) {
             layer.confirm('删除该模块【' + data.name + '】如造成重大损失，将独自承担后果！', {icon: 7, title: '警告提示'}, function (index) {
@@ -165,21 +165,21 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                         layer.Notify.success("删除成功");
                         loadPermissions();
                     }
-                    
+
                 });
-                
+
             });
         },
-        
+
         /**
          * 添加页面菜单
          */
         addLayer2ToDB: function (event, data) {
             data.modul_name = data.name;
             data.modul_id = data.id;
-            
+
             var content = $('#addPage').html()
-            
+
             layer.open({
                 title: "添加页面",
                 type: 1,
@@ -219,11 +219,11 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                     $("form[role='addPage'] [lay-submit]").trigger('click');
                 }
             });
-            
-            
+
+
         },
         delMenu2ToDB: function (event, data) {
-            
+
             layer.confirm('删除该页面【' + data.name + '】如造成重大损失，将独自承担后果！', {icon: 7, title: '警告提示'}, function (index) {
                 $.ajax({
                     type: "post",
@@ -240,17 +240,17 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                         layer.Notify.success("删除成功");
                         loadPermissions();
                     }
-                    
+
                 });
-                
+
             });
-            
+
         },
         /**
          * 修改页面菜单
          */
         editMenu2ToDB: function (event, data) {
-            
+
             var content = $('#editPage').html();
             layer.open({
                 title: "修改页面",
@@ -281,7 +281,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                                 },
                                 error: function () {
                                     layer.Notify.error("服务器繁忙");
-                                    
+
                                 }
                             });
                             return false
@@ -292,13 +292,13 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                     $("form[role='editMenuForm'] [lay-submit]").trigger('click');
                 }
             });
-            
+
         },
 
         changeMenuParent: function (event, data) {
 
             var content = $('#changeParent').html();
-            laytpl(content).render(data,function (_html) {
+            laytpl(content).render(data, function (_html) {
                 layer.open({
                     title: "切换模块",
                     type: 1,
@@ -353,7 +353,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
             data.permission_module = data.module;
             data.parent_menu_id = data.id;
             data.menu_id = data.menu_id;
-            
+
             var permissionsListTpl = $("#addPermission").html();
             $.ajax({
                 type: "post",
@@ -368,7 +368,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                     }
                     laytpl(permissionsListTpl).render(res, function (content) {
                         // $("#addPermission").html(html);
-                        
+
                         layer.open({
                             title: "添加权限",
                             type: 1,
@@ -380,7 +380,7 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                                 layui.use(['form'], function () {
                                     var form = layui.form;
                                     form.val('addPermission', data);
-                                    
+
                                     form.on('submit(addPermission)', function (formData) {
                                         $.ajax({
                                             type: "post",
@@ -404,25 +404,25 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                                         return false;
                                     })
                                 })
-                                
+
                             },
                             yes: function () {
                                 $("form[role='addPermission'] [lay-submit]").trigger('click');
                             }
                         });
-                        
+
                     });
-                    
+
                 },
                 error: function () {
                     layer.Notify.error("服务器繁忙");
                 }
             });
-            
-            
+
+
         },
         delPermissionKey: function (event, data) {
-            
+
             layer.confirm('删除该权限【' + data.permission_name + '】如造成重大损失，将独自承担后果！', {
                 icon: 7,
                 title: '警告提示'
@@ -443,16 +443,16 @@ layui.use(['layer', 'element', 'laytpl', "form"], function () {
                         loadPermissions();
                     },
                     fail: function () {
-                        
+
                     }
-                    
+
                 });
-                
+
             });
-            
+
         },
     };
-    
+
     $('body').on('click', '[data-btn-type]', function (e) {
         var typ = $(this).data('btnType');
         if (events[typ] && $.isFunction(events[typ])) {

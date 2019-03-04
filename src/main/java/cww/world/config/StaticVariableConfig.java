@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +18,12 @@ public class StaticVariableConfig {
 
     /**
      * thymleaf 全局变量定义
+     *
      * @param viewResolver
      */
     @Autowired
     public void configureThymeleafStaticVars(ThymeleafViewResolver viewResolver, Environment environment) {
-        if(viewResolver != null) {
+        if (viewResolver != null) {
             Map<String, Object> vars = new HashMap<>();
             vars.put("SYS_NAME", environment.getProperty("sys.name"));
             viewResolver.setStaticVariables(vars);

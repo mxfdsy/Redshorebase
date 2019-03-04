@@ -5,35 +5,35 @@
     <title>dom选择器，节点选择</title>
 </head>
 <body>
-    <div id="only" class="demo"></div>
+<div id="only" class="demo"></div>
 
-    <div>
-        <strong>
+<div>
+    <strong>
 
-        </strong>
-    </div>
+    </strong>
+</div>
 
-    <div>
+<div>
         <span>
             <strong>
 
             </strong>
         </span>
-    </div>
+</div>
 
 
-    <div class="demo">
-        <strong></strong>
-        <span></span>
-        <em></em>
-    </div>
+<div class="demo">
+    <strong></strong>
+    <span></span>
+    <em></em>
+</div>
 
-    <div class="xw"></div>
+<div class="xw"></div>
 
-    <div class="cww">
-        <div>你好</div>
-        <span>世界</span>
-    </div>
+<div class="cww">
+    <div>你好</div>
+    <span>世界</span>
+</div>
 
 
 <script type="text/javascript">
@@ -43,7 +43,7 @@
     var div = document.getElementsByTagName('div')[0];
     var div1 = document.getElementsByClassName('demo')[0];
 
-    var  eleT= document.getElementsByTagName('strong');
+    var eleT = document.getElementsByTagName('strong');
     var eleS = document.querySelector('div > span strong');
     var eleA = document.querySelectorAll('div > span strong');
 
@@ -77,25 +77,6 @@
     cww.setAttribute('id', 'only');
 
     cww.getAttribute('id');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

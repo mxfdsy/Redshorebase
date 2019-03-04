@@ -8,8 +8,8 @@
 
 (function (factory) {
     "use strict";
-    layui.define(['jquery','pinyin', 'addressData'], function (exports) {
-        
+    layui.define(['jquery', 'pinyin', 'addressData'], function (exports) {
+
         factory(layui.$, window, layui.addressData);
         exports('chooseArea', '');
     })
@@ -20,13 +20,13 @@
         '<div class="city-title"><input type="text" placeholder="请选择省/市/区" value="" readonly="" class="layui-input"></div>' +
         '<div class="ks-overlay ks-overlay-hidden">' +
         '<div class="ks-overlay-content"> <div class="city-select-warp"><div class="city-select-tab"><a class="current" attr-cont="city-province">省份</a><a class="" attr-cont="city-city">城市</a> <a class="" attr-cont="city-district">县区</a> </div> <div class="city-select-content"> <div class="city-select city-province"><dl class=fn-clear><dt>A-G<dd class="a-g"></dl><dl class=fn-clear><dt>H-K<dd class="h-k"></dl><dl class=fn-clear><dt>L-S<dd class="l-s"></dl><dl class=fn-clear><dt>T-Z<dd class="t-z"></dl></div><div class="city-select hide city-city"></div><div class="city-select hide city-district"></div></div></div></div></div>';
-    
+
     var partHtml =
         '<div  class="city-title"><input type="text" placeholder="请选择省/市" value="" readonly="" class="layui-input"></div>' +
         '<div class="ks-overlay ks-overlay-hidden">' +
         '<div class="ks-overlay-content"> <div class="city-select-warp"><div class="city-select-tab"><a class="current" attr-cont="city-province">省份</a><a class="" attr-cont="city-city">城市</a></div> <div class="city-select-content"> <div class="city-select city-province"><dl class=fn-clear><dt>A-G<dd class="a-g"></dl><dl class=fn-clear><dt>H-K<dd class="h-k"></dl><dl class=fn-clear><dt>L-S<dd class="l-s"></dl><dl class=fn-clear><dt>T-Z<dd class="t-z"></dl></div><div class="city-select hide city-city"></div><div class="city-select hide city-district"></div></div></div></div></div>';
-    
-    
+
+
     // 拼音排序
     function pySegSort(arr, empty) {
         if (!String.prototype.localeCompare) return null;
@@ -58,12 +58,12 @@
         });
         return segs;
     }
-    
+
     // 渲染省份
     var renderProvince = function (filted) {
         var targetArea = this.element;
-        
-        
+
+
         filted.forEach(function (value) {
             var html = value.zone
                 .map(function (province) {
@@ -87,36 +87,36 @@
             }
         });
     };
-    
+
     // 只显示已添加城市
     function onlyShowData(data, _onlyShowArea) {
         return data.filter(function (f) {
             return _onlyShowArea.indexOf(f.id) > -1;
         });
     }
-    
+
     var config = {
         fullArea: true,  //是否显示全 省市区 false 显示 省市
         onlyShowArea: [],    //自定义省市区显示 省id
         chooseResult: [],     //默认值 [{id:1,name:'省'},{id:1,name:'市'},{id:1,name:'区'}] 按省市区顺序
         choose: function (chooseResult) {   //点击回调事件 chooseResult 选中的数据 []
-            
+
         }
-        
+
     };
-    
+
     function ChooseCity(element, options) {
         var that = this;
         that.element = $(element);
         that.config = $.extend(true, {}, config, options);
         that.fullArea = that.config.fullArea;
-        
+
         that.element.append(!that.fullArea ? partHtml : fullAreaHtml);
-        
+
         that.onlyShowArea = that.config.onlyShowArea.slice(0);
         that.result = [];
         that.defaultResult = that.config.chooseResult.slice(0);
-        
+
         that._init = function () {
             that.init();
             setTimeout(function () {
@@ -127,26 +127,26 @@
                 that._setDefaultValue();
             }, 2000)
         };
-        
-        
+
+
         if (options.areaData) {
             that.areaData = global.areaData = options.areaData;
             that._init();
             return
         }
-        
+
         if (global.areaData) {
             that.areaData = global.areaData;
             that._init();
             return
         }
-        
+
         that.areaData = global.areaData = areaData;
         that._init();
-        
+
     }
-    
-    
+
+
     // 获取一级菜单数据
     ChooseCity.prototype.init = function () {
         var html = "",
@@ -181,7 +181,7 @@
         if (!this.compositorData) {
             this.compositorData = pySegSort(this.filted);
         }
-        
+
         this.compositorData.forEach(function (value) {
             for (var i = 0; i < regPosistion.length; i++) {
                 if (regPosistion[i].reg.test(value.letter)) {
@@ -191,7 +191,7 @@
         });
         renderProvince.call(this, regPosistion);
     };
-    
+
     // 点击显示地址栏
     ChooseCity.prototype.clickShow = function () {
         var targetArea = this.element;
@@ -199,7 +199,7 @@
             targetArea.find(".ks-overlay").removeClass("ks-overlay-hidden");
         });
     };
-    
+
     // 点击隐藏地址栏
     ChooseCity.prototype.clickHide = function () {
         var targetArea = this.element;
@@ -209,7 +209,7 @@
             }
         });
     };
-    
+
     // 选择地址
     ChooseCity.prototype.areaClick = function () {
         this.element.on("click", ".city-select dd a", function (e) {
@@ -252,7 +252,7 @@
             }.bind(this)
         );
     };
-    
+
     // 渲染input当前地址
     ChooseCity.prototype.renderArea = function (position, data) {
         this.element.find(".city-select-content .city-select").addClass("hide");
@@ -289,12 +289,12 @@
             .find("." + position)
             .append(html);
     };
-    
+
     // 当选择省份改变时改变内容
     ChooseCity.prototype.destory = function () {
         this.element.find(".city-district .city-select-city dd").html("");
     };
-    
+
     // tab切换
     ChooseCity.prototype.tab = function () {
         var titles = this.element.find(".city-select-tab a");
@@ -317,7 +317,7 @@
         });
         // });
     };
-    
+
     // 添加title
     ChooseCity.prototype.title = function (index, tit, id) {
         if (this.result[index] == undefined) {
@@ -345,7 +345,7 @@
         this.element.find(".city-title").addClass("has-city-title")
             .find('input').val(html);
     };
-    
+
     ChooseCity.prototype.reset = function () {
         this.result = [];
         this.element.data("address-result", this.result);
@@ -353,9 +353,9 @@
         this.init();
         this.tab();
     };
-    
+
     ChooseCity.prototype._setDefaultValue = function () {
-        
+
         var defaultResult = this.defaultResult;
         var targetArea = this.element;
         if (defaultResult.length > 0) {
@@ -372,7 +372,7 @@
             }, 200)
         }
     };
-    
+
     // 注册插件
     $.fn[PluginName] = function (options) {
         return this.each(function () {

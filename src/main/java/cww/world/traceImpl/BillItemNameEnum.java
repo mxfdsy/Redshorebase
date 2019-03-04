@@ -4,19 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @date: 2018/9/12 13:31
  * @description:
  */
 public enum BillItemNameEnum {
-    amountReceived("amountReceived","账单已收金额"),
-    receivableAmount("receivableAmount","账单应收金额"),
-    outstandingAmount("outstandingAmount","账单未收金额"),
-    paymentStatus("paymentStatus","账单付款状态"),
-    billStatus("billStatus","账单账单状态"),
-    billSetDate("billSetDate","账单立账日期"),
-    memo("memo","账单摘要"),
-    unknow("unknow","未知字段"),
+    amountReceived("amountReceived", "账单已收金额"),
+    receivableAmount("receivableAmount", "账单应收金额"),
+    outstandingAmount("outstandingAmount", "账单未收金额"),
+    paymentStatus("paymentStatus", "账单付款状态"),
+    billStatus("billStatus", "账单账单状态"),
+    billSetDate("billSetDate", "账单立账日期"),
+    memo("memo", "账单摘要"),
+    unknow("unknow", "未知字段"),
 
     FEE("FEE", "费用单"),
 
@@ -67,9 +66,6 @@ public enum BillItemNameEnum {
     public String getItemName() {
         return itemName;
     }
-
-
-
 
 
 }

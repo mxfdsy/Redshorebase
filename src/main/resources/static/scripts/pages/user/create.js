@@ -1,7 +1,7 @@
 /**
  * Created by SK on 2018/6/6.
  */
-layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable', 'table','lmfConfig'], function () {
+layui.use(['element', 'form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable', 'table', 'lmfConfig'], function () {
     var $ = layui.$;
     var form = layui.form;
     var layer = layui.layer;
@@ -9,7 +9,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
     var clickEvent = layui.lmfEvent;
     var lmfTable = layui.lmfTable;
     var CONFIG = layui.lmfConfig;
-    
+
     var MAX_ROLE_NUM = 20;
     var roleCount = 1;   //权限数量技术
     var select_roles = {  //选中的数据
@@ -18,7 +18,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             malls: []
         }
     };
-    
+
     function initSelectData(index) {
         if (!select_roles[index]) {
             select_roles[index] = {
@@ -27,13 +27,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             }
         }
     }
-    layui.element.on('tab(choosed-permission-tab)', function(){
+
+    layui.element.on('tab(choosed-permission-tab)', function () {
         $(window).trigger('resize');
     });
-    
+
     clickEvent('add-role', function () {
         var contactTpl = $('#tplRoles').html();
-        
+
         laytpl(contactTpl).render({index: ++roleCount}, function (contactHtml) {
             $('.user-roles:last').after(contactHtml);
         });
@@ -47,14 +48,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 $deleteIcon.first().removeClass('layui-hide')
             }
         }
-        
+
         initSelectData(roleCount.toString());
     });
-    
+
     clickEvent('del-role', function (e) {
         var index = $(this).parents('.user-roles').attr('data-index');
         delete select_roles[index];
-        
+
         $(this).parents('.user-roles').remove();
         var $deleteIcon = $('.delete-icon');
         if ($deleteIcon.length < MAX_ROLE_NUM) {
@@ -66,7 +67,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             $deleteIcon.first().removeClass('layui-hide')
         }
     });
-    
+
     // 设置角色
     clickEvent('choose-role', function (res) {
         var _this = this;
@@ -106,7 +107,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 }
             ]]
         };
-        
+
         var optionEvents = {
             select: function (selected) {
                 layer.closeAll();
@@ -116,7 +117,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 $(_this).siblings('.choose-permission').removeClass('layui-hide');
             }
         };
-        
+
         layer.open({
             type: 1,
             area: ['800px', '525px'],
@@ -132,8 +133,8 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             }
         });
     });
-    
-    
+
+
     (function choosePermission() {
         var choosedMalls = []; //弹窗中 选中的数据
         var allMalls; //所有数据
@@ -146,17 +147,17 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 }));
             }
             return $.ajax({
-                    type: "post",
-                    url: '/businessProgram/getList',
-                    dataType: "json",
-                    data: JSON.stringify({
-                        "page_no": 1,
-                        "page_size": 1000,
-                        "sort_order": "desc",
-                        "sort_key": "created_at"
-                    }),
-                    contentType: "application/json"
-                })
+                type: "post",
+                url: '/businessProgram/getList',
+                dataType: "json",
+                data: JSON.stringify({
+                    "page_no": 1,
+                    "page_size": 1000,
+                    "sort_order": "desc",
+                    "sort_key": "created_at"
+                }),
+                contentType: "application/json"
+            })
                 .then(function (res) {
                     if (res.code != 200) {
                         return []
@@ -167,7 +168,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     return allMalls = _allMalls.slice(0);
                 })
         };
-        
+
         var getWaitingMalls = function () {
             var choosedMallUids = choosedMalls.map(function (mall) {
                 return mall.mall_uid
@@ -176,9 +177,9 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 return choosedMallUids.indexOf(mall.mall_uid) == -1;
             })
         };
-        
+
         var choosedTable, listTable;
-        
+
         var renderPermissionTable = function () {
             var tableCols = [
                 {
@@ -232,7 +233,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     width: 150
                 }
             ];
-            
+
             var choosedTableConfig = {
                 data: choosedMalls.slice(0),
                 elem: '#choosed-table',
@@ -247,7 +248,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 cacheChecked: true,
                 cols: [tableCols.slice(0)]
             };
-            
+
             var listTableConfig = {
                 data: getWaitingMalls(),
                 elem: '#permission-table',
@@ -262,18 +263,18 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 cacheChecked: true,
                 cols: [tableCols.slice(0)]
             };
-            
+
             choosedTable = lmfTable(choosedTableConfig, {});
             listTable = lmfTable(listTableConfig, {});
         };
-        
+
         //删除项目
         clickEvent('delete-choose', function () {
             var deleteMallsData = choosedTable.checkStatus().data.slice(0);
             var deleteMallUids = deleteMallsData.map(function (mall) {
                 return mall.mall_uid;
             });
-            
+
             choosedMalls = choosedMalls
                 .filter(function (mall) {
                     return deleteMallUids.indexOf(mall.mall_uid) == -1;
@@ -283,14 +284,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     delete mall['LAY_TABLE_INDEX'];
                     return mall;
                 });
-            
+
             choosedTable.reload({
                 data: choosedMalls.slice(0)
             });
             listTable.reload({
                 data: getWaitingMalls()
             });
-            
+
             return false;
         });
         //选择项目
@@ -320,42 +321,42 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     delete mall['LAY_TABLE_INDEX'];
                     return mall;
                 });
-            
+
             getAllMalls().then(function () {
-                    layer.open({
-                        type: 1,
-                        area: ['1100px', '600px'],
-                        title: ['设置数据权限'],
-                        btn: ['提交', '取消'],
-                        move: false,
-                        resize: false,
-                        scrollbar: false,
-                        shadeClose: false,
-                        shade: [0.3, '#000'],
-                        content: $('#tplPermission').html(),
-                        success: function () {
-                            renderPermissionTable();
-                            
-                        },
-                        yes: function (layerIndex) {
-                            select_roles[index].malls = choosedMalls;
-                            layer.close(layerIndex);
-                        },
-                        end: function () {
-                            listTable.tableIns.clearCache();
-                            choosedTable.tableIns.clearCache();
-                        }
-                    });
-                })
+                layer.open({
+                    type: 1,
+                    area: ['1100px', '600px'],
+                    title: ['设置数据权限'],
+                    btn: ['提交', '取消'],
+                    move: false,
+                    resize: false,
+                    scrollbar: false,
+                    shadeClose: false,
+                    shade: [0.3, '#000'],
+                    content: $('#tplPermission').html(),
+                    success: function () {
+                        renderPermissionTable();
+
+                    },
+                    yes: function (layerIndex) {
+                        select_roles[index].malls = choosedMalls;
+                        layer.close(layerIndex);
+                    },
+                    end: function () {
+                        listTable.tableIns.clearCache();
+                        choosedTable.tableIns.clearCache();
+                    }
+                });
+            })
                 .fail(function () {
                     layer.Notify.error("获取项目信息失败")
                 });
             return false;
         });
-        
+
     })();
-    
-    
+
+
     var selected_organization = [];
     clickEvent('choose-organization', function () {
         layer.load(2);
@@ -364,14 +365,14 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             selected_organization_code: selected_organization,
             is_all: "false"
         };
-        
+
         $.ajax({
-                type: "post",
-                url: '/organizationManage/getOrganizationNodeByCode',
-                dataType: "json",
-                data: JSON.stringify(parameter),
-                contentType: "application/json"
-            })
+            type: "post",
+            url: '/organizationManage/getOrganizationNodeByCode',
+            dataType: "json",
+            data: JSON.stringify(parameter),
+            contentType: "application/json"
+        })
             .then(function (res) {
                 layer.closeAll();
                 if (res.code != 200) {
@@ -403,7 +404,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                         }
                     },
                 };
-                
+
                 var chooseNode;
                 layer.open({
                     type: 1,
@@ -417,7 +418,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                     shade: [0.3, '#000'],
                     success: function () {
                         $('#organization-tree-content').on('changed.jstree', function (e, data) {
-                            
+
                             var allNodes = data.selected[0].match(/\d{3}/g);
                             var nodeText = [CONFIG.groupName];
                             var nodeUid = '';
@@ -425,15 +426,15 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                                 var _node = data.instance.get_json(nodeUid += node);
                                 nodeText.push(_node.text)
                             });
-                            
+
                             chooseNode = data.instance.get_node(data.selected[0]);
                             chooseNode.previwe_text = nodeText.join('/');
-                            
+
                         }).jstree(treeConfig)
                     },
                     yes: function (index) {
                         layer.close(index);
-                        
+
                         if (!chooseNode) {
                             $('.organization').val('');
                             $('.organization_uid').val('');
@@ -441,7 +442,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                         }
                         $('.organization').val(chooseNode.previwe_text);
                         $('.organization_uid').val(chooseNode.data.organization_uid);
-                        
+
                         selected_organization = [chooseNode.id];
                     }
                 });
@@ -451,7 +452,7 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
                 layer.Notify.error('请求归属组织列表出错');
             });
     });
-    
+
     form.verify({
         input_email: function (value, item) {
             if (value && !/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value)) {
@@ -459,18 +460,18 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             }
         }
     });
-    
+
     // 创建用户
     form.on('submit(form-create-user)', function (data) {
         var field = data.field;
-        
+
         //确认密码
         if (field.password !== field.repassword) {
             layer.Notify.error('两次密码输入不一致');
             return false;
         }
         field.password = md5(field.password);
-        
+
         var choose_roles = [];
         for (var index in select_roles) {
             var role = {
@@ -481,23 +482,23 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             };
             choose_roles.push(role);
         }
-        
+
         field.roles = choose_roles;
-        
+
         $.ajax({
-                type: "post",
-                url: "/user/createUser",
-                dataType: "json",
-                contentType: "application/json",
-                async: false,
-                data: JSON.stringify(field)
-            })
+            type: "post",
+            url: "/user/createUser",
+            dataType: "json",
+            contentType: "application/json",
+            async: false,
+            data: JSON.stringify(field)
+        })
             .then(function (res) {
                 if (res.code != 200) {
                     layer.Notify.error(res.error_msg || '创建用户出错!');
                     return false;
                 }
-                
+
                 layer.Notify.success('用户创建成功!');
                 setTimeout(function () {
                     window.location.href = "/user/layout/index.html";
@@ -508,5 +509,5 @@ layui.use(['element','form', 'layer', 'jstree', 'lmfEvent', 'laytpl', 'lmfTable'
             });
         return false;
     });
-    
+
 });

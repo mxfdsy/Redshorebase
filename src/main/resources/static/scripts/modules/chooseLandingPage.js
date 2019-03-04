@@ -1,13 +1,13 @@
 layui.define(['lmfTable'], function (exports) {
     "use strict";
     var $ = layui.$;
-    
+
     var global = window;
     if (!global.mall_uid) {
         console.error('[chooseLandingPage]组件需要使用全局变量mall_uid');
     }
-    
-    
+
+
     var TABLE_NAME = 'choose-box-landing-table';
     var TPL = '<div class="layui-card ' + TABLE_NAME + '">' +
         '<div class="layui-card-body">' +
@@ -17,7 +17,7 @@ layui.define(['lmfTable'], function (exports) {
         '<input type="hidden" name="state"  value="active">' +
         '<input type="hidden" name="mall_list"  value="' + global.mall_uid + '">' +
         '<div class="layui-col-sm6">' +
-        
+
         '</div>' +
         '<div class="layui-col-sm3">' +
         '     <input type="text" name="page_name" autocomplete="true" placeholder="请输入海报标题" maxlength="40" class="layui-input">' +
@@ -32,8 +32,8 @@ layui.define(['lmfTable'], function (exports) {
         '<table id="' + TABLE_NAME + '" lay-filter="' + TABLE_NAME + '" class="mt20"></table>' +
         '</div>' +
         '</div>';
-    
-    
+
+
     var TITLE = '活动海报';
     //构造器
     var ChooseBox = function (options) {
@@ -41,16 +41,17 @@ layui.define(['lmfTable'], function (exports) {
         that.config = $.extend({}, that.config, options);
         that.open();
     };
-    
+
     //默认配置
     ChooseBox.prototype.config = {
         isMultiple: false,   //是否多选
         excludeUIDs: [],    //已有id
         type: "",           //类型 mallProduct  mallActivity
-        success: function (data) {},     //成功回调
+        success: function (data) {
+        },     //成功回调
         params_in: {}  //默认参数
     };
-    
+
     ChooseBox.prototype.open = function () {
         var that = this;
         this.box_index = layer.open({
@@ -74,7 +75,7 @@ layui.define(['lmfTable'], function (exports) {
             }
         });
     };
-    
+
     ChooseBox.prototype.setBox = function () {
         var that = this;
         var where = $.extend({}, {
@@ -82,7 +83,7 @@ layui.define(['lmfTable'], function (exports) {
             sort_key: 'created_at',
             state: "active",
         }, that.config.params_in);
-        
+
         var table_events = {};
         var table_cols = [
             // {
@@ -158,12 +159,12 @@ layui.define(['lmfTable'], function (exports) {
             },
             cols: [table_cols]
         };
-        
+
         that.table = layui.lmfTable(table_config, table_events);
         return that;
     };
-    
-    
+
+
     //操作当前实例
     exports('chooseLandingPage', function (option) {
         new ChooseBox(option);

@@ -22,7 +22,7 @@ public class Predicate {
 
         Consumer<Father> fatherConsumer = (father -> father.setBigDecimal(father.getBigDecimal().add(BigDecimal.TEN)));
 
-        fatherConsumer.accept(new Father("cww",233, BigDecimal.ZERO));
+        fatherConsumer.accept(new Father("cww", 233, BigDecimal.ZERO));
     }
 
 

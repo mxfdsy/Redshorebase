@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cww.world.mapper.menu.MenuMapper">
-	<resultMap id="menuMap" type="cww.world.pojo.po.menu.MenuPO">
-		<id column="id" property="id"/>
-		<result column="menu_uid" property="menuUid"/>
-		<result column="name" property="name"/>
-		<result column="parent" property="parent"/>
-		<result column="layer" property="layer"/>
-		<result column="sort_order" property="sort"/>
-		<result column="menu_icon" property="menuIcon"/>
-		<result column="menu_icon_checked" property="menuIconChecked"/>
-		<result column="skip_url" property="skipUrl"/>
-		<result column="code" property="code"/>
-		<result column="permission_keys" property="permissionKeys"/>
-		<result column="menu_type" property="menuType"/>
+    <resultMap id="menuMap" type="cww.world.pojo.po.menu.MenuPO">
+        <id column="id" property="id"/>
+        <result column="menu_uid" property="menuUid"/>
+        <result column="name" property="name"/>
+        <result column="parent" property="parent"/>
+        <result column="layer" property="layer"/>
+        <result column="sort_order" property="sort"/>
+        <result column="menu_icon" property="menuIcon"/>
+        <result column="menu_icon_checked" property="menuIconChecked"/>
+        <result column="skip_url" property="skipUrl"/>
+        <result column="code" property="code"/>
+        <result column="permission_keys" property="permissionKeys"/>
+        <result column="menu_type" property="menuType"/>
 
-		<result column="created_at" property="createdAt"/>
-		<result column="updated_at" property="updatedAt"/>
-		<result column="created_by" property="createdBy"/>
-		<result column="updated_by" property="updatedBy"/>
-	</resultMap>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="updated_by" property="updatedBy"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id, menu_uid, menu_icon, menu_icon_checked, name, skip_url, layer, parent,
-		permission_keys, sort_order, code, created_at, updated_at, created_by, updated_by
-	</sql>
+    <sql id="Base_Column_List">
+        id, menu_uid, menu_icon, menu_icon_checked, name, skip_url, layer, parent,
+        permission_keys, sort_order, code, created_at, updated_at, created_by, updated_by
+    </sql>
 
-	<insert id="insertMenu" parameterType="cww.world.pojo.po.menu.MenuPO">
-		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-			SELECT LAST_INSERT_ID() AS id
-		</selectKey>
-		INSERT INTO tnt_biz_erp_menu
-		(menu_uid, menu_icon, menu_icon_checked, name, skip_url, layer, parent, permission_keys, sort_order, code, created_at, updated_at, created_by, archive)
-		VALUES
-		(TNT_UUID_SHORT(), #{menuIcon}, #{menuIconChecked}, #{name}, #{skipUrl}, #{layer}, #{parent}, #{permissionKeys}, #{sort}, #{code}, now(), now(), #{createdBy}, 1)
-	</insert>
+    <insert id="insertMenu" parameterType="cww.world.pojo.po.menu.MenuPO">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO tnt_biz_erp_menu
+        (menu_uid, menu_icon, menu_icon_checked, name, skip_url, layer, parent, permission_keys, sort_order, code,
+        created_at, updated_at, created_by, archive)
+        VALUES
+        (TNT_UUID_SHORT(), #{menuIcon}, #{menuIconChecked}, #{name}, #{skipUrl}, #{layer}, #{parent}, #{permissionKeys},
+        #{sort}, #{code}, now(), now(), #{createdBy}, 1)
+    </insert>
 
-	<update id="updateMenuSortAndCode">
-		UPDATE tnt_biz_erp_menu
-		SET
-		sort_order = #{sort},
-		code = #{code},
-		updated_at = now()
-		WHERE id = #{id}
-	</update>
+    <update id="updateMenuSortAndCode">
+        UPDATE tnt_biz_erp_menu
+        SET
+        sort_order = #{sort},
+        code = #{code},
+        updated_at = now()
+        WHERE id = #{id}
+    </update>
 
 
-	<select id="listAllParentMenus" resultMap="menuMap">
-		SELECT id, name, menu_icon, menu_icon_checked, sort_order, menu_type FROM tnt_biz_erp_menu WHERE layer=1 AND archive=1 ORDER BY sort_order
-	</select>
+    <select id="listAllParentMenus" resultMap="menuMap">
+        SELECT id, name, menu_icon, menu_icon_checked, sort_order, menu_type FROM tnt_biz_erp_menu WHERE layer=1 AND
+        archive=1 ORDER BY sort_order
+    </select>
 
-	<select id="listMenuByParentIds" resultMap="menuMap">
-		SELECT id, name, parent ,skip_url, sort_order, menu_type
-		FROM tnt_biz_erp_menu
-		WHERE
-		archive=1
-		AND parent in <foreach collection="moduleids" open="(" close=")" item="id" separator=",">#{id}</foreach>
-		ORDER BY sort_order
-	</select>
+    <select id="listMenuByParentIds" resultMap="menuMap">
+        SELECT id, name, parent ,skip_url, sort_order, menu_type
+        FROM tnt_biz_erp_menu
+        WHERE
+        archive=1
+        AND parent in
+        <foreach collection="moduleids" open="(" close=")" item="id" separator=",">#{id}</foreach>
+        ORDER BY sort_order
+    </select>
 
-	<select id="listMenuByIds" resultMap="menuMap">
-		SELECT
-		id, menu_uid, menu_icon, menu_icon_checked, name, skip_url, layer, parent,
-		permission_keys, sort_order, code, created_at, updated_at, created_by, updated_by
-		FROM tnt_biz_erp_menu
-		WHERE
-		id in <foreach collection="menuIds" item="id" open="(" close=")" separator=",">#{id}</foreach>
-		AND archive = 1
-		ORDER BY sort_order asc
-	</select>
+    <select id="listMenuByIds" resultMap="menuMap">
+        SELECT
+        id, menu_uid, menu_icon, menu_icon_checked, name, skip_url, layer, parent,
+        permission_keys, sort_order, code, created_at, updated_at, created_by, updated_by
+        FROM tnt_biz_erp_menu
+        WHERE
+        id in
+        <foreach collection="menuIds" item="id" open="(" close=")" separator=",">#{id}</foreach>
+        AND archive = 1
+        ORDER BY sort_order asc
+    </select>
 
 
 </mapper>

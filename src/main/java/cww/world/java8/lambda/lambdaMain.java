@@ -23,7 +23,7 @@ public class lambdaMain {
         System.out.println(factory.createPerson("xiaowu", 333));
 
         //lambda1
-        PersonFactory factory1 = (name, age) -> new Person(name,age);
+        PersonFactory factory1 = (name, age) -> new Person(name, age);
         factory1.createPerson("1", 99);
         //构造方法
         PersonFactory factory2 = Person::new;
@@ -49,7 +49,6 @@ public class lambdaMain {
         //静态方法引用
         ParseInterface p3 = Integer::parseInt;
         p3.parse("22");
-
 
 
     }

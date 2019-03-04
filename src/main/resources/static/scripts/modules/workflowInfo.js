@@ -44,7 +44,7 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
         '           </div>' +
         '       </div>';
 
-    var POPUP_HTML = '<div style="width: 95%;border-top:1px solid #f0f0f0;margin-bottom: 10px;"></div>'+
+    var POPUP_HTML = '<div style="width: 95%;border-top:1px solid #f0f0f0;margin-bottom: 10px;"></div>' +
         '       <div class="layui-form-item">' +
         '           <label class="layui-form-label layui-label-required">下步审批 </label>' +
         '           <div class="layui-input-block">' +
@@ -78,7 +78,7 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
 
     var AUDIT_OPERATION_HTML = ' <button class="layui-btn"  lmf-event="audit-pass">审核通过</button>' +
         '                       <button class="layui-btn"  lmf-event="audit-refuse">审核拒绝</button>';
-    
+
     var Workflow = function (option) {
         var that = this;
         this.newAuditorList = function () {
@@ -123,19 +123,19 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
         _auditorList: [],
         init: function (option) {
             this.config = $.extend(true, {}, _config, option);
-            
+
             if (!this.config.auditProgressInfo) {
                 return;
             }
 
             this._excludeUIDs = (this.config.auditProgressInfo.auditor_list || []).map(function (ele) {
-                    return ele.userUid;
+                return ele.userUid;
             });
 
             this.render();
             this.bindEvents();
             form.render();
-            
+
             return this;
         },
         render: function () {
@@ -143,7 +143,7 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
             var hasAddAuditor = !this.config.isView;
 
             var _html = "";
-            if(this.config.htmlType == 0){
+            if (this.config.htmlType == 0) {
                 if (hasAuditInfoHtml) {
                     _html += HTML;
                     if (hasAddAuditor) {
@@ -153,7 +153,7 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
                 _html += this.renderPageBottom();
             }
 
-            if(this.config.htmlType == 1){
+            if (this.config.htmlType == 1) {
                 if (hasAuditInfoHtml) {
                     _html += POPUP_HTML;
                     if (hasAddAuditor) {
@@ -183,8 +183,8 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
         bindEvents: function () {
             var that = this;
             var auditorUidList = that._auditorList.map(function (auditor) {
-                    return auditor.user_uid
-                }) || [];
+                return auditor.user_uid
+            }) || [];
             clickEvent('add-auditor', function (e) {
                 var _this = this;
                 var option = {
@@ -206,12 +206,12 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
                         laytpl(AUDITOR_ITEM_HTML).render(user, function (html) {
                             $(_this).parents(".layui-card-body").find('.auditor-list-box').append(html);
                         });
-                        
+
                     }
                 };
                 chooseUser(option);
             });
-            
+
             clickEvent('del-auditor', function (e) {
                 var parents = $(this).parents('.auditor-item');
                 var userUid = parents.find('[name="user_uid"]').val();
@@ -257,5 +257,5 @@ layui.define(['chooseUser', 'lmfEvent', 'laytpl', 'form'], function (exports) {
     exports('workflowInfo', function (option) {
         return new Workflow(option);
     });
-    
+
 });

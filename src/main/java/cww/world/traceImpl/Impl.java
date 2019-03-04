@@ -45,7 +45,6 @@ public class Impl {
 //        }
 
 
-
         //具体的变化值：enum类
         ArrayList<Object> billMessageList = new ArrayList<>();
         //过滤账单中不必要的字段

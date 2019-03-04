@@ -48,8 +48,9 @@ public class GroupCountSortTest {
         );
 
         collect1.values().stream()
-                .forEach(e->{
-                    e.setPrice(collect.get(e.getName())); });
+                .forEach(e -> {
+                    e.setPrice(collect.get(e.getName()));
+                });
 
         List<Item> collect2 = collect1.values().stream().collect(Collectors.toList());
         System.out.println(result);
@@ -66,7 +67,7 @@ public class GroupCountSortTest {
         Map<String, Long> counting = items.stream().collect(
                 Collectors.groupingBy(Item::getName, Collectors.counting())
         );
-        System.out.println("count :" + counting );
+        System.out.println("count :" + counting);
 
 //
 //        Map<String, Integer> sum = items.stream().collect(
@@ -80,7 +81,7 @@ public class GroupCountSortTest {
                 Collectors.groupingBy(Item::getName)
         );
 
-        map.forEach((k,v)->{
+        map.forEach((k, v) -> {
             BigDecimal value = v.stream()
                     .map(e -> "".equals(e.getBusinessType()) ? e.getPrice() : e.getPrice().negate())
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -88,27 +89,25 @@ public class GroupCountSortTest {
         });
 
 
-
-
     }
 
     private static List<Item> getItems() {
         return Arrays.asList(
-                    new Item("apple", 10, new BigDecimal("9.99"),"TYPE_REFUND"),
-                    new Item("banana", 20, new BigDecimal("19.99"),"TYPE_ADD"),
-                    new Item("orang", 10, new BigDecimal("29.99")),
-                    new Item("watermelon", 10, new BigDecimal("29.99")),
-                    new Item("papaya", 20, new BigDecimal("9.99")),
-                    new Item("apple", 10, new BigDecimal("9.99")),
-                    new Item("banana", 10, new BigDecimal("19.99")),
-                    new Item("apple", 20, new BigDecimal("9.99"))
-            );
+                new Item("apple", 10, new BigDecimal("9.99"), "TYPE_REFUND"),
+                new Item("banana", 20, new BigDecimal("19.99"), "TYPE_ADD"),
+                new Item("orang", 10, new BigDecimal("29.99")),
+                new Item("watermelon", 10, new BigDecimal("29.99")),
+                new Item("papaya", 20, new BigDecimal("9.99")),
+                new Item("apple", 10, new BigDecimal("9.99")),
+                new Item("banana", 10, new BigDecimal("19.99")),
+                new Item("apple", 20, new BigDecimal("9.99"))
+        );
     }
 
     private static void groupTest1() {
         List<String> items =
                 Arrays.asList("apple", "apple", "banana",
-                        "apple", "orange", "banana", "papaya","c");
+                        "apple", "orange", "banana", "papaya", "c");
 
         Map<String, Long> result = items.stream().collect(Collectors.groupingBy(
                 Function.identity(), Collectors.counting()
@@ -117,9 +116,8 @@ public class GroupCountSortTest {
 
         Map<String, Long> finalMap = new LinkedHashMap<>();
 
-         result.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-                .forEachOrdered(e->finalMap.put(e.getKey(), e.getValue()));
-
+        result.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .forEachOrdered(e -> finalMap.put(e.getKey(), e.getValue()));
 
 
         System.out.println(finalMap);

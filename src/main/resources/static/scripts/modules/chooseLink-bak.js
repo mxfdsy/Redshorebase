@@ -29,8 +29,8 @@
         return true;
     };
 
-    var changePromotionType = function(type){
-        if(type === 'TYP_SELECT_PRODUCT'){
+    var changePromotionType = function (type) {
+        if (type === 'TYP_SELECT_PRODUCT') {
             // TODO
             return true;
         }
@@ -47,23 +47,23 @@
      * 表格配置
      * @type {{searchbox_product: searchbox_product, searchbox_cashBack: searchbox_cashBack, searchbox_activity: searchbox_activity, searchbox_lottery: searchbox_lottery, searchbox_gift: searchbox_gift, searchbox_topic: searchbox_topic, searchbox_TYP_BAYMAX_SHOP: searchbox_TYP_BAYMAX_SHOP, searchbox_TYP_BAYMAX_REBATE: searchbox_TYP_BAYMAX_REBATE, searchbox_TYP_BAYMAX_PRODUCT: searchbox_TYP_BAYMAX_PRODUCT, searchbox_TYP_BAYMAX_LOTTERY: searchbox_TYP_BAYMAX_LOTTERY, searchbox_TYP_BAYMAX_GIFT: searchbox_TYP_BAYMAX_GIFT}}
      */
-    // TODO 抄来的，还没动
+        // TODO 抄来的，还没动
     var changeExcludeUIDs = function (_showBox) {
 
-        _showBox = _showBox || {};
-        if (!!_showBox.__isMultiple) {  // 多选
-            return (_showBox._selected || []).map(function (ele) {
-                var _ele = linkTypeValObj(_showBox.__type.replace('searchbox_', ''), ele);
-                return _ele.promotionUid;
-            });
-        } else {
-            return (_showBox._selected || []).map(function (ele) {
-                return ele.promotion_uid || ele.targetUid; //兼容小程序和品牌配置
-            });
-        }
+            _showBox = _showBox || {};
+            if (!!_showBox.__isMultiple) {  // 多选
+                return (_showBox._selected || []).map(function (ele) {
+                    var _ele = linkTypeValObj(_showBox.__type.replace('searchbox_', ''), ele);
+                    return _ele.promotionUid;
+                });
+            } else {
+                return (_showBox._selected || []).map(function (ele) {
+                    return ele.promotion_uid || ele.targetUid; //兼容小程序和品牌配置
+                });
+            }
 
 
-    };
+        };
 
     var getTableConfigByType = {
 
@@ -409,8 +409,8 @@
         }
         return false;
     };
-    
-     function P(fn) {
+
+    function P(fn) {
         var dfd = $.Deferred();
         fn = $.isFunction(fn) ? fn : $.noop;
         try {
@@ -419,7 +419,7 @@
             dfd.reject(e);
         }
         return dfd.promise();
-        
+
     }
 
 });

@@ -1,7 +1,6 @@
 package cww.world.traceImpl;
 
 /**
- *
  * @date 2018/6/19 19:07
  */
 public class Generic<T> {

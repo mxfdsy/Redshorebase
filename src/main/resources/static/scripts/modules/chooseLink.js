@@ -1,8 +1,8 @@
 layui.define(['jquery', 'chooseProduct', 'chooseActivity', 'chooseLandingPage'], function (exports) {
     "use strict";
     var $ = layui.$;
-    
-    
+
+
     var responesData = function (content, promotionUid, targetUrl, promotionType) {
         return {
             promotion_name: content,
@@ -27,45 +27,47 @@ layui.define(['jquery', 'chooseProduct', 'chooseActivity', 'chooseLandingPage'],
             return res;
         },
         mallLandingPage: function (res) {
-            
+
             res.format_data = res.data.map(function (data) {
                 return responesData(data.page_name, data.lp_uid, data.page_link, 'landingpage');
             });
             return res;
-            
+
         }
     };
-    
-    
+
+
     var choiceLinkConfig = {
         isMultiple: false,   //是否多选
         excludeUIDs: [],    //已有id
         type: "",           //类型 mallProduct  mallActivity
-        success: function (data) {},     //成功回调
+        success: function (data) {
+        },     //成功回调
         params_in: {}  //默认参数
     };
-    
+
     //传入方法与内置方法对于关系
     var linkTpyeConfig = {
         'mallProduct': layui.chooseProduct,    //商品
         'mallActivity': layui.chooseActivity, //商业项目活动
         'mallLandingPage': layui.chooseLandingPage,   //商业项目微页
     };
-    
+
     var choiceLink = function (opts) {
         opts = $.extend({}, choiceLinkConfig, opts);
         if (!linkTpyeConfig[opts.type]) {
             console.log('错误的类型', opts.type);
             layer.Notify.error('错误的类型');
         }
-        var success = typeof opts.success == 'function' ? opts.success : function () {}
+        var success = typeof opts.success == 'function' ? opts.success : function () {
+        }
         opts.success = function (data) {
             success(linkTypeValObj[opts.type](data));
         };
         linkTpyeConfig[opts.type](opts);
         return false;
     };
-    
-    
+
+
     exports('chooseLink', choiceLink);
 });

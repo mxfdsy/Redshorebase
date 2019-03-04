@@ -18,7 +18,7 @@
 
 
 <body class="layui-layout-body layadmin-tabspage-none">
-<div class="layui-layout layui-layout-admin" >
+<div class="layui-layout layui-layout-admin">
     <!--<div class="layui-header" th:include="login/index2"></div>-->
 
     <div class="layui-header" th:include="fragments/header"></div>
@@ -76,87 +76,87 @@
 </body>
 
 
-    <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    </script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 
 
-    <script type="text/javascript" th:src="@{/layui.js?201807061917}" charset="utf-8"></script>
-    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-    <script>
-        layui.use(['table', 'laypage', 'layer'], function () {
-            var table = layui.table;
-            var laypage = layui.laypage
-                , layer = layui.layer;
+<script type="text/javascript" th:src="@{/layui.js?201807061917}" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['table', 'laypage', 'layer'], function () {
+        var table = layui.table;
+        var laypage = layui.laypage
+            , layer = layui.layer;
 
-            //监听表格复选框选择
-            table.on('checkbox(demo)', function (obj) {
-                console.log(obj)
-            });
-            //监听工具条
-            table.on('tool(demo)', function (obj) {
-                var data = obj.data;
-                if (obj.event === 'detail') {
-                    layer.msg('ID：' + data.id + ' 的查看操作');
-                } else if (obj.event === 'del') {
-                    layer.confirm('真的删除行么', function (index) {
-                        obj.del();
-                        layer.close(index);
-                    });
-                } else if (obj.event === 'edit') {
-                    layer.alert('编辑行：<br>' + JSON.stringify(data))
-                }
-            });
-
-            var $ = layui.$, active = {
-                getCheckData: function () { //获取选中数据
-                    var checkStatus = table.checkStatus('idTest')
-                        , data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                }
-                , getCheckLength: function () { //获取选中数目
-                    var checkStatus = table.checkStatus('idTest')
-                        , data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                }
-                , isAll: function () { //验证是否全选
-                    var checkStatus = table.checkStatus('idTest');
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选')
-                }
-            };
-
-            $('.demoTable .layui-btn').on('click', function () {
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
-
-            //分页
-            laypage.render({
-                elem: 'demo2'
-                , count: 100
-                , theme: '#1E9FFF'
-            });
-
-            //调用分页
-            laypage.render({
-                elem: 'demo20'
-                , count: data.length
-                , jump: function (obj) {
-                    //模拟渲染
-                    document.getElementById('biuuu_city_list').innerHTML = function () {
-                        var arr = []
-                            , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-                        layui.each(thisData, function (index, item) {
-                            arr.push('<li>' + item + '</li>');
-                        });
-                        return arr.join('');
-                    }();
-                }
-            });
+        //监听表格复选框选择
+        table.on('checkbox(demo)', function (obj) {
+            console.log(obj)
         });
-    </script>
+        //监听工具条
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            }
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function () { //获取选中数据
+                var checkStatus = table.checkStatus('idTest')
+                    , data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('idTest')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('idTest');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        //分页
+        laypage.render({
+            elem: 'demo2'
+            , count: 100
+            , theme: '#1E9FFF'
+        });
+
+        //调用分页
+        laypage.render({
+            elem: 'demo20'
+            , count: data.length
+            , jump: function (obj) {
+                //模拟渲染
+                document.getElementById('biuuu_city_list').innerHTML = function () {
+                    var arr = []
+                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                    layui.each(thisData, function (index, item) {
+                        arr.push('<li>' + item + '</li>');
+                    });
+                    return arr.join('');
+                }();
+            }
+        });
+    });
+</script>
 </div>
 </body>
 </html>

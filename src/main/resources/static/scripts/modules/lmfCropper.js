@@ -4,24 +4,24 @@
 
 (function (factory) {
     "use strict";
-    layui.define(['jquery','layer'], function (exports) {
-        factory(layui.$,layui.layer);
+    layui.define(['jquery', 'layer'], function (exports) {
+        factory(layui.$, layui.layer);
         exports('lmfCropper', '');
     })
-})(function ($, layer,undefined) {
+})(function ($, layer, undefined) {
     //全局配置，如果采用默认均不需要改动
     var config = {
         cropper: {
             css: '../../../styles/cropper.min.css',
             js: '../../cropper.min.js'
         },
-        cropperExt:{
-            css:'../../../styles/cropper.Ext.css'
+        cropperExt: {
+            css: '../../../styles/cropper.Ext.css'
         },
         path: '', //laydate所在路径
     };
     var MAX_FILE_SIZE = 10 * 1024 * 1024; // -> 最大10M
-    
+
     var lmfCropper = {}, doc = document, creat = 'createElement', byid = 'getElementById',
         tags = 'getElementsByTagName';
     //获取组件存放路径
@@ -51,8 +51,8 @@
                 '</div>'
         }()
     };
-    
-    
+
+
     //加载资源
     lmfCropper.use = function () {
         var use = function (type, filename) {
@@ -79,8 +79,8 @@
             }
         }
     }();
-    
-    
+
+
     //初始化
     lmfCropper.init = function () {
         //cropper依赖
@@ -89,13 +89,13 @@
             this.use.css(config.cropperExt.css);
             this.use.js(config.cropper.js);
         }
-        
+
     };
-    
-    
+
+
     lmfCropper.init();
-    
-    
+
+
     //默认参数
     var defaultOptions = {
         maxSize: MAX_FILE_SIZE,
@@ -106,12 +106,12 @@
         isCut: true, //是否裁剪
         outType: "bsae64", //裁剪后返回类型 base64/blob
         success: function (imageBase64) {  //成功回调
-            
+
         },
         fail: function (msg) {//失败回调
-            
+
         }
-        
+
     };
     var isImageFile = function (file) {
         if (file && file.type) {
@@ -120,14 +120,14 @@
             return /\.(jpg|jpeg|png)$/.test(file);
         }
     };
-    
+
     function suffix(file_name) {
         return file_name.substr(file_name.lastIndexOf(".") + 1).toLowerCase();
     }
-    
-    
+
+
     var URL = window.URL || window.webkitURL;
-    
+
     lmfCropper.lmfCropper = function (file, _scope, options) {
         var scope = null;
         if ($.isPlainObject(_scope) == 'object') {
@@ -135,7 +135,7 @@
         } else {
             scope = _scope;
         }
-        
+
         var opts = $.extend({}, defaultOptions, options);
         var blobURL;
         if (!URL) {
@@ -144,15 +144,15 @@
                 msg: '浏览器不支持'
             });
         }
-        
+
         if (!$.isNumeric(opts.maxSize)) {
             opts.maxSize = MAX_FILE_SIZE;
         } else {
             opts.maxSize *= 1024;
         }
-        
+
         opts.maxSize = Math.min(opts.maxSize, MAX_FILE_SIZE);
-        
+
         if (!isImageFile(file)) {
             opts.fail({
                 code: 1002,
@@ -160,7 +160,7 @@
             });
             return false;
         }
-        
+
         if (opts.maxSize < file.size) {
             opts.fail({
                 code: 1005,
@@ -168,8 +168,8 @@
             });
             return false;
         }
-        
-        
+
+
         if (!!opts.fileTypeExts) {
             var allowExts = opts.fileTypeExts.split(',');
             allowExts.map(function (ext) {
@@ -185,9 +185,9 @@
             }
         }
         var imgType = ['image/jpg', 'image/jpeg'].indexOf(file.type) > -1 ? 'image/jpeg' : 'image/png';
-        
+
         blobURL = URL.createObjectURL(file);
-        
+
         var _dialogBox = null;
         if (opts.isCut) {
             _dialogBox = layer.open({
@@ -196,13 +196,13 @@
                 title: '图片裁剪',
                 scrollbar: false,
                 content: tpl.dialog,
-                shadeClose:false,
+                shadeClose: false,
                 cancel: function () {
-                    
+
                 }
             });
         }
-        
+
         var _dialog = {
             _id: _dialogBox,
             _img: null,
@@ -212,34 +212,34 @@
             getImage: function () {
                 if (opts.isCut) {
                     return this._img = this._img || this.getElement().find('.layui-layer-content .dialog-upload .wrap-img [data-upload-image]').cropper({
-                            // viewMode: 1,
-                            aspectRatio: opts.aspectRatio,
-                            modal: true,
-                            autoCropArea: 1,
-                            scalable: true,
-                            rotatable: true,
-                            zoomable: true,
-                            dragMode: "move",
-                            guides: false,
-                            zoomOnTouch: true,
-                            zoomOnWheel: true,
-                            cropBoxMovable: false,
-                            dragCrop: true,
-                            // cropBoxResizable: false,
-                            // toggleDragModeOnDblclick: false
-                        });
-                }
-                
-                return this._img = this._img || $(new Image()).cropper({
-                        viewMode: 1,
+                        // viewMode: 1,
+                        aspectRatio: opts.aspectRatio,
+                        modal: true,
                         autoCropArea: 1,
-                        restore: false,
-                        modal: false,
+                        scalable: true,
+                        rotatable: true,
+                        zoomable: true,
+                        dragMode: "move",
                         guides: false,
-                        highlight: false
-                        // cropBoxMovable: false,
-                        // cropBoxResizable: false
+                        zoomOnTouch: true,
+                        zoomOnWheel: true,
+                        cropBoxMovable: false,
+                        dragCrop: true,
+                        // cropBoxResizable: false,
+                        // toggleDragModeOnDblclick: false
                     });
+                }
+
+                return this._img = this._img || $(new Image()).cropper({
+                    viewMode: 1,
+                    autoCropArea: 1,
+                    restore: false,
+                    modal: false,
+                    guides: false,
+                    highlight: false
+                    // cropBoxMovable: false,
+                    // cropBoxResizable: false
+                });
             },
             close: function () {
                 if (opts.isCut) {
@@ -249,10 +249,10 @@
                     this.getImage().remove();
                 } catch (e) {
                 }
-                
+
             }
         };
-        
+
         var $image = _dialog.getImage();
         // Cropper
         $image.one('built.cropper', function () {
@@ -271,7 +271,7 @@
                             opts.success.call(scope, blob);
                         }, imgType)
                     } else {
-                        opts.success.call(scope, $image.cropper('getCroppedCanvas', cropOpts).toDataURL(imgType,1));
+                        opts.success.call(scope, $image.cropper('getCroppedCanvas', cropOpts).toDataURL(imgType, 1));
                     }
                 }
                 _dialog.close();
@@ -279,7 +279,7 @@
             }
         }).cropper('reset').cropper('replace', blobURL);
         $(scope).val('');
-        
+
         //直接返回
         if (!opts.isCut) {
             return false;
@@ -304,18 +304,18 @@
                         opts.success.call(scope, blob);
                     }, imgType)
                 } else {
-                    opts.success.call(scope, $image.cropper('getCroppedCanvas', cropOpts).toDataURL(imgType,1));
+                    opts.success.call(scope, $image.cropper('getCroppedCanvas', cropOpts).toDataURL(imgType, 1));
                 }
             }
-            
-            
+
+
             _dialog.close();
             return false;
         });
-        
+
     };
-    
-    
+
+
     lmfCropper.export = function (options) {
         var opts = $.extend({}, defaultOptions, options);
         var blobURL;
@@ -325,9 +325,9 @@
                 msg: '浏览器不支持'
             });
         }
-        
+
         $(this).on('change', function (event) {
-            
+
             var files = this.files;
             if (!(files && files.length)) {
                 return opts.fail({
@@ -335,9 +335,9 @@
                     msg: '文件为空'
                 });
             }
-            
+
             lmfCropper.lmfCropper(files[0], this, opts);
-            
+
         });
     };
     $.fn.extend({
@@ -347,7 +347,7 @@
         lmfCropper: lmfCropper.lmfCropper,
         CaculatorSize: CaculatorSize
     });
-    
+
     function CaculatorSize(size) {
         if (size < 1024) {
             return size + "B";
@@ -360,8 +360,7 @@
         }
         if (size / 1024 / 1024 / 1024 < 1024) {
             return Math.floor(size * 100 / 1024 / 1024 / 1024) / 100 + "G";
-        }
-        else {
+        } else {
             return size;
         }
     }

@@ -32,9 +32,9 @@ public class Test02 {
         Person person = iterator.next().getClass().getConstructor().newInstance();
         System.out.println(person);
 
-        Method age =  ReflectionUtils.findMethod(person1.getClass(), "getAge");
+        Method age = ReflectionUtils.findMethod(person1.getClass(), "getAge");
         Object o = ReflectionUtils.invokeJdbcMethod(age, person1);
-        System.out.println(o.toString()+ "1111");
+        System.out.println(o.toString() + "1111");
 
         List<String> strings = new ArrayList<>();
         strings.add("age");
@@ -44,10 +44,10 @@ public class Test02 {
                 Field declaredField = person3.getClass().getDeclaredField(string);
                 declaredField.setAccessible(true);
                 if (declaredField.getType().getName().equals("java.lang.String")) {
-                    declaredField.set(person,"cwww");
+                    declaredField.set(person, "cwww");
                 }
                 if (declaredField.getType().getName().equals("java.lang.Integer")) {
-                    declaredField.set(person,55);
+                    declaredField.set(person, 55);
                 }
             }
 

@@ -3,16 +3,16 @@
 <mapper namespace="cww.world.mapper.config.ComboxItemMapper">
 
     <resultMap id="comboxItemMap" type="cww.world.pojo.po.config.ComboxItemPO">
-        <result column="combox_item_uid"  property="comboxItemUid" jdbcType="VARCHAR" />
-        <result column="text"  property="text" jdbcType="VARCHAR" />
-        <result column="type"  property="type" jdbcType="VARCHAR" />
-        <result column="flag"  property="flag" jdbcType="VARCHAR" />
-        <result column="memo"  property="memo" jdbcType="VARCHAR" />
-        <result column="created_at"  property="createdAt" jdbcType="TIMESTAMP" />
-        <result column="updated_at"  property="updatedAt" jdbcType="TIMESTAMP" />
-        <result column="created_by"  property="createdBy" jdbcType="VARCHAR" />
-        <result column="updated_by"  property="updatedBy" jdbcType="VARCHAR" />
-        <result column="sort_order"  property="sortOrder" jdbcType="VARCHAR" />
+        <result column="combox_item_uid" property="comboxItemUid" jdbcType="VARCHAR"/>
+        <result column="text" property="text" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="flag" property="flag" jdbcType="VARCHAR"/>
+        <result column="memo" property="memo" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="created_by" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="updated_by" property="updatedBy" jdbcType="VARCHAR"/>
+        <result column="sort_order" property="sortOrder" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="batchCreateComboxItem">
@@ -26,29 +26,29 @@
 
     <insert id="createComboxItem" parameterType="cww.world.pojo.po.config.ComboxItemPO">
         INSERT INTO tnt_biz_erp_combox_item
-            (combox_item_uid, `text`, memo, type, created_by, created_at, sort_order)
+        (combox_item_uid, `text`, memo, type, created_by, created_at, sort_order)
         VALUES
-            (tnt_uuid_short(), #{text}, #{memo}, #{type}, #{createdBy}, now(), #{sortOrder})
+        (tnt_uuid_short(), #{text}, #{memo}, #{type}, #{createdBy}, now(), #{sortOrder})
     </insert>
 
     <delete id="deleteComboxItem">
         DELETE FROM tnt_biz_erp_combox_item
         WHERE
-            combox_item_uid = #{comboxItemUid}
+        combox_item_uid = #{comboxItemUid}
     </delete>
 
     <update id="updateComboxItem" parameterType="cww.world.pojo.po.config.ComboxItemPO">
         UPDATE tnt_biz_erp_combox_item
         SET
-            `text` = #{text},
-            memo = #{memo},
-            type = #{type},
-            flag = #{flag},
-            sort_order = #{sortOrder},
-            updated_by = #{updatedBy},
-            updated_at = now()
+        `text` = #{text},
+        memo = #{memo},
+        type = #{type},
+        flag = #{flag},
+        sort_order = #{sortOrder},
+        updated_by = #{updatedBy},
+        updated_at = now()
         WHERE
-            combox_item_uid = #{comboxItemUid}
+        combox_item_uid = #{comboxItemUid}
     </update>
 
     <update id="updateComboxItemFlag">
@@ -63,11 +63,11 @@
 
     <select id="getComboxItemByUid" resultMap="comboxItemMap">
         SELECT
-            *
+        *
         FROM
-            tnt_biz_erp_combox_item
+        tnt_biz_erp_combox_item
         WHERE
-            combox_item_uid = #{comboxItemUid}
+        combox_item_uid = #{comboxItemUid}
     </select>
 
     <select id="getComboxItemByTypeText" resultMap="comboxItemMap">
@@ -119,10 +119,11 @@
     </select>
 
 
-    <select id="countComboxItem" parameterType="cww.world.pojo.dto.config.ListComboxItemDTO" resultType="java.lang.Integer">
+    <select id="countComboxItem" parameterType="cww.world.pojo.dto.config.ListComboxItemDTO"
+            resultType="java.lang.Integer">
         SELECT count(id)
         FROM
-            tnt_biz_erp_combox_item
+        tnt_biz_erp_combox_item
         WHERE
         1=1
         <if test=" type != null and type != ''">
@@ -133,9 +134,9 @@
         </if>
     </select>
 
-    <select id="getComboxItemValueByTypeAndUid" resultType= "java.lang.String">
+    <select id="getComboxItemValueByTypeAndUid" resultType="java.lang.String">
         SELECT
-            `text`
+        `text`
         FROM
         tnt_biz_erp_combox_item
         WHERE

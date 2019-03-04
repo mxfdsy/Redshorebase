@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FatherAndSon {
 
-    public static  List<Son> getSons() {
+    public static List<Son> getSons() {
         Son son1 = new Son();
         son1.setName("1");
         son1.setBigDecimal(new BigDecimal("1.100"));

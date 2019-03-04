@@ -7,34 +7,34 @@
         exports('lmfUpload', factory(layui.$, layui.layer, window));
     })
 })(function ($, layer, global, undefined) {
-    
+
     //七牛配置
     var _qiniuConfig = {
         domain: $('meta[name="QINIU_DOMAIN"]').attr('content') || 'http://p3q5g1tr1.bkt.clouddn.com/',
         tokenUrl: '/upload/genUpToken'
     };
-    
-    
+
+
     //进度条默认配置
     var defaultOptions = {
         progress: -1,//进度条样式 -1不显示
         onStart: function () {
-            
+
         },
         onStartOne: function (index) {
-            
+
         },
         onProgress: function (index, percent, name, number, total) {
-            
+
         },
         onFinish: function (infos) {
             console.log(infos);
         },
         onFinishOne: function (index, info) {
-            
+
         },
         onError: function (error) {
-            
+
         }
     };
     //进度条管理
@@ -56,7 +56,7 @@
                 '                    </div>' +
                 '                </td>' +
                 '            </tr>';
-            
+
             return '<div class="progress-warp">' +
                 '    <div class="progress-content">' +
                 '        <table class="table table-striped clearfix">' +
@@ -94,7 +94,7 @@
             this.initCss();
             //设置皮肤
             this.setSkin(skin);
-            
+
             //初始化html
             if ($(".progress-warp").size() == 0) {
                 try {
@@ -103,14 +103,14 @@
                     console.trace('progress init error', e);
                 }
             }
-            
+
             //页面元素获取
             this._obj = $(".progress-warp");
             //显示
             this.show();
             //初始化进度
             this.setProgress(0, 1);
-            
+
         },
         setSkin: function (skin) {
             this.skin = Math.min(4, parseInt(skin));
@@ -148,22 +148,22 @@
     var isBlob = function (blob) {
         return Object.prototype.toString.call(blob) === "[object Blob]" || Object.prototype.toString.call(blob) === "[object File]"
     };
-    
+
     //获取文件后缀
     var getFileExt = function (base64) {
         var _ext;
         if (isBlob(base64)) {
-            
+
             if (base64.type.indexOf('image') == -1) {
                 if (base64.name) {
                     var extStartIndex = base64.name.lastIndexOf(".") + 1;
                     var extEndIndex = base64.name.length;
                     return _ext = base64.name.substring(extStartIndex, extEndIndex);
                 }
-                
+
                 return base64.type.split('/')[1];
             }
-            
+
             // picture
             _ext = base64.type.replace('image/', '');
             return _ext == 'png' ? 'png' : 'jpg';
@@ -177,8 +177,8 @@
         _ext = base64.split(';base64,')[0].replace('data:image/', '');
         return _ext == 'png' ? 'png' : 'jpg';
     };
-    
-    
+
+
     //获取文件内容
     var getFileContent = function (base64) {
         if (isBlob(base64)) {
@@ -196,19 +196,19 @@
     //获取文件名
     var getFileName = function (fileBase64) {
         var _ext = getFileExt(fileBase64);
-        
+
         var path = (function () {
             var now = new Date();
             return now.getFullYear() + "/" + right2word(now.getMonth() + 1) + '/' + right2word(now.getDate()) + '/' + now.getTime()
         })();
         return path + '-' + Math.random().toString(36).substr(2) + '.' + _ext;
     };
-    
+
     var formatResponsUrl = function (responsData) {
         return _qiniuConfig.domain + responsData.key;
     };
-    
-    
+
+
     //上传到七牛
     var uploadToQiniu = function (imageBase64, filename, QiniuToken, index, opts) {
         var defer = $.Deferred();
@@ -220,7 +220,7 @@
             var isHttps = location.href.indexOf("https") == 0;
             var path = isBlob(imageBase64) ? "" : "/putb64/-1/key/" + btoa(filename);
             return (isHttps ? host.https : host.http) + path;
-            
+
         })(filename);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -235,7 +235,7 @@
                 responsData.originSrc = formatResponsUrl(responsData);
                 //opts.onFinishOne(index, responsData);
                 defer.resolve(responsData);
-                
+
             }
         };
         xhr.upload.onprogress = function (e) {
@@ -262,7 +262,7 @@
         }
         return defer.promise();
     };
-    
+
     // 缓存数据
     var cacheData = [];
     //上传列队
@@ -313,27 +313,27 @@
         };
         setTimeout(upload, 0);
     };
-    
-    
+
+
     var judgeValueIsLocalImage = function (value) {
         if (!value) {
             return false;
         }
         return (typeof value === 'string' && value.indexOf('data:image/') === 0) || isBlob(value);
     };
-    
-    
+
+
     function _dataEach(obj, callback) {
         $.each(obj, function (k, v) {
             if (typeof v === 'object' && (!isBlob(v))) {
                 _dataEach(v, callback); //递归遍历
             } else if (judgeValueIsLocalImage(v)) {
-                
+
                 callback(obj, k, v);
             }
         });
     }
-    
+
     function getImages(originData) {
         var arr = [];
         _dataEach(originData, function (obj, k, v) {
@@ -341,7 +341,7 @@
         });
         return arr;
     }
-    
+
     function assignData(originData, imgUrlArr) {
         var i = 0;
         _dataEach(originData, function (obj, k) {
@@ -353,7 +353,7 @@
         console.log(originData);
         return originData;
     }
-    
+
     //对外方法
     var qiniu = {
         /**
@@ -400,7 +400,7 @@
                     progress.remove();
                 }
             });
-            
+
         },
         /**
          * 上传文件
@@ -412,11 +412,11 @@
             var originSuccess = options.onFinish;
             var originError = options.onError;
             var fileBase64s = getImages(submitData);
-            
+
             if (fileBase64s.length === 0) {
                 $.isFunction(originSuccess) && originSuccess(submitData);
                 dfd.resolve(submitData);
-                
+
             } else {
                 options.onFinish = function (successData) {
                     var finalData = assignData(submitData, successData);
@@ -432,7 +432,7 @@
             return dfd.promise();
         }
     };
-    
-    
+
+
     return qiniu;
 })

@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="layui-table-setting layui-btn-group">
-                                <button class="layui-btn layui-btn-primary layui-btn-sm setting"  lay-tips="自定义列表项"
+                                <button class="layui-btn layui-btn-primary layui-btn-sm setting" lay-tips="自定义列表项"
                                         lay-filter="setting">
                                     <i class="layui-icon">&#xe716;</i></button>
                             </div>
@@ -70,8 +70,10 @@
 <footer>
     <div th:remove="tag" th:include="fragments/footer"></div>
     <script id="operateTemplate" type="text/html">
-        <a href="/workflow/{{d.workflow_uid}}/view.html" lmf:anyPower="erp_workflow_config_view" class="split-line">查看</a>
-        <a href="/workflow/{{d.workflow_uid}}/edit.html" lmf:anyPower="erp_workflow_config_update" class="split-line">修改</a>
+        <a href="/workflow/{{d.workflow_uid}}/view.html" lmf:anyPower="erp_workflow_config_view"
+           class="split-line">查看</a>
+        <a href="/workflow/{{d.workflow_uid}}/edit.html" lmf:anyPower="erp_workflow_config_update"
+           class="split-line">修改</a>
         <a href="JavaScript:void(0);" lmf:anyPower="erp_workflow_config_delete" class="split-line"
            lay-event="workflow_delete">删除</a>
     </script>

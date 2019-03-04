@@ -27,7 +27,7 @@ public class ComparatorUtil {
 
 
         if (ReflectionUtils.findField(list.get(0).getClass(), fieldName) == null) {
-            throw new BaseException(BaseCode.INTERNAL_ERROR,"实体类中不存在该字段名称");
+            throw new BaseException(BaseCode.INTERNAL_ERROR, "实体类中不存在该字段名称");
         }
 
         Method method = ReflectionUtils.findMethod(list.get(0).getClass(), fieldName);
@@ -86,13 +86,14 @@ public class ComparatorUtil {
                     e.printStackTrace();
                 }
 
-                return compair(value1, value2,"");
+                return compair(value1, value2, "");
             }
 
         });
         return list;
     }
-    public static List<?> sort(List<?> list, String fieldName ,String desc) throws Exception {
+
+    public static List<?> sort(List<?> list, String fieldName, String desc) throws Exception {
 
 
         if (list == null) {
@@ -146,7 +147,7 @@ public class ComparatorUtil {
                     e.printStackTrace();
                 }
 
-                return compair(value1, value2,desc);
+                return compair(value1, value2, desc);
             }
 
         });
@@ -184,23 +185,23 @@ public class ComparatorUtil {
 
     }
 
-    private static int compair(String value1, String value2,String desc) {
+    private static int compair(String value1, String value2, String desc) {
 
-        int result=1;
+        int result = 1;
 
-        if(desc.trim()=="desc"){
-            result=-1;
+        if (desc.trim() == "desc") {
+            result = -1;
         }
 
         if (ascii(value1, 0) > ascii(value2, 0)) {
-            System.out.println("result的值"+result);
+            System.out.println("result的值" + result);
             return result;
         }
         if (ascii(value1, 0) == ascii(value2, 0)) {
             int o1Num = Integer.valueOf(value1.substring(1, value1.length()));
             int o2Num = Integer.valueOf(value2.substring(1, value2.length()));
             if (o1Num > o2Num) {
-                System.out.println("result的值"+result);
+                System.out.println("result的值" + result);
                 return result;
             }
             if (o1Num < o2Num) {

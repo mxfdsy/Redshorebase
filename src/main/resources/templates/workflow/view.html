@@ -86,8 +86,12 @@
                                     <!--<label class="layui-form-label">审核级别</label>-->
                                     <div class="layui-input-inline">
                                         <select name="workflow_step[0][approval_level]" disabled>
-                                            <option value="TYP_GROUP" th:selected="${step.approvalLevel == 'TYP_GROUP'}">集团</option>
-                                            <option value="TYP_MALL" th:selected="${step.approvalLevel == 'TYP_MALL'}">商业项目</option>
+                                            <option value="TYP_GROUP"
+                                                    th:selected="${step.approvalLevel == 'TYP_GROUP'}">集团
+                                            </option>
+                                            <option value="TYP_MALL" th:selected="${step.approvalLevel == 'TYP_MALL'}">
+                                                商业项目
+                                            </option>
                                         </select>
                                     </div>
                                     <!--<label class="layui-form-label">审核组类型</label>-->

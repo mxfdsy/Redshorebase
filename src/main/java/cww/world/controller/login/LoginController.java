@@ -35,18 +35,18 @@ public class LoginController {
     UserService userService;
 
 
-    @ApiOperation(value="用戶登陆校验",notes = "用戶登陆校验",httpMethod = "POST")
-    @ApiImplicitParam(name = "payload",value = "用户登陆信息",required = true,dataType = "String")
-    @RequestMapping(value = "/check" , method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "用戶登陆校验", notes = "用戶登陆校验", httpMethod = "POST")
+    @ApiImplicitParam(name = "payload", value = "用户登陆信息", required = true, dataType = "String")
+    @RequestMapping(value = "/check", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String check(@RequestBody String payload, HttpServletRequest request) {
         String field = JSONObject.parseObject(payload).getString("field");
         UserPO loginUser = JSONObject.parseObject(field, UserPO.class);
         ValidateResult validateResult = EntityValidator.validate(request, Insert.class);
         if (validateResult.hasError()) {
-            throw new BaseException(BaseCode.INVALID_ARGUMENT,validateResult.getErrorMessages());
+            throw new BaseException(BaseCode.INVALID_ARGUMENT, validateResult.getErrorMessages());
         }
-        return  userService.login(loginUser, request);
+        return userService.login(loginUser, request);
     }
 
 

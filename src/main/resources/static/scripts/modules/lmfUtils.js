@@ -4,7 +4,7 @@
 
 layui.define(function (exports) {
     var lmfUtils = {};
-    
+
     /**
      * 金额格式化 2位小数
      * @param money
@@ -23,8 +23,8 @@ layui.define(function (exports) {
         }
         return t.split("").reverse().join("") + "." + r;
     };
-    
-    
+
+
     /**
      * 格式化url
      * @param url
@@ -36,7 +36,7 @@ layui.define(function (exports) {
         }
         return url && 'http://' + url || ""
     };
-    
+
     /**
      * 文本换行处理
      * @param value  源数据

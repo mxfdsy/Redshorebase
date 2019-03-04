@@ -1,4 +1,4 @@
-layui.define(['jstree', 'layer','lmfConfig'], function (exports) {
+layui.define(['jstree', 'layer', 'lmfConfig'], function (exports) {
     "use strict";
     var $ = layui.$;
     var layer = layui.layer;

@@ -46,16 +46,17 @@ layui.define(['lmfTable', 'form'], function (exports) {
         that.config = $.extend({}, that.config, options);
         that.open();
     };
-    
+
     //默认配置
     ChooseBox.prototype.config = {
         isMultiple: false,   //是否多选
         excludeUIDs: [],    //已有id
         type: "",           //类型 mallProduct  mallActivity
-        success: function (data) {},     //成功回调
+        success: function (data) {
+        },     //成功回调
         params_in: {}  //默认参数
     };
-    
+
     ChooseBox.prototype.open = function () {
         var that = this;
         this.box_index = layer.open({
@@ -69,11 +70,11 @@ layui.define(['lmfTable', 'form'], function (exports) {
             btn: that.config.isMultiple ? ['确定'] : [],
             content: STYLE + TPL,
             success: function () {
-                
+
                 that.getSubPromotionData(function () {
                     that.setBox();
                 });
-                
+
             },
             yes: function () {
                 that.config.success({
@@ -83,7 +84,7 @@ layui.define(['lmfTable', 'form'], function (exports) {
             }
         });
     };
-    
+
     ChooseBox.prototype.getSubPromotionData = function (success) {
         var that = this;
         var type = $('.layui-card.' + TABLE_NAME).find('[name="subPromotionsByType"]').val();
@@ -120,11 +121,11 @@ layui.define(['lmfTable', 'form'], function (exports) {
                 form.render('select');
                 success();
             }
-            
+
         });
-        
+
     };
-    
+
     ChooseBox.prototype.setBox = function () {
         var that = this;
         var where = $.extend({}, {
@@ -134,7 +135,7 @@ layui.define(['lmfTable', 'form'], function (exports) {
             state: 'TYP_ON',
             review: ['TYP_APPROVED']
         }, that.config.params_in);
-        
+
         var table_events = {};
         var table_cols = [
             {
@@ -182,8 +183,8 @@ layui.define(['lmfTable', 'form'], function (exports) {
                 layer.close(that.box_index);
             }
         }
-        
-        
+
+
         var table_config = {
             elem: '#' + TABLE_NAME,
             searchFilter: TABLE_NAME + '-search-box',    //必传
@@ -202,12 +203,12 @@ layui.define(['lmfTable', 'form'], function (exports) {
             },
             cols: [table_cols]
         };
-        
+
         that.table = layui.lmfTable(table_config, table_events);
         return that;
     };
-    
-    
+
+
     //操作当前实例
     exports('chooseProduct', function (option) {
         new ChooseBox(option);

@@ -5,5 +5,5 @@ layui.define([], function (exports) {
     var groupName = $('[name="GROUP_NAME"]').attr('content');
     config.sysName = sysName;
     config.groupName = groupName;
-    exports('lmfConfig',config);
+    exports('lmfConfig', config);
 });

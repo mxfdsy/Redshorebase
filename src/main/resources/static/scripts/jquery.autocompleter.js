@@ -8,7 +8,7 @@
 
 ;(function ($, window) {
     'use strict';
-    
+
     var guid = 0,
         ignoredKeyCode = [9, 13, 17, 19, 20, 27, 33, 34, 35, 36, 37, 39, 44, 92, 113, 114, 115, 118, 119, 120, 122, 123, 144, 145],
         allowOptions = [
@@ -40,7 +40,7 @@
         localStorageKey = 'autocompleterCache',
         supportLocalStorage = (function () {
             var supported = typeof window.localStorage !== 'undefined';
-            
+
             if (supported) {
                 try {
                     localStorage.setItem('autocompleter', 'autocompleter');
@@ -49,10 +49,10 @@
                     supported = false;
                 }
             }
-            
+
             return supported;
         })();
-    
+
     /**
      * Don't forget update README.md
      *
@@ -102,7 +102,7 @@
         combine: $.noop,
         callback: $.noop
     };
-    
+
     var publics = {
         /**
          * @method
@@ -113,10 +113,10 @@
          */
         defaults: function (opts) {
             options = $.extend(options, opts || {});
-            
+
             return (typeof this === 'object') ? $(this) : true;
         },
-        
+
         /**
          * @method
          * @name option
@@ -125,7 +125,7 @@
         option: function (properties) {
             return $(this).each(function (i, input) {
                 var data = $(input).next('.autocompleter').data('autocompleter');
-                
+
                 for (var property in properties) {
                     if ($.inArray(property, allowOptions) !== -1) {
                         data[property] = properties[property];
@@ -133,7 +133,7 @@
                 }
             });
         },
-        
+
         /**
          * @method
          * @name open
@@ -142,13 +142,13 @@
         open: function () {
             return $(this).each(function (i, input) {
                 var data = $(input).next('.autocompleter').data('autocompleter');
-                
+
                 if (data) {
                     _open(null, data);
                 }
             });
         },
-        
+
         /**
          * @method
          * @name close
@@ -157,13 +157,13 @@
         close: function () {
             return $(this).each(function (i, input) {
                 var data = $(input).next('.autocompleter').data('autocompleter');
-                
+
                 if (data) {
                     _close(null, data);
                 }
             });
         },
-        
+
         /**
          * @method
          * @name clearCache
@@ -172,7 +172,7 @@
         clearCache: function () {
             _deleteCache();
         },
-        
+
         /**
          * @method
          * @name destroy
@@ -182,26 +182,26 @@
         destroy: function () {
             return $(this).each(function (i, input) {
                 var data = $(input).next('.autocompleter').data('autocompleter');
-                
+
                 if (data) {
                     // Abort xhr
                     if (data.jqxhr) {
                         data.jqxhr.abort();
                     }
-                    
+
                     // If has selected item & open - confirm it
                     if (data.$autocompleter.hasClass('open')) {
                         data.$autocompleter.find('.autocompleter-selected')
                             .trigger('click.autocompleter');
                     }
-                    
+
                     // Restore original autocomplete attr
                     if (!data.originalAutocomplete) {
                         data.$node.removeAttr('autocomplete');
                     } else {
                         data.$node.attr('autocomplete', data.originalAutocomplete);
                     }
-                    
+
                     // Remove autocompleter & unbind events
                     data.$node.off('.autocompleter')
                         .removeClass('autocompleter-node');
@@ -211,7 +211,7 @@
             });
         }
     };
-    
+
     /**
      * @method private
      * @name _init
@@ -221,21 +221,21 @@
     function _init(opts) {
         // Local options
         opts = $.extend({}, options, opts || {});
-        
+
         // Check for Body
         if ($body === null) {
             $body = $('body');
         }
-        
+
         // Apply to each element
         var $items = $(this);
         for (var i = 0, count = $items.length; i < count; i++) {
             _build($items.eq(i), opts);
         }
-        
+
         return $items;
     }
-    
+
     /**
      * @method private
      * @name _build
@@ -247,7 +247,7 @@
         if (!$node.hasClass('autocompleter-node')) {
             // Extend options
             opts = $.extend({}, opts, $node.data('autocompleter-options'));
-            
+
             // Check for as local or .json file
             if (typeof opts.source === 'string' && (opts.source.slice(-5) === '.json' || opts.asLocal === true)) {
                 $.ajax({
@@ -259,25 +259,25 @@
                     opts.source = response;
                 });
             }
-            
+
             var html = '<div class="autocompleter ' + opts.customClass.join(' ') + '" id="autocompleter-' + (guid + 1) + '">';
-            
+
             if (opts.hint) {
                 html += '<div class="autocompleter-hint"></div>';
             }
-            
+
             html += '<ul class="autocompleter-list"></ul>';
             html += '</div>';
-            
+
             $node.addClass('autocompleter-node')
                 .after(html);
-            
+
             var $autocompleter = $node.next('.autocompleter').eq(0);
-            
+
             // Set autocomplete to off for warn overlay
             var originalAutocomplete = $node.attr('autocomplete');
             $node.attr('autocomplete', 'off');
-            
+
             // Store plugin data
             var data = $.extend({
                 $node: $node,
@@ -294,11 +294,11 @@
                 originalAutocomplete: originalAutocomplete,
                 guid: guid++
             }, opts);
-            
+
             // Bind autocompleter events
             data.$autocompleter.on('mousedown.autocompleter', '.autocompleter-item', data, _select)
                 .data('autocompleter', data);
-            
+
             // Bind node events
             data.$node.on('keyup.autocompleter', data, _onKeyup)
                 .on('keydown.autocompleter', data, _onKeydown)
@@ -307,7 +307,7 @@
                 .on('mousedown.autocompleter', data, _onMousedown);
         }
     }
-    
+
     /**
      * @method private
      * @name _search
@@ -318,15 +318,15 @@
      */
     function _search(query, source, data) {
         var response = [];
-        
+
         query = query.toUpperCase();
-        
+
         if (source.length) {
             // for (var i = 0; i < 2; i++) {
             for (var item = 0, total = source.length; item < total; item++) {
                 if (response.length < data.limit) {
                     var label = (data.customLabel && source[item][data.customLabel]) ? source[item][data.customLabel] : source[item].label;
-                    
+
                     if (label.toUpperCase().search(query) !== -1) {
                         response.push(source[item]);
                         delete source[item];
@@ -335,10 +335,10 @@
             }
             // }
         }
-        
+
         return response;
     }
-    
+
     /**
      * @method private
      * @name _launch
@@ -348,22 +348,24 @@
     function _launch(data) {
         // Clear previous timeout
         clearTimeout(delayTimeout);
-        
+
         data.query = $.trim(data.$node.val());
-        
+
         if ((!data.empty && data.query.length === 0) || (data.minLength && (data.query.length < data.minLength))) {
             _clear(data);
             return;
         }
-        
+
         if (data.delay) {
             // Be careful: delay used also with local source
-            delayTimeout = setTimeout(function () { _xhr(data); }, data.delay);
+            delayTimeout = setTimeout(function () {
+                _xhr(data);
+            }, data.delay);
         } else {
             _xhr(data);
         }
     }
-    
+
     /**
      * @method private
      * @name _xhr
@@ -373,10 +375,10 @@
     function _xhr(data) {
         if (typeof data.source === 'object') {
             _clear(data);
-            
+
             // Local search
             var search = _search(data.query, _clone(data.source), data);
-            
+
             if (search.length) {
                 _response(search, data);
             }
@@ -384,42 +386,42 @@
             if (data.jqxhr) {
                 data.jqxhr.abort();
             }
-            
+
             var ajaxData = $.extend({
                 limit: data.limit,
                 query: data.query
             }, data.combine(data.query));
-            
+
             data.jqxhr = $.ajax({
-                    url: data.source,
-                    dataType: 'json',
-                    crossDomain: true,
-                    data: ajaxData,
-                    beforeSend: function (xhr) {
-                        data.$autocompleter.addClass('autocompleter-ajax');
-                        _clear(data);
-                        
-                        if (data.cache) {
-                            var stored = _getCache(this.url, data.cacheExpires);
-                            
-                            if (stored) {
-                                xhr.abort();
-                                _response(stored, data);
-                            }
+                url: data.source,
+                dataType: 'json',
+                crossDomain: true,
+                data: ajaxData,
+                beforeSend: function (xhr) {
+                    data.$autocompleter.addClass('autocompleter-ajax');
+                    _clear(data);
+
+                    if (data.cache) {
+                        var stored = _getCache(this.url, data.cacheExpires);
+
+                        if (stored) {
+                            xhr.abort();
+                            _response(stored, data);
                         }
                     }
-                })
+                }
+            })
                 .done(function (response) {
                     // Get subobject from responce
                     if (data.offset) {
                         response = _grab(response, data.offset);
                     }
-                    
+
                     // Set cache
                     if (data.cache) {
                         _setCache(this.url, response);
                     }
-                    
+
                     _response(response, data);
                 })
                 .always(function () {
@@ -427,7 +429,7 @@
                 });
         }
     }
-    
+
     /**
      * @method private
      * @name _clear
@@ -442,10 +444,10 @@
         data.$autocompleter.find('.autocompleter-list').empty();
         data.$autocompleter.find('.autocompleter-hint').removeClass('autocompleter-hint-show').empty();
         data.hintText = false;
-        
+
         _close(null, data);
     }
-    
+
     /**
      * @method private
      * @name _response
@@ -455,12 +457,12 @@
      */
     function _response(response, data) {
         _buildList(response, data);
-        
+
         if (data.$autocompleter.hasClass('autocompleter-focus')) {
             _open(null, data);
         }
     }
-    
+
     /**
      * @method private
      * @name _buildList
@@ -470,58 +472,58 @@
      */
     function _buildList(list, data) {
         var menu = '';
-        
+
         for (var item = 0, count = list.length; item < count; item++) {
             var classes = ['autocompleter-item'],
                 highlightReg = new RegExp(data.query, 'gi');
-            
+
             if (data.selectFirst && item === 0 && !data.changeWhenSelect) {
                 classes.push('autocompleter-item-selected');
             }
-            
+
             var label = (data.customLabel && list[item][data.customLabel]) ? list[item][data.customLabel] : list[item].label,
                 clear = label;
-            
+
             label = data.highlightMatches ? label.replace(highlightReg, '<strong>$&</strong>') : label;
-            
+
             var value = (data.customValue && list[item][data.customValue]) ? list[item][data.customValue] : list[item].value;
-            
+
             // Apply custom template
             if (data.template) {
                 var template = data.template.replace(/({{ label }})/gi, label);
-                
+
                 for (var property in list[item]) {
                     if (list[item].hasOwnProperty(property)) {
                         var regex = new RegExp('{{ ' + property + ' }}', 'gi');
-                        
+
                         template = template.replace(regex, list[item][property]);
                     }
                 }
-                
+
                 label = template;
             }
-            
+
             if (value) {
                 menu += '<li data-value="' + value + '" data-label="' + clear + '" class="' + classes.join(' ') + '">' + label + '</li>';
             } else {
                 menu += '<li data-label="' + clear + '" class="' + classes.join(' ') + '">' + label + '</li>';
             }
         }
-        
+
         // Set hint
         if (list.length && data.hint) {
             var hintLabel = (data.customLabel && list[0][data.customLabel]) ? list[0][data.customLabel] : list[0].label,
-                hint = ( hintLabel.substr(0, data.query.length).toUpperCase() === data.query.toUpperCase() ) ? hintLabel : false;
-            
+                hint = (hintLabel.substr(0, data.query.length).toUpperCase() === data.query.toUpperCase()) ? hintLabel : false;
+
             if (hint && (data.query !== hintLabel)) {
                 var hintReg = new RegExp(data.query, 'i');
                 var hintText = hint.replace(hintReg, '<span>' + data.query + '</span>');
-                
+
                 data.$autocompleter.find('.autocompleter-hint').addClass('autocompleter-hint-show').html(hintText);
                 data.hintText = hintText;
             }
         }
-        
+
         // Update data
         data.response = list;
         data.$autocompleter.find('.autocompleter-list').html(menu);
@@ -532,7 +534,7 @@
             $(j).data(data.response[i]);
         });
     }
-    
+
     /**
      * @method private
      * @name _onKeyup
@@ -542,13 +544,13 @@
     function _onKeyup(e) {
         var data = e.data,
             code = e.keyCode ? e.keyCode : e.which;
-        
+
         if ((code === 40 || code === 38) && data.$autocompleter.hasClass('autocompleter-show')) {
             // Arrows up & down
             var len = data.$list.length,
                 next,
                 prev;
-            
+
             if (len) {
                 // Determine new index
                 if (len > 1) {
@@ -572,18 +574,18 @@
                     prev = -1;
                     next = -1;
                 }
-                
+
                 data.index = (code === 40) ? next : prev;
-                
+
                 // Update HTML
                 data.$list.removeClass('autocompleter-item-selected');
-                
+
                 if (data.index !== -1) {
                     data.$list.eq(data.index).addClass('autocompleter-item-selected');
                 }
-                
+
                 data.$selected = data.$autocompleter.find('.autocompleter-item-selected').length ? data.$autocompleter.find('.autocompleter-item-selected') : null;
-                
+
                 if (data.changeWhenSelect) {
                     _setValue(data);
                 }
@@ -593,7 +595,7 @@
             _launch(data);
         }
     }
-    
+
     /**
      * @method private
      * @name _onKeydown
@@ -603,7 +605,7 @@
     function _onKeydown(e) {
         var data = e.data,
             code = e.keyCode ? e.keyCode : e.which;
-        
+
         if (code === 40 || code === 38) {
             e.preventDefault();
             e.stopPropagation();
@@ -612,9 +614,9 @@
             if (data.hint && data.hintText && data.$autocompleter.find('.autocompleter-hint').hasClass('autocompleter-hint-show')) {
                 e.preventDefault();
                 e.stopPropagation();
-                
+
                 var hintOrigin = data.$autocompleter.find('.autocompleter-item').length ? data.$autocompleter.find('.autocompleter-item').eq(0).attr('data-label') : false;
-                
+
                 if (hintOrigin) {
                     data.query = hintOrigin;
                     _setHint(data);
@@ -627,7 +629,7 @@
             }
         }
     }
-    
+
     /**
      * @method private
      * @name _onFocus
@@ -638,14 +640,14 @@
     function _onFocus(e, internal) {
         if (!internal) {
             var data = e.data;
-            
+
             data.$autocompleter.addClass('autocompleter-focus');
-            
+
             if (!data.$node.prop('disabled') && !data.$autocompleter.hasClass('autocompleter-show')) {
                 if (data.focusOpen) {
                     _launch(data);
                     data.focused = true;
-                    
+
                     setTimeout(function () {
                         data.focused = false;
                     }, 500);
@@ -653,7 +655,7 @@
             }
         }
     }
-    
+
     /**
      * @method private
      * @name _onBlur
@@ -664,15 +666,15 @@
     function _onBlur(e, internal) {
         e.preventDefault();
         e.stopPropagation();
-        
+
         var data = e.data;
-        
+
         if (!internal) {
             data.$autocompleter.removeClass('autocompleter-focus');
             _close(e);
         }
     }
-    
+
     /**
      * @method private
      * @name _onMousedown
@@ -684,14 +686,14 @@
         if (e.type === 'mousedown' && $.inArray(e.which, [2, 3]) !== -1) {
             return;
         }
-        
+
         var data = e.data;
-        
+
         if (data.$list && !data.focused) {
             if (!data.$node.is(':disabled')) {
                 if (isMobile && !isFirefoxMobile) {
                     var el = data.$select[0];
-                    
+
                     if (window.document.createEvent) { // All
                         var evt = window.document.createEvent('MouseEvents');
                         evt.initMouseEvent('mousedown', false, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -710,7 +712,7 @@
             }
         }
     }
-    
+
     /**
      * @method private
      * @name _open
@@ -720,13 +722,13 @@
      */
     function _open(e, instanceData) {
         var data = e ? e.data : instanceData;
-        
+
         if (!data.$node.prop('disabled') && !data.$autocompleter.hasClass('autocompleter-show') && data.$list && data.$list.length) {
             data.$autocompleter.removeClass('autocompleter-closed').addClass('autocompleter-show');
             $body.on('click.autocompleter-' + data.guid, ':not(.autocompleter-item)', data, _closeHelper);
         }
     }
-    
+
     /**
      * @method private
      * @name _closeHelper
@@ -737,12 +739,12 @@
         if ($(e.target).hasClass('autocompleter-node')) {
             return;
         }
-        
+
         if ($(e.currentTarget).parents('.autocompleter').length === 0) {
             _close(e);
         }
     }
-    
+
     /**
      * @method private
      * @name _close
@@ -752,13 +754,13 @@
      */
     function _close(e, instanceData) {
         var data = e ? e.data : instanceData;
-        
+
         if (data.$autocompleter.hasClass('autocompleter-show')) {
             data.$autocompleter.removeClass('autocompleter-show').addClass('autocompleter-closed');
             $body.off('.autocompleter-' + data.guid);
         }
     }
-    
+
     /**
      * @method private
      * @name _select
@@ -770,27 +772,27 @@
         if (e.type === 'mousedown' && $.inArray(e.which, [2, 3]) !== -1) {
             return;
         }
-        
+
         var data = e.data;
-        
+
         e.preventDefault();
         e.stopPropagation();
-        
+
         if (e.type === 'mousedown' && $(this).length) {
             data.$selected = $(this);
             data.index = data.$list.index(data.$selected);
         }
-        
+
         if (!data.$node.prop('disabled')) {
             _close(e);
             _update(data);
-            
+
             if (e.type === 'click') {
                 data.$node.trigger('focus', [true]);
             }
         }
     }
-    
+
     /**
      * @method private
      * @name _setHint
@@ -802,7 +804,7 @@
         _handleChange(data);
         _launch(data);
     }
-    
+
     /**
      * @method private
      * @name _setValue
@@ -814,17 +816,17 @@
             if (data.hintText && data.$autocompleter.find('.autocompleter-hint').hasClass('autocompleter-hint-show')) {
                 data.$autocompleter.find('.autocompleter-hint').removeClass('autocompleter-hint-show');
             }
-            
+
             data.$node.val(data.$selected.attr('data-value') ? data.$selected.attr('data-value') : data.$selected.attr('data-label'));
         } else {
             if (data.hintText && !data.$autocompleter.find('.autocompleter-hint').hasClass('autocompleter-hint-show')) {
                 data.$autocompleter.find('.autocompleter-hint').addClass('autocompleter-hint-show');
             }
-            
+
             data.$node.val(data.query);
         }
     }
-    
+
     /**
      * @method private
      * @name _update
@@ -835,7 +837,7 @@
         _handleChange(data);
         _clear(data);
     }
-    
+
     /**
      * @method private
      * @name _handleChange
@@ -846,7 +848,7 @@
         data.callback.call(data.$autocompleter, data.$node.val(), data.index, data.response[data.index]);
         data.$node.trigger('change');
     }
-    
+
     /**
      * @method private
      * @name _grab
@@ -856,14 +858,14 @@
      */
     function _grab(response, offset) {
         offset = offset.split('.');
-        
+
         while (response && offset.length) {
             response = response[offset.shift()];
         }
-        
+
         return response;
     }
-    
+
     /**
      * @method private
      * @name _setCache
@@ -875,19 +877,19 @@
         if (!supportLocalStorage) {
             return;
         }
-        
+
         if (url && data) {
             cache[url] = {
                 value: data,
                 timestamp: +new Date()
             };
-            
+
             // Proccess to localStorage
             try {
                 localStorage.setItem(localStorageKey, JSON.stringify(cache));
             } catch (e) {
                 var code = e.code || e.number || e.message;
-                
+
                 if (code === 22) {
                     _deleteCache();
                 } else {
@@ -896,7 +898,7 @@
             }
         }
     }
-    
+
     /**
      * @method private
      * @name _getCache
@@ -906,18 +908,18 @@
     function _getCache(url, expires) {
         var response = false,
             item;
-        
+
         expires = expires || false;
-        
+
         if (!url) {
             return false;
         }
-        
+
         item = cache[url];
-        
+
         if (item && item.value) {
             response = item.value;
-            
+
             if (item.timestamp && expires && (+new Date() - item.timestamp > expires * 1000)) {
                 return false;
             } else {
@@ -927,7 +929,7 @@
             return false;
         }
     }
-    
+
     /**
      * @method private
      * @name _loadCache
@@ -937,10 +939,10 @@
         if (!supportLocalStorage) {
             return;
         }
-        
+
         return JSON.parse(localStorage.getItem(localStorageKey) || '{}');
     }
-    
+
     /**
      * @method private
      * @name _deleteCache
@@ -954,7 +956,7 @@
             throw(e);
         }
     }
-    
+
     /**
      * @method private
      * @name _clone
@@ -962,25 +964,25 @@
      */
     function _clone(obj) {
         var copy;
-        
+
         if (null === obj || 'object' !== typeof obj) {
             return obj;
         }
-        
+
         copy = obj.constructor();
-        
+
         for (var attr in obj) {
             if (obj.hasOwnProperty(attr)) {
                 copy[attr] = obj[attr];
             }
         }
-        
+
         return copy;
     }
-    
+
     // Load cache
     var cache = _loadCache();
-    
+
     $.fn.autocompleter = function (method) {
         if (publics[method]) {
             return publics[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -989,7 +991,7 @@
         }
         return this;
     };
-    
+
     $.autocompleter = function (method) {
         if (method === 'defaults') {
             publics.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -997,4 +999,4 @@
             publics.clearCache.apply(this, null);
         }
     };
-})(window.jQuery||layui.$, window);
+})(window.jQuery || layui.$, window);

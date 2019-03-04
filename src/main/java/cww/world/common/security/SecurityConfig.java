@@ -29,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CommonCacheUtil commonCacheUtil;
 
 
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -38,13 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 为验证拦截器设置AuthenticationManager (由于用了springboot注入方式)
+     *
      * @return
      * @throws Exception
      */
     private RestPreAuthenticatedProcessingFilter getPreAuthenticatedProcessingFilter() throws Exception {
-        RestPreAuthenticatedProcessingFilter filter = new RestPreAuthenticatedProcessingFilter(parameters.getNoneSecurityPath(),commonCacheUtil);
+        RestPreAuthenticatedProcessingFilter filter = new RestPreAuthenticatedProcessingFilter(parameters.getNoneSecurityPath(), commonCacheUtil);
         filter.setAuthenticationManager(this.authenticationManagerBean());
-        return  filter;
+        return filter;
     }
 
     @Override
@@ -66,14 +66,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//无状态请求 不需要session
                 .and()
                 .addFilter(getPreAuthenticatedProcessingFilter())//添加自定义登录验证过滤器
-                ;
+        ;
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**")//忽略 OPTIONS 方法的请求
                 .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**");
-     //放过swagger
+        //放过swagger
     }
 
 }

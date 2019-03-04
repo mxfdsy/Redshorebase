@@ -11,5 +11,5 @@ public interface UserAccountMapper {
 
     List<UserAccountPO> searchUserAccountByUserUids(@Param("userUids") List<String> userUids);
 
-    UserAccountPO searchUserAccountByUserUid(@Param("userUid")String userUid);
+    UserAccountPO searchUserAccountByUserUid(@Param("userUid") String userUid);
 }

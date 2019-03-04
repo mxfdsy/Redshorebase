@@ -1,14 +1,14 @@
 /**
  * Created by SK on 2018/6/7.
  */
-layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], function () {
+layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree', 'lmfConfig'], function () {
     var lmfTable = layui.lmfTable;
     var layuiTable = layui.table;
     var clickEvent = layui.lmfEvent;
     var layer = layui.layer;
     var $ = layui.$;
     var CONFIG = layui.lmfConfig;
-    
+
     // var selected_organization_code = [];
     // clickEvent('selected_organization', function (obj) {
     //     layer.load(2);
@@ -111,10 +111,10 @@ layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], func
     //         });
     // });
     //
-    
+
     //批量启用
     clickEvent('batch-user-on', function () {
-        
+
         var users = layuiTable.checkStatus('user-table').data;
         if (users.length == 0) {
             return layer.Notify.error('请选择需操作的数据');
@@ -125,7 +125,7 @@ layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], func
             }),
             status: 'TYP_ON'
         };
-        
+
         batchOperateUsers(request);
     });
     //批量停用
@@ -142,21 +142,21 @@ layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], func
         };
         batchOperateUsers(request);
     });
-    
+
     function batchOperateUsers(request) {
         var hint_text = {
             'TYP_ON': '确定将选中的用户登录账号状态变更为启用',
             'TYP_OFF': '确定将选中的用户登录账号状态变更为停用'
         };
-        
+
         layer.confirm(hint_text[request.status], {title: '提示'}, function (layerIndex) {
             $.ajax({
-                    type: "post",
-                    url: '/user/batchUpdateUserStatus',
-                    dataType: "json",
-                    contentType: "application/json",
-                    data: JSON.stringify(request)
-                })
+                type: "post",
+                url: '/user/batchUpdateUserStatus',
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(request)
+            })
                 .then(function (res) {
                     if (res.code != 200) {
                         layer.Notify.error('批量操作出错');
@@ -179,20 +179,20 @@ layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], func
                 })
         });
     }
-    
+
     var operateEvents = {
         change_user_pwd: function (obj) {
             var user_uid = obj.data.user_uid || '';
             layer.confirm('是否继续密码重置', {title: '提示'}, function (layerIndex) {
                 $.ajax({
-                        type: "post",
-                        url: '/user/resetPassword',
-                        dataType: "json",
-                        contentType: "application/json",
-                        data: JSON.stringify({
-                            user_uid: user_uid
-                        })
+                    type: "post",
+                    url: '/user/resetPassword',
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        user_uid: user_uid
                     })
+                })
                     .then(function (res) {
                         if (res.code != 200) {
                             layer.Notify.error('用户重置密码失败');
@@ -207,7 +207,7 @@ layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], func
             });
         }
     };
-    
+
     var tableConfig = {
         elem: '#user-table',
         url: '/user/getUserList',
@@ -271,6 +271,6 @@ layui.use(['lmfTable', 'table', 'layer', 'lmfEvent', 'jstree','lmfConfig'], func
             }
         ]]
     };
-    
+
     var userTable = lmfTable(tableConfig, operateEvents);
 });

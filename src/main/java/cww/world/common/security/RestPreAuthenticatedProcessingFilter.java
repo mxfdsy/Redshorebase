@@ -41,13 +41,14 @@ public class RestPreAuthenticatedProcessingFilter extends AbstractPreAuthenticat
 
     /**
      * 获取用户传过来的信息 生成token
+     *
      * @param request
      * @return
      */
     @Override
     protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
         GrantedAuthority[] authorities = new GrantedAuthority[1];
-        if(isNoneSecurity(request.getRequestURI().toString()) || "OPTIONS".equals(request.getMethod())){
+        if (isNoneSecurity(request.getRequestURI().toString()) || "OPTIONS".equals(request.getMethod())) {
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_SOMEONE");
             authorities[0] = authority;
             //无需权限的url直接发放token走Provider授权
@@ -63,8 +64,8 @@ public class RestPreAuthenticatedProcessingFilter extends AbstractPreAuthenticat
             request.setAttribute("header-error", 400);
         }
 //        else if(false){
-            //动态获取version参数 比较 如果要求的最低版本号大于传入的版本号  设置错误头
-            // request.setAttribute("header-error", 400);
+        //动态获取version参数 比较 如果要求的最低版本号大于传入的版本号  设置错误头
+        // request.setAttribute("header-error", 400);
 //        }
 
         //校验token
@@ -95,7 +96,7 @@ public class RestPreAuthenticatedProcessingFilter extends AbstractPreAuthenticat
 
         }
 
-        if(request.getAttribute("header-error") != null){
+        if (request.getAttribute("header-error") != null) {
             //请求头有错误  随便给个角色 让逻辑继续
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_NONE");
             authorities[0] = authority;
@@ -103,8 +104,6 @@ public class RestPreAuthenticatedProcessingFilter extends AbstractPreAuthenticat
         RestAuthenticationToken authToken = new RestAuthenticationToken(Arrays.asList(authorities));
         return authToken;
     }
-
-
 
 
     @Override
@@ -115,6 +114,7 @@ public class RestPreAuthenticatedProcessingFilter extends AbstractPreAuthenticat
 
     /**
      * 校验是否是无需权限的url
+     *
      * @param uri
      * @return
      */

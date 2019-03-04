@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Mapper
 public interface BaseMapper {
-    
+
     String getUuid();
 
     Long getSequenceNextVal(@Param("sequenceName") String sequenceName);

@@ -185,7 +185,7 @@ layui.use(['form', 'layer', 'element', 'laytpl', 'lmfEvent'], function () {
                 }
                 layer.closeAll('loading');
                 layer.Notify.success('新增角色成功!', function () {
-                   window.location.href = "/role/layout/management";
+                    window.location.href = "/role/layout/management";
                 });
             });
 

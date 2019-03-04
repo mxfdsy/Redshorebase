@@ -11,7 +11,7 @@
 layui.define(['upload', 'layer', 'laytpl'], function (exports) {
     var $ = layui.jquery,
         upload = layui.upload;
-    
+
     var default_config = {
         accept: 'file', //普通文件
         auto: false,
@@ -22,38 +22,38 @@ layui.define(['upload', 'layer', 'laytpl'], function (exports) {
         render: function (config) {
             "use strict";
             if (!$.isPlainObject(config)) {
-                
+
                 throw  "配置错误";
             }
-            delete   config.auto;
-            
-            
+            delete config.auto;
+
+
             config = $.extend({}, default_config, config);
             var $elem = $(config.elem);
             var preview_html = {
                 'attachment': '<button type="button" class="layui-btn layui-inline lmf-file-upload-btn"><i class="layui-icon">&#xe67c;</i>选择文件</button><div class="layui-upload_info layui-hide"><div class="layui-inline layui-upload_fliename"></div><div class="layui-inline layui-upload_tool"><a href="#" class="del_file">删除</a></div></div>',
-                'video':'<div class="layui-upload-box layui-inline lmf-file-upload-btn"></div>' +
-                '<div class="lmf-upload-list layui-upload_info layui-hide">' +
-                '   <div class="layui-hide layui-upload_fliename"></div>'+
-                '   <div class="layui-inline layui-upload_tool">' +
-                '       <img src="/images/video-preview.png"class="layui-upload-img">' +
-                '       <a href="#" class="del-img-btn del_file">删除</a>' +
-                '   </div>' +
-                '</div>'
+                'video': '<div class="layui-upload-box layui-inline lmf-file-upload-btn"></div>' +
+                    '<div class="lmf-upload-list layui-upload_info layui-hide">' +
+                    '   <div class="layui-hide layui-upload_fliename"></div>' +
+                    '   <div class="layui-inline layui-upload_tool">' +
+                    '       <img src="/images/video-preview.png"class="layui-upload-img">' +
+                    '       <a href="#" class="del-img-btn del_file">删除</a>' +
+                    '   </div>' +
+                    '</div>'
             };
-            
+
             $elem.hide();
             $elem.after(preview_html[config.skin] || preview_html.attachment);
-            
-            
+
+
             $elem.nextAll('.layui-upload_info').children('.layui-upload_tool').children('a.del_file').on('click', function () {
                 $elem.nextAll('.layui-upload_info').addClass('layui-hide');
                 $elem.nextAll('.lmf-file-upload-btn').removeClass('layui-hide');
                 $elem.val('');
                 return false;
             });
-            
-            
+
+
             var preview = function (index, file) {
                 $elem.nextAll('.lmf-file-upload-btn').addClass('layui-hide');
                 $elem.nextAll('.layui-upload_info').removeClass('layui-hide').children('.layui-upload_fliename').text(file.name).attr('title', file.name);
@@ -61,18 +61,18 @@ layui.define(['upload', 'layer', 'laytpl'], function (exports) {
             $elem.nextAll('.lmf-file-upload-btn').on('click', function () {
                 $elem.trigger('click');
             });
-            
+
             var _choose = config.choose || $.noop;
             config.choose = function (obj) {
                 obj.preview(preview);
-                delete  obj.upload;
+                delete obj.upload;
                 _choose.call(this, obj);
             };
             upload.render(config);
-            
+
         }
     };
-    
-    
+
+
     exports('lmfUploadFile', lmfUploadFile);
 });

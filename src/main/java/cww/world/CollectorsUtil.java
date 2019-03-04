@@ -25,10 +25,8 @@ public class CollectorsUtil {
     /**
      * Simple implementation class for {@code CollectorDemo}.
      *
-     * @param <T>
-     *            the type of elements to be collected
-     * @param <R>
-     *            the type of the result
+     * @param <T> the type of elements to be collected
+     * @param <R> the type of the result
      */
     static class CollectorImpl<T, A, R> implements Collector<T, A, R> {
         private final Supplier<A> supplier;

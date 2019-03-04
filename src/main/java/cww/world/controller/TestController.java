@@ -29,25 +29,27 @@ public class TestController {
 
 
     /**
-     *  rabbitmq 自产自销 消息发送(异步q)
+     * rabbitmq 自产自销 消息发送(异步q)
+     *
      * @return
      */
     @PostMapping("/sendDirectMessage")
     @ResponseBody
-    public  String sendDirect() {
+    public String sendDirect() {
         testMessageChannel.send(MessageBuilder.withPayload("sendDirectMessage").build());
         return ResultBuilderUtils.buildSuccess(Constants.SUCCESS);
     }
 
     @PostMapping("/sendFanoutMessage")
     @ResponseBody
-    public  String sendFanout() {
+    public String sendFanout() {
         testMessageChanne2.send(MessageBuilder.withPayload("sendFanoutMessage:").build());
         return ResultBuilderUtils.buildSuccess(Constants.SUCCESS);
     }
 
     /**
      * thymeleaf 自定以方言
+     *
      * @return
      */
     @PostMapping("/diy")

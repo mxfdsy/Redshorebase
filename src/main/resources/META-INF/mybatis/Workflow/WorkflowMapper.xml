@@ -68,65 +68,65 @@
     </resultMap>
     <select id="getByWorkflowUid" resultMap="workflowResultMap">
         SELECT
-            info.workflow_uid,
-            info.workflow_key,
-            info.workflow_name,
-            info.workflow_desc,
-            info.created_at,
-            info.created_by,
-            info.updated_at,
-            info.updated_by,
-            step.step_uid,
-            step.workflow_uid as step_workflow_uid,
-            step.step,
-            step.step_desc,
-            step.approval_level,
-            step.approval_group_type,
-            step.approval_group,
-            step.approval_group_name,
-            step.created_at   as step_created_at,
-            step.created_by   as step_created_by,
-            step.updated_at   as step_updated_at,
-            step.updated_by   as step_updated_by
+        info.workflow_uid,
+        info.workflow_key,
+        info.workflow_name,
+        info.workflow_desc,
+        info.created_at,
+        info.created_by,
+        info.updated_at,
+        info.updated_by,
+        step.step_uid,
+        step.workflow_uid as step_workflow_uid,
+        step.step,
+        step.step_desc,
+        step.approval_level,
+        step.approval_group_type,
+        step.approval_group,
+        step.approval_group_name,
+        step.created_at as step_created_at,
+        step.created_by as step_created_by,
+        step.updated_at as step_updated_at,
+        step.updated_by as step_updated_by
         FROM
-            tnt_biz_erp_workflow_info info
-            LEFT JOIN
-            tnt_biz_erp_workflow_step step ON info.workflow_uid = step.workflow_uid
-                                              AND step.archive = 1
+        tnt_biz_erp_workflow_info info
+        LEFT JOIN
+        tnt_biz_erp_workflow_step step ON info.workflow_uid = step.workflow_uid
+        AND step.archive = 1
         WHERE
-            info.workflow_uid = #{workflowUid}
-            AND info.archive = 1
+        info.workflow_uid = #{workflowUid}
+        AND info.archive = 1
         ORDER BY step.step;
     </select>
     <select id="getByWorkflowKey" resultMap="workflowResultMap">
         SELECT
-            info.workflow_uid,
-            info.workflow_key,
-            info.workflow_name,
-            info.workflow_desc,
-            info.created_at,
-            info.created_by,
-            info.updated_at,
-            info.updated_by,
-            step.step_uid,
-            step.workflow_uid as step_workflow_uid,
-            step.step,
-            step.step_desc,
-            step.approval_level,
-            step.approval_group_type,
-            step.approval_group,
-            step.created_at   as step_created_at,
-            step.created_by   as step_created_by,
-            step.updated_at   as step_updated_at,
-            step.updated_by   as step_updated_by
+        info.workflow_uid,
+        info.workflow_key,
+        info.workflow_name,
+        info.workflow_desc,
+        info.created_at,
+        info.created_by,
+        info.updated_at,
+        info.updated_by,
+        step.step_uid,
+        step.workflow_uid as step_workflow_uid,
+        step.step,
+        step.step_desc,
+        step.approval_level,
+        step.approval_group_type,
+        step.approval_group,
+        step.created_at as step_created_at,
+        step.created_by as step_created_by,
+        step.updated_at as step_updated_at,
+        step.updated_by as step_updated_by
         FROM
-            tnt_biz_erp_workflow_info info
-            LEFT JOIN
-            tnt_biz_erp_workflow_step step ON info.workflow_uid = step.workflow_uid
-                                              AND step.archive = 1
+        tnt_biz_erp_workflow_info info
+        LEFT JOIN
+        tnt_biz_erp_workflow_step step ON info.workflow_uid = step.workflow_uid
+        AND step.archive = 1
         WHERE
-            info.workflow_key = #{workflowKey}
-            AND info.archive = 1
+        info.workflow_key = #{workflowKey}
+        AND info.archive = 1
         ORDER BY step.step;
     </select>
 

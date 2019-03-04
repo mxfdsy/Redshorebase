@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface UserRoleService {
-    
+
     int deleteByUids(UserRoleRequestDTO request);
 
     List<LoginRoleDTO> listUserRoleInfo(String userUid);

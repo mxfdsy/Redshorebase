@@ -16,25 +16,25 @@ import javax.annotation.PostConstruct;
 public class JedisPoolWrapper {
 
 
-	private JedisPool jedisPool = null;
-	
-	@Autowired
-	private Parameters parameters;
-	
-	@PostConstruct
-	public void init()  {
-		try {
-			JedisPoolConfig config = new JedisPoolConfig();
+    private JedisPool jedisPool = null;
 
-			jedisPool = new JedisPool(config,parameters.getRedisHost(),parameters.getRedisPort(),2000);
-		} catch (Exception e) {
-			log.error("Fail to initialize jedis pool", e);
-			throw new BaseException(BaseCode.SESSION_SETTING_FAIL,"Fail to initialize jedis pool");
-		}
-	}
+    @Autowired
+    private Parameters parameters;
 
-	public JedisPool getJedisPool() {
-		return jedisPool;
-	}
-	
+    @PostConstruct
+    public void init() {
+        try {
+            JedisPoolConfig config = new JedisPoolConfig();
+
+            jedisPool = new JedisPool(config, parameters.getRedisHost(), parameters.getRedisPort(), 2000);
+        } catch (Exception e) {
+            log.error("Fail to initialize jedis pool", e);
+            throw new BaseException(BaseCode.SESSION_SETTING_FAIL, "Fail to initialize jedis pool");
+        }
+    }
+
+    public JedisPool getJedisPool() {
+        return jedisPool;
+    }
+
 }

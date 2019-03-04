@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/role")
-public class RoleController  extends BaseController {
+public class RoleController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
@@ -69,22 +69,22 @@ public class RoleController  extends BaseController {
         return "role/list";
     }
 
-    @RequestMapping(value = "/edit/{roleUid:[\\d]+}.html", method =  RequestMethod.GET)
+    @RequestMapping(value = "/edit/{roleUid:[\\d]+}.html", method = RequestMethod.GET)
     public String editRole(@PathVariable String roleUid, Model model) {
         generateRoleModel(roleUid, model);
-        return  "role/edit";
+        return "role/edit";
     }
 
-    @RequestMapping(value = "/view/{roleUid:[\\d]+}.html", method =  RequestMethod.GET)
+    @RequestMapping(value = "/view/{roleUid:[\\d]+}.html", method = RequestMethod.GET)
     public String viewRole(@PathVariable String roleUid, Model model) {
         generateRoleModel(roleUid, model);
-        return  "role/view";
+        return "role/view";
     }
 
-    @RequestMapping(value = "/copy/{roleUid:[\\d]+}.html", method =  RequestMethod.GET)
+    @RequestMapping(value = "/copy/{roleUid:[\\d]+}.html", method = RequestMethod.GET)
     public String copyRole(@PathVariable String roleUid, Model model) {
         generateRoleModel(roleUid, model);
-        return  "role/copy";
+        return "role/copy";
     }
 
 
@@ -94,9 +94,9 @@ public class RoleController  extends BaseController {
         logger.info("创建角色，入参：{}", payload);
         if (StringUtils.isBlank(payload)) {
             logger.error("创建角色请求参数为空");
-            return ResultBuilderUtils.buildError(BaseCode.INVALID_ARGUMENT,"请求参数不能为空");
+            return ResultBuilderUtils.buildError(BaseCode.INVALID_ARGUMENT, "请求参数不能为空");
         }
-        EditRoleRequestDTO createRole = JSONObject.parseObject(payload,EditRoleRequestDTO.class);
+        EditRoleRequestDTO createRole = JSONObject.parseObject(payload, EditRoleRequestDTO.class);
         ValidateResult validateResult = EntityValidator.validate(createRole, Insert.class);
         if (validateResult.hasError()) {
             throw new BaseException(BaseCode.INVALID_ARGUMENT, validateResult.getErrorMessages());
@@ -128,16 +128,16 @@ public class RoleController  extends BaseController {
 
     @RequestMapping(value = "/deleteUserRole", method = RequestMethod.POST)
     @ResponseBody
-    public String deleteUserRole(@RequestBody String payload){
+    public String deleteUserRole(@RequestBody String payload) {
         logger.info("开始删除用户角色，入参为{}", payload);
         if (StringUtils.isEmpty(payload)) {
             logger.error("删除用户角色请求参数为空");
             return ResultBuilderUtils.buildError(BaseCode.INVALID_ARGUMENT, "删除用户角色请求参数为空");
         }
         UserRoleRequestDTO userRoleRequest
-                = JSONObject.parseObject(payload,UserRoleRequestDTO.class);
+                = JSONObject.parseObject(payload, UserRoleRequestDTO.class);
         ValidateResult validateResult = EntityValidator.validate(userRoleRequest, Delete.class);
-        if(validateResult.hasError()){
+        if (validateResult.hasError()) {
             logger.info("删除用户角色，请求参数错误 :{}", validateResult.getErrorMessages());
             return ResultBuilderUtils.buildError(validateResult.getErrorMessages());
         }
@@ -148,9 +148,9 @@ public class RoleController  extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delete", method =  RequestMethod.POST, produces = JSON_UTF8)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = JSON_UTF8)
     public String deleteRole(@RequestBody String payload) {
-        logger.info("删除角色入参为{}",payload);
+        logger.info("删除角色入参为{}", payload);
         if (StringUtils.isEmpty(payload)) {
             logger.error("删除角色请求参数为空");
             return ResultBuilderUtils.buildError(BaseCode.INVALID_ARGUMENT, "删除角色请求参数为空");

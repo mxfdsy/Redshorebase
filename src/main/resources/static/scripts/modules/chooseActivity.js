@@ -46,16 +46,17 @@ layui.define(['lmfTable', 'form'], function (exports) {
         }
         that.open();
     };
-    
+
     //默认配置
     ChooseBox.prototype.config = {
         isMultiple: false,   //是否多选
         excludeUIDs: [],    //已有id
         type: "",           //类型 mallProduct  mallActivity
-        success: function (data) {},     //成功回调
+        success: function (data) {
+        },     //成功回调
         params_in: {}  //默认参数
     };
-    
+
     ChooseBox.prototype.open = function () {
         var that = this;
         this.box_index = layer.open({
@@ -71,8 +72,8 @@ layui.define(['lmfTable', 'form'], function (exports) {
             success: function () {
                 that.bindEvents();
                 that.setBox();
-                
-                
+
+
             },
             yes: function () {
                 that.config.success({
@@ -82,16 +83,16 @@ layui.define(['lmfTable', 'form'], function (exports) {
             }
         });
     };
-    
+
     ChooseBox.prototype.bindEvents = function (success) {
         var that = this;
         form.on('select(subPromotionsByType)', function () {
             $('.layui-card.' + TABLE_NAME).find('[lay-submit]').get(0).click();
         })
-        
-        
+
+
     };
-    
+
     ChooseBox.prototype.setBox = function () {
         var type = $('.layui-card.' + TABLE_NAME).find('[name="type"]').val();
         var that = this;
@@ -104,7 +105,7 @@ layui.define(['lmfTable', 'form'], function (exports) {
             "status": ["not_start", "active"],
             "create_type": "TYP_MALL"
         }, that.config.params_in);
-        
+
         var table_events = {};
         var table_cols = [
             {
@@ -114,7 +115,7 @@ layui.define(['lmfTable', 'form'], function (exports) {
                 templet: function (d) {
                     return d.sub_promotion_name || d.promotion_name;
                 }
-                
+
             },
             {
                 field: 'created_at',
@@ -131,13 +132,13 @@ layui.define(['lmfTable', 'form'], function (exports) {
                     return d.end_at || d.sub_promotion_end_at;
                 }
             }];
-        
-       
+
+
         if (that.config.isMultiple) {
             table_cols.unshift({
                 field: 'sub_promotion_uid',
                 title: 'id选择',
-                fixed:'left',
+                fixed: 'left',
                 checkbox: true
             });
         } else {
@@ -146,7 +147,7 @@ layui.define(['lmfTable', 'form'], function (exports) {
                 title: '操作(单选)',
                 valign: 'middle',
                 width: '115',
-                fixed:'right',
+                fixed: 'right',
                 undraggable: true,
                 templet: function (d) {
                     return '<a href="javascript:;" lay-event="single-choose">选取</a>';
@@ -161,8 +162,8 @@ layui.define(['lmfTable', 'form'], function (exports) {
                 layer.close(that.box_index);
             }
         }
-        
-        
+
+
         var table_config = {
             elem: '#' + TABLE_NAME,
             searchFilter: TABLE_NAME + '-search-box',    //必传
@@ -180,12 +181,12 @@ layui.define(['lmfTable', 'form'], function (exports) {
             },
             cols: [table_cols]
         };
-        
+
         that.table = layui.lmfTable(table_config, table_events);
         return that;
     };
-    
-    
+
+
     //操作当前实例
     exports('chooseActivity', function (option) {
         new ChooseBox(option);

@@ -73,7 +73,7 @@ layui.use(['form', 'lmfTable', 'workflowInfo'], function () {
         tableFilter: 'trace-table',
         searchFilter: 'trace-search-box',
         where: {
-            brand_operation_type:operationType,
+            brand_operation_type: operationType,
             sort_order: 'desc',
             sort_key: 'id',
             brand_uid: global.brandUid
@@ -133,7 +133,7 @@ layui.use(['form', 'lmfTable', 'workflowInfo'], function () {
             {
                 field: 'brand_status',
                 title: '品牌状态',
-                width:130,
+                width: 130,
                 templet: function (brand_info) {
                     if (brand_info.brand_status == 'TYP_ENABLED') {
                         return '库内';
@@ -161,7 +161,7 @@ layui.use(['form', 'lmfTable', 'workflowInfo'], function () {
         tableFilter: 'traceAudit-table',
         searchFilter: 'traceAudit-search-box',
         where: {
-            brand_operation_type:auditOperationType,
+            brand_operation_type: auditOperationType,
             sort_order: 'desc',
             sort_key: 'id',
             brand_uid: global.brandUid
@@ -221,7 +221,7 @@ layui.use(['form', 'lmfTable', 'workflowInfo'], function () {
             {
                 field: 'brand_status',
                 title: '品牌状态',
-                width:130,
+                width: 130,
                 templet: function (brand_info) {
                     if (brand_info.brand_status == 'TYP_ENABLED') {
                         return '库内';
@@ -246,9 +246,9 @@ layui.use(['form', 'lmfTable', 'workflowInfo'], function () {
     lmfTable(brandVendorTableConfig, {});
     var operateEvents = {};
     var traceTable = lmfTable(tableConfig, operateEvents);
-    var traceAuditTable = lmfTable(tableAuditConfig,operateEvents);
+    var traceAuditTable = lmfTable(tableAuditConfig, operateEvents);
     form.on('select(brand-traceAudit-select)', function (data) {
-        if (data.value === ""){
+        if (data.value === "") {
             data.value = auditOperationType;
         }
         traceAuditTable.reload({
@@ -262,7 +262,7 @@ layui.use(['form', 'lmfTable', 'workflowInfo'], function () {
     });
 
     form.on('select(brand-trace-select)', function (data) {
-        if (data.value === ""){
+        if (data.value === "") {
             data.value = operationType;
         }
         traceTable.reload({

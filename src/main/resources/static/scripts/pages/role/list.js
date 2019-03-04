@@ -2,14 +2,14 @@
  * Created by sqq on 2018/6/20.
  */
 
-layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent','select2'], function () {
+layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent', 'select2'], function () {
     var lmfTable = layui.lmfTable;
     var table = layui.table;
     var form = layui.form;
     var layer = layui.layer;
     var $ = layui.$;
-    
-    
+
+
     //接口路径
     var ajaxURL = {
         //获取角色
@@ -33,31 +33,30 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent','select2']
         //修改权限
         insertOrUpdateRolePermission: "/permission/insertOrUpdateRolePermission"
     };
-    
-    
+
+
     var operateEvents = {
         //删除角色
         delete_role: function (obj) {
             var data = obj.data; //获得当前行数据
             var role_uid = data.role_uid;
-            
+
             layer.confirm('确认删除该角色？', {title: '提示'}, function () {
                 $.ajax({
-                        type: "post",
-                        url: "/role/delete",
-                        dataType: "json",
-                        contentType: "application/json",
-                        async: false,
-                        data: JSON.stringify({
-                            role_uid: role_uid
-                        })
+                    type: "post",
+                    url: "/role/delete",
+                    dataType: "json",
+                    contentType: "application/json",
+                    async: false,
+                    data: JSON.stringify({
+                        role_uid: role_uid
                     })
+                })
                     .then(function (res) {
                         if (res.code == 12004) {
                             layer.Notify.error('该角色已绑定用户，无法删除！');
                             return false;
-                        }
-                        else if (res.code != 200) {
+                        } else if (res.code != 200) {
                             layer.Notify.error('删除失败！');
                             return false;
                         }
@@ -69,16 +68,16 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent','select2']
                         layer.Notify.error('删除失败！');
                     });
             }, function () {
-                
+
             });
         }
     };
-    
-    
+
+
     /**
      * 角色数据展示
      */
-    
+
     function renderTable() {
         var table_cols = [
             {
@@ -87,7 +86,7 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent','select2']
                 title: '角色名称',
                 fixed: 'left'
             },
-            
+
             {
                 field: 'role_desc',
                 align: 'left',
@@ -123,7 +122,7 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent','select2']
             },
             cols: [table_cols]
         };
-        
+
         lmfTable(tableConfig, operateEvents);
     };
     var roleManage_Table = renderTable();

@@ -15,6 +15,7 @@ public interface MenuService {
 
     /**
      * 创建一级菜单
+     *
      * @param menu
      * @return
      */
@@ -23,6 +24,7 @@ public interface MenuService {
 
     /**
      * 更新二级菜单
+     *
      * @return
      */
     BaseCode insertChildrenMenu(InsertChildrenMenuDTO request);
@@ -30,6 +32,7 @@ public interface MenuService {
 
     /**
      * 获取菜单列表
+     *
      * @param requestDTO
      * @return
      */

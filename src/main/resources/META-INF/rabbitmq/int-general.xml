@@ -11,7 +11,7 @@
     <rabbit:connection-factory id="rabbitConnectionFactory" host="${spring.rabbitmq.host}"
                                username="${spring.rabbitmq.username}" password="${spring.rabbitmq.password}"/>
     <rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"/>
-    <rabbit:admin connection-factory="rabbitConnectionFactory" />
+    <rabbit:admin connection-factory="rabbitConnectionFactory"/>
 
     <!-- rabbitmq 异步消息特殊的Exception处理 -->
     <!--<int:channel id="amqpAsynFailedMessageChannel"/>-->
@@ -19,7 +19,6 @@
 
     <!--<int:channel id="failedMessageChannel" />-->
     <!--<int:service-activator input-channel="failedMessageChannel"	ref="failedMessageHandler" />-->
-
 
 
     <!--点对点，交换机-->
@@ -34,10 +33,10 @@
     <rabbit:queue name="cww.test.fanout.queue5"/>
     <rabbit:queue name="cww.test.fanout.queue4"/>
     <rabbit:fanout-exchange name="test.fanout.exchange_cww">
-            <rabbit:bindings>
-                <rabbit:binding queue="cww.test.fanout.queue5"/>
-                <rabbit:binding queue="cww.test.fanout.queue4"/>
-            </rabbit:bindings>
+        <rabbit:bindings>
+            <rabbit:binding queue="cww.test.fanout.queue5"/>
+            <rabbit:binding queue="cww.test.fanout.queue4"/>
+        </rabbit:bindings>
     </rabbit:fanout-exchange>
 
 </beans>

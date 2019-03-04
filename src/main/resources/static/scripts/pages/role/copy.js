@@ -173,7 +173,7 @@ layui.use(['form', 'lmfTable', 'table', 'laytpl', 'layer', 'lmfEvent', 'element'
         field.is_changeable = "YES";
 
         //去除提交permission_uids中的空字符串
-        var permission_uidsArr = $.grep(field.permission_uids, function(n) {
+        var permission_uidsArr = $.grep(field.permission_uids, function (n) {
             return $.trim(n).length > 0;
         })
         field.permission_uids = permission_uidsArr;

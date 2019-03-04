@@ -17,29 +17,30 @@
         <result column="archive" property="archive"/>
     </resultMap>
 
-    <sql id="Base_Column_List" >
-        id, role_uid,role_name, role_desc, role_key, is_changeable,gw_code, created_at, updated_at, created_by, updated_by, archive
+    <sql id="Base_Column_List">
+        id, role_uid,role_name, role_desc, role_key, is_changeable,gw_code, created_at, updated_at, created_by,
+        updated_by, archive
     </sql>
 
-	<select id="listRole" resultMap="roleMap">
-	   SELECT
-	       <include refid="Base_Column_List"></include>
-		FROM
-		    tnt_biz_erp_role
-		WHERE
-            archive = 1
-	        <if test="roleName != null and roleName != ''">
-               AND role_name like CONCAT('%' ,#{roleName}, '%')
-	        </if>
-            <if test="isChangeable != null and isChangeable != ''">
-               AND is_changeable = #{isChangeable}
-            </if>
+    <select id="listRole" resultMap="roleMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        tnt_biz_erp_role
+        WHERE
+        archive = 1
+        <if test="roleName != null and roleName != ''">
+            AND role_name like CONCAT('%' ,#{roleName}, '%')
+        </if>
+        <if test="isChangeable != null and isChangeable != ''">
+            AND is_changeable = #{isChangeable}
+        </if>
 
-	    <if test="sortKey != null and sortKey != ''">
+        <if test="sortKey != null and sortKey != ''">
             ORDER BY ${sortKey} ${sortOrder}
-	    </if>
-	    LIMIT #{pageOffset},#{pageSize}
-	</select>
+        </if>
+        LIMIT #{pageOffset},#{pageSize}
+    </select>
 
     <select id="listAllRole" resultMap="roleMap">
         SELECT
@@ -52,11 +53,11 @@
 
     <select id="countRole" resultType="java.lang.Integer">
         SELECT
-            COUNT(0)
+        COUNT(0)
         FROM
-          tnt_biz_erp_role
+        tnt_biz_erp_role
         WHERE
-          archive = 1
+        archive = 1
         <if test="roleName != null and roleName != ''">
             AND role_name like CONCAT('%' ,#{roleName}, '%')
         </if>
@@ -65,27 +66,27 @@
         </if>
     </select>
 
-	<select id="queryRoleByUidOrKey" resultMap="roleMap">
-	   SELECT
-		    <include refid="Base_Column_List"></include>
-		FROM
-		    tnt_biz_erp_role
-		WHERE
-		    archive = 1
-	        <if test="roleUid != null and roleUid != ''">
-	            AND role_uid = #{roleUid}
-	        </if>
-	        <if test="roleKey != null and roleKey != ''">
-	            AND role_key = #{roleKey}
-	        </if>
-	</select>
+    <select id="queryRoleByUidOrKey" resultMap="roleMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        tnt_biz_erp_role
+        WHERE
+        archive = 1
+        <if test="roleUid != null and roleUid != ''">
+            AND role_uid = #{roleUid}
+        </if>
+        <if test="roleKey != null and roleKey != ''">
+            AND role_key = #{roleKey}
+        </if>
+    </select>
 
     <select id="getRoleInfoByRoleKey" resultMap="roleMap">
         SELECT
-          <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         FROM tnt_biz_erp_role
         WHERE
-          archive = 1
+        archive = 1
         <if test="roleKey != null and roleKey != ''">
             AND role_key = #{roleKey}
         </if>
@@ -96,10 +97,10 @@
         <include refid="Base_Column_List"/>
         FROM tnt_biz_erp_role
         WHERE
-             role_key = #{roleKey}
+        role_key = #{roleKey}
     </select>
 
-    <insert id="insert" parameterType="cww.world.pojo.dto.role.CreateRoleDTO" >
+    <insert id="insert" parameterType="cww.world.pojo.dto.role.CreateRoleDTO">
         INSERT INTO
         tnt_biz_erp_role
         (role_uid, role_name, role_desc, role_key,
@@ -115,7 +116,7 @@
         now(), now(), #{createdBy,jdbcType=BIGINT}, 1)
     </insert>
 
-    <insert id="syncInsert" parameterType="cww.world.pojo.dto.role.CreateRoleDTO" >
+    <insert id="syncInsert" parameterType="cww.world.pojo.dto.role.CreateRoleDTO">
         INSERT INTO
         tnt_biz_erp_role
         (role_uid, role_name, role_desc, role_key,
@@ -144,41 +145,41 @@
     </delete>
     <select id="getRoleInfoByRoleUid" resultMap="roleMap">
         SELECT
-          <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         FROM
-          tnt_biz_erp_role
+        tnt_biz_erp_role
         WHERE
-          archive = 1
-          AND role_uid = #{roleUid}
+        archive = 1
+        AND role_uid = #{roleUid}
     </select>
 
     <select id="countRoleByNameWithoutSelf" resultType="java.lang.Integer">
         SELECT
-            count(0)
+        count(0)
         FROM
-          tnt_biz_erp_role
+        tnt_biz_erp_role
         WHERE
-          role_name = #{roleName}
+        role_name = #{roleName}
         AND
-          role_uid != #{roleUid}
+        role_uid != #{roleUid}
     </select>
 
-    <update id="updateRole" parameterType="cww.world.pojo.dto.role.CreateRoleDTO" >
+    <update id="updateRole" parameterType="cww.world.pojo.dto.role.CreateRoleDTO">
         update tnt_biz_erp_role
-        <set >
-            <if test="roleName != null and roleName != ''" >
+        <set>
+            <if test="roleName != null and roleName != ''">
                 role_name = #{roleName,jdbcType=VARCHAR},
             </if>
-            <if test="roleDesc != null and roleDesc != ''" >
+            <if test="roleDesc != null and roleDesc != ''">
                 role_desc = #{roleDesc,jdbcType=VARCHAR},
             </if>
             <if test="isChangeable != null and isChangeable != ''">
                 is_changeable = #{isChangeable},
             </if>
-            <if test="roleKey != null and roleKey != ''" >
+            <if test="roleKey != null and roleKey != ''">
                 role_key = #{roleKey,jdbcType=VARCHAR},
             </if>
-            <if test="updatedBy != null" >
+            <if test="updatedBy != null">
                 updated_by = #{updatedBy,jdbcType=BIGINT},
             </if>
             updated_at = now()
@@ -192,25 +193,25 @@
         WHERE role_name = #{roleName}
     </select>
 
-    <update id="SyncUpdateRole" parameterType="cww.world.pojo.dto.role.CreateRoleDTO" >
+    <update id="SyncUpdateRole" parameterType="cww.world.pojo.dto.role.CreateRoleDTO">
         update tnt_biz_erp_role
-        <set >
-            <if test="roleName != null and roleName != ''" >
+        <set>
+            <if test="roleName != null and roleName != ''">
                 role_name = #{roleName,jdbcType=VARCHAR},
             </if>
-            <if test="roleDesc != null and roleDesc != ''" >
+            <if test="roleDesc != null and roleDesc != ''">
                 role_desc = #{roleDesc,jdbcType=VARCHAR},
             </if>
             <if test="isChangeable != null and isChangeable != ''">
                 is_changeable = #{isChangeable},
             </if>
-            <if test="roleKey != null and roleKey != ''" >
+            <if test="roleKey != null and roleKey != ''">
                 role_key = #{roleKey,jdbcType=VARCHAR},
             </if>
-            <if test="updatedBy != null" >
+            <if test="updatedBy != null">
                 updated_by = #{updatedBy,jdbcType=BIGINT},
             </if>
-            <if test="archive != null" >
+            <if test="archive != null">
                 archive = #{archive,jdbcType=BIGINT},
             </if>
             updated_at = now()
@@ -231,9 +232,9 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-          tnt_biz_erp_role
+        tnt_biz_erp_role
         WHERE
-         role_name = #{roleName}
+        role_name = #{roleName}
     </select>
 
 </mapper>

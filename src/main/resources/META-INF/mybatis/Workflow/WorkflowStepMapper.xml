@@ -17,50 +17,50 @@
 
     <select id="listWorkflowSteps" resultMap="listWorkflowStepsResultMap">
         SELECT
-            workflowStep.step_uid,
-            workflowStep.workflow_uid as step_workflow_uid,
-            workflowStep.step,
-            workflowStep.approval_level,
-            workflowStep.approval_group_type,
-            workflowStep.approval_group,
-            workflowStep.approval_group_name,
-            workflowStep.updated_by,
-            workflowStep.updated_at,
-            workflowStep.created_by,
-            workflowStep.created_at
+        workflowStep.step_uid,
+        workflowStep.workflow_uid as step_workflow_uid,
+        workflowStep.step,
+        workflowStep.approval_level,
+        workflowStep.approval_group_type,
+        workflowStep.approval_group,
+        workflowStep.approval_group_name,
+        workflowStep.updated_by,
+        workflowStep.updated_at,
+        workflowStep.created_by,
+        workflowStep.created_at
         FROM
-            tnt_biz_erp_workflow_step workflowStep
+        tnt_biz_erp_workflow_step workflowStep
         WHERE
-            workflowStep.archive = 1
-            AND workflowStep.workflow_uid = #{workflowUid}
+        workflowStep.archive = 1
+        AND workflowStep.workflow_uid = #{workflowUid}
         ORDER BY
-            workflowStep.created_at DESC
+        workflowStep.created_at DESC
     </select>
     <select id="getWorkflowStepByUid" resultMap="listWorkflowStepsResultMap">
         SELECT workflowStep.step_uid,
-               workflowStep.workflow_uid as step_workflow_uid,
-               workflowStep.step,
-               workflowStep.approval_level,
-               workflowStep.approval_group_type,
-               workflowStep.approval_group,
-               workflowStep.approval_group_name,
-               workflowStep.updated_by,
-               workflowStep.updated_at,
-               workflowStep.created_by,
-               workflowStep.created_at
+        workflowStep.workflow_uid as step_workflow_uid,
+        workflowStep.step,
+        workflowStep.approval_level,
+        workflowStep.approval_group_type,
+        workflowStep.approval_group,
+        workflowStep.approval_group_name,
+        workflowStep.updated_by,
+        workflowStep.updated_at,
+        workflowStep.created_by,
+        workflowStep.created_at
         FROM tnt_biz_erp_workflow_step workflowStep
         WHERE workflowStep.archive = 1
-          AND workflowStep.step_uid = #{workflowStepUid}
+        AND workflowStep.step_uid = #{workflowStepUid}
     </select>
 
     <insert id="insertWorkflowStep" parameterType="cww.world.pojo.po.workflow.WorkflowStepPO">
         INSERT INTO tnt_biz_erp_workflow_step
         (step_uid, workflow_uid, step, approval_level, approval_group_type, approval_group, approval_group_name,
-         created_at, created_by, updated_at, updated_by)
+        created_at, created_by, updated_at, updated_by)
         VALUES
-            (tnt_uuid_short(), #{workflowUid}, #{step}, #{approvalLevel}, #{approvalGroupType}, #{approvalGroup},
-                #{approvalGroupName},
-             now(), '', now(), '')
+        (tnt_uuid_short(), #{workflowUid}, #{step}, #{approvalLevel}, #{approvalGroupType}, #{approvalGroup},
+        #{approvalGroupName},
+        now(), '', now(), '')
     </insert>
 
     <insert id="batchInsertWorkflowStep">
@@ -102,13 +102,13 @@
 
     <delete id="deleteWorkflowSteps">
         delete from
-            tnt_biz_erp_workflow_step
+        tnt_biz_erp_workflow_step
         WHERE workflow_uid = #{workflowUid}
     </delete>
 
     <delete id="deleteWorkflowStep">
         delete from
-            tnt_biz_erp_workflow_step
+        tnt_biz_erp_workflow_step
         WHERE step_uid = #{stepUid}
     </delete>
 </mapper>

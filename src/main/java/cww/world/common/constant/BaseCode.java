@@ -1,7 +1,7 @@
 package cww.world.common.constant;
+
 /**
  * @author 小武 on 2018/8/17.\
- *
  */
 public enum BaseCode {
     /**
@@ -11,21 +11,21 @@ public enum BaseCode {
 
     UNKNOWN(-1, "Unknown error"),
 
-    PERMISSION_IS_NOT_EXIST(13001,"权限信息不存在"),
+    PERMISSION_IS_NOT_EXIST(13001, "权限信息不存在"),
 
-    SESSION_SETTING_FAIL(13002,"缓存设置失败"),
+    SESSION_SETTING_FAIL(13002, "缓存设置失败"),
 
-    INTERNAL_ERROR(11002,"请求信息不存在"),
+    INTERNAL_ERROR(11002, "请求信息不存在"),
 
     DATE_ERROR(11003, "数据异常"),
 
     DB_INSERT_ERROR(19999, "数据库插入错误"),
 
-    ROLE_NAME_IS_EXIST_ERROR(25003,"角色名已存在"),
+    ROLE_NAME_IS_EXIST_ERROR(25003, "角色名已存在"),
 
     ROLE_CREATE_ERROR(25001, "角色创建失败"),
 
-    ROLE_IS_NOT_EXIST_ERROR(25004,"角色不存在"),
+    ROLE_IS_NOT_EXIST_ERROR(25004, "角色不存在"),
 
     MENU_DO_NOT_EXIST(12002, "菜单不存在"),
 
@@ -43,8 +43,6 @@ public enum BaseCode {
     WORKFLOW_AUDITOR_ERROR(23001, "用户不在审核人候选列表"),
 
     INVALID_ARGUMENT(11001, "请求参数错误");
-
-
 
 
     public static final String DEFAULT_MALL_UID = "11111111111111111";
