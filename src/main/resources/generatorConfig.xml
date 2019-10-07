@@ -62,8 +62,8 @@
         <!-- 列出要生成代码的所有表，这里配置的是不生成Example文件 -->
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
                    是否生成 example类   -->
-        <table tableName="tnt_biz_erp_deposit" domainObjectName="DepositPO"
-               schema="lmfun_ayderp_dev"
+        <table tableName="tnt_red_shore_base_user" domainObjectName="RedUserPO"
+               schema="redshorebase"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

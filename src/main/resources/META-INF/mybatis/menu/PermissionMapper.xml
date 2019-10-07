@@ -47,7 +47,6 @@
         permission_key in
         <foreach collection="permissionKeys" open="(" close=")" item="permissionKey" separator=",">#{permissionKey}
         </foreach>
-        AND archive=1
     </select>
 
     <select id="getPermissionByPermissionKey" resultMap="permissionMap">

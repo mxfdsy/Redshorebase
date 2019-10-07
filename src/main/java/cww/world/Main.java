@@ -2,8 +2,11 @@ package cww.world;
 
 import cww.world.java8.po.Father;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,6 +41,20 @@ public class Main {
 
         List<Father> list = new ArrayList<>();
         list.addAll(null);
+        KolPlanExtendDTO kolPlanExtendDTO = new KolPlanExtendDTO();
+
+        List<KolPlanExtendDTO> kolPlanExtendList1 = Arrays.asList(kolPlanExtendDTO);
+        kolPlanExtendList1.stream().flatMap(n -> n.getPromotionProductList().stream()).map(PromotionProductInfoDTO::getPromotionProductUid).collect(Collectors.toList());
+
+        List<KolPlanExtendDTO> kolPlanExtendList2 = Arrays.asList(kolPlanExtendDTO);
+
+        kolPlanExtendList1.stream().map(product1 ->
+                kolPlanExtendList2.stream().filter(product2 -> product2.getBasePrice().equals(product1.getBasePrice()))
+                        .findFirst().map(findproduct -> {
+                    KolPlanExtendDTO kolPlanExtendDTO1 = new KolPlanExtendDTO();
+                    kolPlanExtendDTO1.setBasePrice(BigDecimal.ZERO);
+                    return kolPlanExtendDTO1;
+                })).collect(Collectors.toList());
     }
 
 

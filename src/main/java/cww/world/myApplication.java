@@ -1,11 +1,13 @@
 package cww.world;
 
 import cww.world.common.tag.mytag.CmsDialect;
+import cww.world.springcloud.zuul.TokenFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
@@ -21,7 +23,8 @@ import org.springframework.context.annotation.PropertySource;
 })
 @PropertySource(value = "classpath:parameter.properties")
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "cww.world.springcloud.feign")
+@EnableZuulProxy
 public class myApplication {
     public static void main(String[] args) {
         SpringApplication.run(myApplication.class, args);
@@ -31,4 +34,10 @@ public class myApplication {
     public CmsDialect CmsDialect() {
         return new CmsDialect();
     }
+
+    @Bean
+    public TokenFilter tokenFilter() {
+        return new TokenFilter();
+    }
+
 }

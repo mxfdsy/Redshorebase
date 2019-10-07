@@ -7,18 +7,18 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class UserRolePO extends BasePO {
     @JSONField(name = "user_uid")
     private String userUid;
-    
-	@JSONField(name = "role_uid")
-	private String roleUid;
-	
-	@JSONField(name = "role_key")
-	private String roleKey;
-	
-	@JSONField(name = "mall_uid")
-	private String mallUid;
 
-	@JSONField(name = "old_mall_uid")
-	private String oldMallUid;
+    @JSONField(name = "role_uid")
+    private String roleUid;
+
+    @JSONField(name = "role_key")
+    private String roleKey;
+
+    @JSONField(name = "mall_uid")
+    private String mallUid;
+
+    @JSONField(name = "old_mall_uid")
+    private String oldMallUid;
 
     public String getUserUid() {
         return userUid;

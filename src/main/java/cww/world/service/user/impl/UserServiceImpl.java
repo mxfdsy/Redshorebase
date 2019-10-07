@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
         session.setAttribute(Constants.USER_INFO, loginUser);
         session.setAttribute(Constants.USER_UID, loginUser.getUserUid());
 
-        putSessionToRedis(session, loginUser);
+//        putSessionToRedis(session, loginUser);
 
         JSONObject res = new JSONObject();
         String lastRedirectUrl = (String) session.getAttribute(Constants.REDIRECT_URL);
