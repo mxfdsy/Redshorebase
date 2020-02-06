@@ -56,7 +56,8 @@ public class KruskalCase {
         for (int i = 0; i < edgeNum; i++) {
 //获取到第 i 条边的第一个顶点(起点)
             int p1 = getPosition(edges[i].start); //p1=4 //获取到第 i 条边的第 2 个顶点
-            int p2 = getPosition(edges[i].); //p2 = 5
+            int p2 = getPosition(edges[i].end); //p2 = 5
+
 //获取 p1 这个顶点在已有最小生成树中的终点
             int m = getEnd(ends, p1); //m = 4
 //获取 p2 这个顶点在已有最小生成树中的终点
