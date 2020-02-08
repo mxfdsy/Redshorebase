@@ -54,7 +54,6 @@ public class HorseChessboard {
 //row = 4 X = 8 column = 4 = 4 * 8 + 4 = 36
         visited[row * X + column] = true; //标记该位置已经访问 //获取当前位置可以走的下一个位置的集合
         ArrayList<Point> ps = next(new Point(column, row));
-
         sort(ps);
 
         //遍历 ps
