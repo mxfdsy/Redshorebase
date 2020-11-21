@@ -1,5 +1,5 @@
 package cww.world.traceImpl;
 
 public class Shui {
-    public int a=8;
+    public int a=10;
 }
