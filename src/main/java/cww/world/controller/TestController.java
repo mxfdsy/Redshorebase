@@ -2,13 +2,16 @@ package cww.world.controller;
 
 import cww.world.common.constant.Constants;
 import cww.world.common.util.ResultBuilderUtils;
+import cww.world.config.TestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/test")
 public class TestController {
+    @Autowired
+    private TestBean testBean;
 
 
     @Autowired
@@ -57,4 +62,11 @@ public class TestController {
         return "demo/diy";
     }
 
+
+
+    @RequestMapping(value = "/multiDatabase", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String get() {
+        return testBean.getName();
+    }
 }
+

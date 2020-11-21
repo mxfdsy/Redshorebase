@@ -9,9 +9,9 @@ public class QuickSort {
     public static void main(String[] args) {
 //        int[] bigIntArr = TestTimeUtils.getBigIntArr();
 //        int[] bigIntArr = {-9, 78, 0, 23, -567, 70,-1 ,900,4561};
-        int[] bigIntArr = {2,-1,-3,-4};
+        int[] bigIntArr = {10,1,4,3,19,8};
         TestTimeUtils.printCurrentTime();
-        quickSort(bigIntArr, 0, bigIntArr.length - 1);
+        quickSort2(bigIntArr, 0, bigIntArr.length - 1);
         TestTimeUtils.printCurrentTime();
         System.out.println(Arrays.toString(bigIntArr));
     }
@@ -61,7 +61,35 @@ public class QuickSort {
         if (right > l) {
             quickSort(arr,l,right);
         }
+    }
+
+    static  void quickSort2(int[] arr,int L ,int R) {
+        if (L >= R) {
+            return;
+        }
+        int left = L;
+        int right = R;
+        int pivot = arr[L];
+        while (left < right) {
+            while (left < right && arr[right] >= pivot) {
+                right--;
+            }
+            if (left < right) {
+                arr[left] = arr[right];
+            }
 
 
+            while (left < right && arr[left] <= pivot) {
+                left++;
+            }
+            if (left < right) {
+                arr[right] = arr[left];
+            }
+            if (left>=right) {
+                arr[left] = pivot;
+            }
+        }
+        quickSort(arr, L, right - 1);
+        quickSort(arr, right + 1, R);
     }
 }

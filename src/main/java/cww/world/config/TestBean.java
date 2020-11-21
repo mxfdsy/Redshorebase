@@ -1,4 +1,4 @@
-package cww.redshorebase.config;
+package cww.world.config;
 
 public class TestBean {
 

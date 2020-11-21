@@ -1,4 +1,4 @@
-package cww.redshorebase.config;
+package cww.world.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

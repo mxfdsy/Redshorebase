@@ -6,7 +6,8 @@ package cww.world.datastructure.sort;
 public class InsertSort {
 
     public static void main(String[] args) {
-        int[] arr = TestTimeUtils.getBigIntArr();
+//        int[] arr = TestTimeUtils.getBigIntArr();
+        int[] arr ={19,3,7,6,2,8};
         TestTimeUtils.printCurrentTime();
         insertSort(arr);
         TestTimeUtils.printCurrentTime();
